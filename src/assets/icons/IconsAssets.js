@@ -5,6 +5,7 @@ import facebook from './facebook (1).png'
 import mail from './email.svg'
 import phone from './phone.svg'
 import location from './location.svg'
+import purplelogo from './purplelogo.svg'
 export const assets={
     lightlogo,
     apple,
@@ -12,5 +13,6 @@ export const assets={
     google,
     mail,
     phone,
-    location
+    location,
+    purplelogo
 }
