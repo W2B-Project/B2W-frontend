@@ -4,6 +4,7 @@ import Landing from "./pages/Landing"
 import Login from './pages/signup/Login'
 import Createaccount from './pages/signup/Createaccount'
 import Setup from "./pages/setup/Setup"
+import Error from "./pages/Error"
 function App() {
   return (
     <>
@@ -12,6 +13,7 @@ function App() {
         <Route path="/landing" element={<Landing/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<Createaccount/>}/>
+        <Route path="*" element={<Error />} />
       </Routes>
     </>
   )
