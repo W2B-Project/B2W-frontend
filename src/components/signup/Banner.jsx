@@ -7,7 +7,7 @@ function Banner({ image, text, bgColor ,logoColor}) {
                 <Logo logoColor={logoColor} />
             </div>
             <h1 className="text-[40px] font-bold text-white">{text}</h1>
-            <img src={image} alt="Banner" />
+            <img src={image} alt="Banner" loading="lazy" />
         </div>
     );
 }

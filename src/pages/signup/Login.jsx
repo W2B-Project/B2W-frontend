@@ -6,9 +6,10 @@ import Button from "../../components/global/Button";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple, FaFacebook } from "react-icons/fa";
+import { useSignUp } from "../../context/SignUpContext";
 
 function Login() {
-    const [showPassword, setShowPassword] = useState(false);
+    const {showPassword, setShowPassword}= useSignUp();
     return (
         <div className="grid grid-cols-2 h-screen bg-primry_purble">
             <Banner image={bannerImage} text='Where Hope starts' bgColor="primry_purble" logoColor="white" />

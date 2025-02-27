@@ -4,10 +4,9 @@ import Banner from "./Banner"
 import bannerImage from "../../assets/images/signup/Reset password-rafiki 1.png"
 import HeadingText from "./HeadingText"
 import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react"
-
+import { useSignUp } from "../../context/SignUpContext"
 function ResetPassword() {
-    const [showPassword, setShowPassword] = useState(false);
+    const {showPassword, setShowPassword} = useSignUp();
 
     return (
         <div className="grid grid-cols-2 h-screen bg-veryLight_purple">

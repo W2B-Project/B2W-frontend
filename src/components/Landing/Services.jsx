@@ -13,10 +13,10 @@ function Services() {
                                 serv.right ?
                                     <>
                                         <p className="text-2xl w-1/2 font-lato font-medium">{serv.text}</p>
-                                        <img src={serv.img} alt={serv.alt} width={290} />
+                                        <img loading="lazy"  src={serv.img} alt={serv.alt} width={290} />
                                     </>
                                     : <>
-                                        <img src={serv.img} alt={serv.alt} width={290} />
+                                        <img  loading="lazy" src={serv.img} alt={serv.alt} width={290} />
                                         <p className="text-2xl w-1/2 font-lato font-medium">{serv.text}</p>
                                     </>
                             }

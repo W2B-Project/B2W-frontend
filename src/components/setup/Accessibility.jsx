@@ -13,7 +13,7 @@ function Accessibility() {
         <>
             {/* fonts */}
             <div className='flex gap-2 font-roboto items-center'>
-                <img src={setup.font} alt="font" width={27} />
+                <img src={setup.font} alt="font" width={27} loading="lazy" />
                 <p className='font-bold' >Fonts</p>
             </div>
             <div className='mt-5'>
@@ -38,7 +38,7 @@ function Accessibility() {
 
             {/* colors */}
             <div className='flex gap-2 roboto items-center'>
-                <img src={setup.color} alt="font" width={27} />
+                <img src={setup.color} alt="font" width={27} loading="lazy" />
                 <p className='font-bold' >Colors</p>
             </div>
             <div className='my-12'>

@@ -30,7 +30,7 @@ function VerifyEmail() {
             numInputs={4}
             inputType="text"
             renderInput={(props) => <input {...props} />}
-            containerStyle="flex justify-evenly space-x-3 w-full"
+            containerStyle="flex justify-center space-x-3 w-full gap-5"
             inputStyle="!w-[50px] !h-[50px] text-lg border border-gray-300 rounded-2xl text-center focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
         </div>
