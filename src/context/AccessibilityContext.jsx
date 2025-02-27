@@ -1,42 +1,40 @@
+import { createContext, useState, useEffect } from 'react';
 
-import { createContext, useState, useEffect } from 'react'
-
-export const AccessibilityContext = createContext()
+export const AccessibilityContext = createContext();
 
 export const AccessibilityProvider = ({ children }) => {
     const [scale, setscale] = useState(localStorage.getItem('scale') || 'Medium')
-    const [LineHieght, setLinehight] = useState(localStorage.getItem('LineHieght') || false);
-    const [Wordspacing, setWordspacing] = useState(localStorage.getItem('Wordspacing') || false);
-    const [contrastMode, setContrastMode] = useState(localStorage.getItem('contrastMode') || false);
-    /*     const [darkMode,setDarkMode]=useState(localStorage.getItem('darkMode') || false); */
+    const [LineHieght, setLinehight] = useState(localStorage.getItem('LineHieght') === 'true'); 
+    const [Wordspacing, setWordspacing] = useState(localStorage.getItem('Wordspacing') === 'true'); 
+    const [contrastMode, setContrastMode] = useState(localStorage.getItem('contrastMode') === 'true'); 
 
     useEffect(() => {
-        const root = document.documentElement
-        /* font size */
+        const root = document.documentElement;
+        const body = document.body;
+
+        /* Font Size (Using zoom) */
         root.style.zoom =
             scale === 'Medium' ? '1' :
                 scale === 'Large' ? '1.1' :
                     scale === 'Very Large' ? '1.2' : '1'
         localStorage.setItem('scale', scale);
 
-        /*word spacing */
-        root.style.wordSpacing = Wordspacing ? '10px' : 'normal'
-        localStorage.setItem('Wordspacing', Wordspacing);
+        root.style.wordSpacing = Wordspacing ? '10px' : 'normal';
+        localStorage.setItem('Wordspacing', Wordspacing.toString());
 
-        /*line hieght */
-        root.style.lineHeight = LineHieght ? '2' : '1.5'
-        localStorage.setItem('LineHieght', LineHieght);
+        body.style.lineHeight = LineHieght ? '2' : '1.5';
+        document.querySelectorAll('*').forEach(el => {
+            el.style.lineHeight = LineHieght ? '2' : '1.5';
+        });
+        localStorage.setItem('LineHieght', LineHieght.toString());
 
-        /*contrast */
-        root.style.filter = contrastMode ? 'contrast(110%)' : 'contrast(1)'
-        localStorage.setItem('contrastMode', contrastMode);
+        /* Contrast */
+        root.style.filter = contrastMode ? 'contrast(110%)' : 'contrast(1)';
+        localStorage.setItem('contrastMode', contrastMode.toString());
 
-        /*localStorage.setItem('darkMode', darkMode); */
+    }, [scale, LineHieght, Wordspacing, contrastMode]);
 
-    }, [scale, LineHieght, Wordspacing, contrastMode/* ,darkMode */])
-
-
-    const contextvalues = {
+    const contextValues = {
         scale,
         setscale,
         LineHieght,
@@ -44,17 +42,14 @@ export const AccessibilityProvider = ({ children }) => {
         Wordspacing,
         setWordspacing,
         contrastMode,
-        setContrastMode,
-        /*         darkMode,
-                setDarkMode */
-    }
-    return (
-        <>
-            <AccessibilityContext.Provider value={contextvalues}>
-                {children}
-            </AccessibilityContext.Provider>
-        </>
-    )
-}
+        setContrastMode
+    };
 
-export default AccessibilityContext
+    return (
+        <AccessibilityContext.Provider value={contextValues}>
+            {children}
+        </AccessibilityContext.Provider>
+    );
+};
+
+export default AccessibilityContext;
