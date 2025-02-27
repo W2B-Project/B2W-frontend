@@ -10,8 +10,8 @@ function ResetPassword() {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
-        <div className="grid grid-cols-2 h-screen bg-[#f6ffe5]">
-            <Banner image={bannerImage}  bgColor="[#f2e5ff]" logoColor="#7F00FF" />
+        <div className="grid grid-cols-2 h-screen bg-veryLight_purple">
+            <Banner image={bannerImage}  bgColor="veryLight_purple" logoColor="#7F00FF" />
             <div className="bg-white p-8 rounded-lg shadow-md w-full flex flex-col justify-center px-20 rounded-bl-[6%] rounded-tl-[6%]">
                 <HeadingText mainText="Create new password" subText="Create a new password and confirm it to secure your account" />
                 <form>
@@ -22,7 +22,7 @@ function ResetPassword() {
                             required
                             type={showPassword ? "text" : "password"}
                             placeholder="*******"
-                            className="mt-1 p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                            className="mt-1 p-2 border border-gray-300 rounded-2xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                             />
                         <button
                             type="button"
@@ -39,7 +39,7 @@ function ResetPassword() {
                             required
                             type={showPassword ? "text" : "password"}
                             placeholder="*******"
-                            className="mt-1 p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                            className="mt-1 p-2 border border-gray-300 rounded-2xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                             />
                         <button
                             type="button"

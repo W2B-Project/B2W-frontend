@@ -6,8 +6,10 @@ import Accessibility from "../../components/setup/Accessibility"
 import Info from "../../components/setup/Info"
 function Setup() {
     const [step, setStep] = useState(0)
+    const [checked,setchecked]=useState(null)
     const getnextstep = () => {
         setStep(s => s + 1)
+        setchecked(null)
     }
     let destructInfo = info[step]
     return (
@@ -21,7 +23,7 @@ function Setup() {
                         <Form />
                         : info[step].step === 7 ?
                             <Accessibility />
-                            : <Info info={destructInfo} />
+                            : <Info info={destructInfo} checked={checked} setchecked={setchecked} />
                 }
                 {
                     <button type="submit"

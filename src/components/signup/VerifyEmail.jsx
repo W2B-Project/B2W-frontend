@@ -11,9 +11,9 @@ function VerifyEmail() {
   const [otp, setOtp] = useState("");
 
   return (
-    <div className="grid grid-cols-2 h-screen bg-[#f6ffe5]">
+    <div className="grid grid-cols-2 h-screen bg-veryLight_purple">
       {/* Left Side - Banner */}
-      <Banner image={bannerImage} bgColor="[#f2e5ff]" logoColor="#7F00FF" />
+      <Banner image={bannerImage} bgColor="veryLight_purple" logoColor="#7F00FF" />
 
       {/* Right Side - Email Verification */}
       <div className="bg-white p-8 rounded-lg shadow-md w-full flex flex-col justify-center px-20 rounded-bl-[6%] rounded-tl-[6%]">
@@ -31,7 +31,7 @@ function VerifyEmail() {
             inputType="text"
             renderInput={(props) => <input {...props} />}
             containerStyle="flex justify-evenly space-x-3 w-full"
-            inputStyle="!w-[50px] !h-[50px] text-lg border border-gray-300 rounded-md text-center focus:outline-none focus:ring-2 focus:ring-purple-500"
+            inputStyle="!w-[50px] !h-[50px] text-lg border border-gray-300 rounded-2xl text-center focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
         </div>
 

@@ -11,7 +11,7 @@ function Login() {
     const [showPassword, setShowPassword] = useState(false);
     return (
         <div className="grid grid-cols-2 h-screen bg-primry_purble">
-            <Banner image={bannerImage} text='Where Hope starts' bgColor="primry_purble" />
+            <Banner image={bannerImage} text='Where Hope starts' bgColor="primry_purble" logoColor="white" />
             <div className="bg-white p-8 rounded-lg shadow-md w-full flex flex-col justify-center px-20 rounded-bl-[6%] rounded-tl-[6%]">
                 <h2 className="text-4xl font-bold text-center text-gray-900 mb-6">
                     Login
@@ -24,7 +24,7 @@ function Login() {
                             required
                             type="email"
                             placeholder="Example@gmail.com"
-                            className="mt-1 p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                            className="mt-1 p-2 border border-gray-300 rounded-2xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                             />
                     </div>
 
@@ -34,8 +34,8 @@ function Login() {
                         <input
                             required
                             type={showPassword ? "text" : "password"}
-                            placeholder="*******"
-                            className="mt-1 p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                            placeholder="* * * * * * * * * *"
+                            className="mt-1 p-2 border border-gray-300 rounded-2xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                             />
                         <button
                             type="button"

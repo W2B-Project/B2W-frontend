@@ -1,23 +1,27 @@
+import { useEffect, useState } from 'react'
 import { setup } from '../../assets/images/setup/setupAssets'
 import Toggle from './Toggle'
-const font = ['Large', 'Medium', 'Small']
-const fontsetteng = ['Line Hight', 'Word Spacing']
-const color=['Contrat Mode','Dark Mode']
+import { useContext } from 'react'
+import AccessibilityContext from '../../context/AccessibilityContext'
+const font = ['Medium', 'Large', 'Very Large']
 
 function Accessibility() {
+
+    const { setscale, setWordspacing,Wordspacing,LineHieght, setLinehight,contrastMode, setContrastMode } = useContext(AccessibilityContext)
+
     return (
         <>
             {/* fonts */}
-            <div className='flex gap-2 roboto items-center'>
+            <div className='flex gap-2 font-roboto items-center'>
                 <img src={setup.font} alt="font" width={27} />
                 <p className='font-bold' >Fonts</p>
             </div>
-            <div className='mt-5 '>
+            <div className='mt-5'>
                 <p>Font size</p>
                 <div className='flex justify-between'>
                     {font.map(f => (
-                        <div className='flex gap-2 mt-2' key={f}>
-                            <input type="radio" value={f} className='checked:accent-primry_purble w-4' name='fonts' />
+                        <div className='flex gap-2 mt-2 ' key={f}>
+                            <input type="radio" value={f} className='checked:accent-primry_purble w-4' name='fonts' onChange={(e) => setscale(e.target.value)} />
                             <label htmlFor={f}>{f}</label>
                         </div>
                     ))}
@@ -26,25 +30,23 @@ function Accessibility() {
 
             {/* line hight word spacing */}
             <div className='my-12'>
-                {fontsetteng.map(s => (
-                    <>
-                        <Toggle t={s}/>
-                    </>
-                ))}
+
+                <Toggle t='Line Hight' s={LineHieght} st={setLinehight} />
+                <Toggle t='Word Spacing' s={Wordspacing} st={setWordspacing} />
+
             </div>
-            
+
             {/* colors */}
             <div className='flex gap-2 roboto items-center'>
                 <img src={setup.color} alt="font" width={27} />
                 <p className='font-bold' >Colors</p>
             </div>
             <div className='my-12'>
-                {color.map(s => (
-                    <>
-                        <Toggle t={s}/>
-                    </>
-                ))}
+                        <Toggle t='Contrat Mode' s={contrastMode} st={setContrastMode}/>
+                        <Toggle t='Dark Mode'/>
             </div>
+
+
         </>
     )
 }

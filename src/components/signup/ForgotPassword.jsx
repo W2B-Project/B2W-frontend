@@ -5,8 +5,8 @@ import bannerImage from "../../assets/images/signup/Forgot password.png"
 import HeadingText from "./HeadingText"
 function ForgotPassword() {
     return (
-        <div className="grid grid-cols-2 h-screen bg-[#f6ffe5]">
-            <Banner image={bannerImage}  bgColor="[#f2e5ff]" logoColor="#7F00FF" />
+        <div className="grid grid-cols-2 h-screen bg-veryLight_purple">
+            <Banner image={bannerImage}  bgColor="veryLight_purple" logoColor="#7F00FF" />
             <div className="bg-white p-8 rounded-lg shadow-md w-full flex flex-col justify-center px-20 rounded-bl-[6%] rounded-tl-[6%]">
                 <HeadingText mainText="forgot password" subText="Forgot your password? Enter your email to recover your account easily" />
                 <form>
@@ -17,7 +17,7 @@ function ForgotPassword() {
                             required
                             type="email"
                             placeholder="Example@gmail.com"
-                            className="mt-1 p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                            className="mt-1 p-2 border border-gray-300 rounded-2xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                             />
                     </div>
                     
