@@ -9,19 +9,24 @@ import ForgotPassword from "./components/signup/ForgotPassword"
 import VerifyEmail from "./components/signup/VerifyEmail"
 import SuccesPage from "./components/signup/SuccesPage"
 import ResetPassword from "./components/signup/ResetPassword"
+import { SignupProvider } from "./context/SignUpContext"
+import SelectUser from "./pages/signup/SelectUser"
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Setup />} />
-      <Route path="/landing" element={<Landing />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/forgotpassword" element={<ForgotPassword />} />
-      <Route path="/verifyEmail" element={<VerifyEmail />} />
-      <Route path="/succusspage" element={<SuccesPage />} />
-      <Route path="/resetPassword" element={<ResetPassword />} />
-      <Route path="/signup" element={<Createaccount />} />
-      <Route path="*" element={<Error />} />
-    </Routes>
+    <SignupProvider>
+      <Routes>
+        <Route path="/" element={<Setup />} />
+        <Route path="/landing" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/verifyEmail" element={<VerifyEmail />} />
+        <Route path="/succusspage" element={<SuccesPage />} />
+        <Route path="/resetPassword" element={<ResetPassword />} />
+        <Route path="/signup" element={<Createaccount />} />
+        <Route path="/selectUser" element={<SelectUser />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </SignupProvider>
   )
 }
 export default App

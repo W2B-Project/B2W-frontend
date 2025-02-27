@@ -8,12 +8,12 @@ function Footer() {
                 <div className="w-10/12 m-auto flex justify-between py-10">
                     <div className="flex flex-col gap-4">
 
-                        <img src={Landingassets.purplelogo} alt="logo" width={100} />
+                        <img loading="lazy" src={Landingassets.purplelogo} alt="logo" width={100}  />
                         <p className="text-dark_gray">Where Hope starts</p>
                         <div className="flex gap-2">
-                            <img src={assets.google} alt="google" className="cursor-pointer" />
-                            <img src={assets.apple} alt="apple" className="cursor-pointer"/>
-                            <img src={assets.facebook} alt="facebook" className="cursor-pointer"/>
+                            <img loading="lazy" src={assets.google} alt="google" className="cursor-pointer" />
+                            <img loading="lazy" src={assets.apple} alt="apple" className="cursor-pointer"/>
+                            <img loading="lazy" src={assets.facebook} alt="facebook" className="cursor-pointer"/>
                         </div>
                         <p className="text-dark_gray">Copyright 2024 B2W Website. All Rights Reserved.</p>
                     </div>
@@ -27,15 +27,15 @@ function Footer() {
                     <div className="flex flex-col gap-4 mb-5" id="Contact Us">
                         <p className="font-bold">Contact Us</p>
                         <div className="flex gap-3 cursor-pointer">
-                            <img src={assets.mail} alt="mail" />
+                            <img loading="lazy" src={assets.mail} alt="mail" />
                             <p className="text-dark_gray">BridgeToWork1234@gmail.com</p>
                         </div>
                         <div className="flex gap-3 cursor-pointer">
-                            <img src={assets.phone} alt="phone" />
+                            <img loading="lazy" src={assets.phone} alt="phone" />
                             <p className="text-dark_gray">000 000 000 000</p>
                         </div>
                         <div className="flex gap-3 cursor-pointer">
-                            <img src={assets.location} alt="location" />
+                            <img loading="lazy" src={assets.location} alt="location" />
                             <p className="text-dark_gray">Egypt, Mansoura</p>
                         </div>
                     </div>

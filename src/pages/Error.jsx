@@ -5,7 +5,7 @@ import Button from "../components/global/Button";
 function Error() {
     return (
         <div className="h-screen flex flex-col justify-center items-center text-center w-1/3 m-auto">
-            <img src={NotFoundImage} alt="Not Found" className="" />
+            <img src={NotFoundImage} alt="Not Found" className="" loading="lazy" />
             <h1 className="text-5xl md:text-6xl leading-10 font-bold">
                 Oops! <span className="text-primry_purble">Page not Found</span>
             </h1>

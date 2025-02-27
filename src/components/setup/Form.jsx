@@ -5,7 +5,7 @@ function Form() {
                 {/* image upload */}
                 <input type="file" id="inputt" className="hidden" />
                 <label htmlFor="inputt">
-                    <img src={setup.addimg} alt="upload image" className="m-auto" width={100} />
+                    <img src={setup.addimg} alt="upload image" loading="lazy" className="m-auto" width={100} />
                 </label>
                 {/* user info */}
                 <div className="mt-5">

@@ -15,7 +15,7 @@ function Splash() {
         <>
             <div className='h-screen flex justify-center items-center bg-gradient-to-b from-primry_purble to-veryLight_purple'>
                 <div className=''>
-                    <img src={assets.lightlogo} alt="light logo" />
+                    <img src={assets.lightlogo} alt="light logo" loading="lazy" />
                     <p className='text-white text-2xl font-bold font-lato'>Where Hope Starts</p>
                 </div>
 
