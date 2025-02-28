@@ -17,14 +17,16 @@ function App() {
   return (
     <SignupProvider>
       <Routes>
-        <Route path="/" element={<Setup />} />
+        <Route path="/" element={<Splash />} />
         <Route path="/landing" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login />} />        
+        <Route path="/signup" element={<Createaccount />} />
+        <Route path="/Setup" element={<Setup />} />
+        <Route path="/companysetup" element={<CompaySetup />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/verifyEmail" element={<VerifyEmail />} />
         <Route path="/succusspage" element={<SuccesPage />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
-        <Route path="/signup" element={<Createaccount />} />
         <Route path="/selectUser" element={<SelectUser />} />
         <Route path="*" element={<Error />} />
       </Routes>

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 function Button({btn_text ,onHandleClick}) {
     return (
 

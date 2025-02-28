@@ -16,7 +16,7 @@ function SelectUser() {
     const handleNext = () => {
         if (selectUser) {
             setConfirmed(true);
-            navigate(selectUser === "company" ? "/signup" : "/succusspage");
+            navigate(selectUser === "company" ? "/companysetup" : "/Setup");
         } else {
             alert("Please select an option before proceeding.");
         }
