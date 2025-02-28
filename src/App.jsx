@@ -9,10 +9,11 @@ import ForgotPassword from "./components/signup/ForgotPassword"
 import VerifyEmail from "./components/signup/VerifyEmail"
 import SuccesPage from "./components/signup/SuccesPage"
 import ResetPassword from "./components/signup/ResetPassword"
+import CompaySetup from "./pages/company setup/CompaySetup"
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Setup />} />
+      <Route path="/" element={<CompaySetup />} />
       <Route path="/landing" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />

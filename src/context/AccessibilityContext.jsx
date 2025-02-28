@@ -22,9 +22,9 @@ export const AccessibilityProvider = ({ children }) => {
         root.style.wordSpacing = Wordspacing ? '10px' : 'normal';
         localStorage.setItem('Wordspacing', Wordspacing.toString());
 
-        body.style.lineHeight = LineHieght ? '2' : '1.5';
+        body.style.lineHeight = LineHieght ? '1.9' : '1.5';
         document.querySelectorAll('*').forEach(el => {
-            el.style.lineHeight = LineHieght ? '2' : '1.5';
+            el.style.lineHeight = LineHieght ? '1.9' : '1.5';
         });
         localStorage.setItem('LineHieght', LineHieght.toString());
 
