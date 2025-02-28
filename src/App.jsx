@@ -9,8 +9,10 @@ import ForgotPassword from "./components/signup/ForgotPassword"
 import VerifyEmail from "./components/signup/VerifyEmail"
 import SuccesPage from "./components/signup/SuccesPage"
 import ResetPassword from "./components/signup/ResetPassword"
+import CompaySetup from "./pages/company setup/CompaySetup"
 import { SignupProvider } from "./context/SignUpContext"
 import SelectUser from "./pages/signup/SelectUser"
+
 function App() {
   return (
     <SignupProvider>
