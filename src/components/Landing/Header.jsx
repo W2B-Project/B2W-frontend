@@ -9,7 +9,7 @@ function Header() {
         <>
             <div className="border-gray-100 border-b-2 font-medium fixed w-full bg-white bg-opacity-75" >
                 <div className="w-10/12 m-auto flex justify-between my-3 items-center" >
-                    <img src={Landingassets.purplelogo} className="w-12 h-12" alt="logo" />
+                    <img src={Landingassets.purplelogo} className="w-12 h-12" alt="logo" loading="lazy" />
                     <div className="flex flex-row gap-5 items-start font-roboto">
                         {texts.map((text, index) => (
                             <a

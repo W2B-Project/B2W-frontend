@@ -16,7 +16,7 @@ function Landing() {
                         <p className="text-[#66666E] text-lg mt-5 font-roboto" id="Services">Where skills meet opportunity for a brighter tomorrow.</p>
                     </div>
                     <div className="">
-                        <img src={Landingassets.header} alt="hero image" width={"1000rem"} />
+                        <img src={Landingassets.header} alt="hero image" width={"1000rem"} loading="lazy" />
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@ function Landing() {
                         <p className="text-3xl font-lato font-bold">An Inclusive Job Platform for People with Special needs</p>
                         <p className="mt-7 text-[#66666E] text-lg">Creating a link between job seekers and companies and building a community that brings together people with special needs</p>
                     </div>
-                    <img src={Landingassets.about} alt="about" width={400} />
+                    <img src={Landingassets.about} alt="about" width={400} loading="lazy" />
                 </div>
             </div>
 
