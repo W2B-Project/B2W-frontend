@@ -12,6 +12,7 @@ import ResetPassword from "./components/signup/ResetPassword"
 import CompaySetup from "./pages/company setup/CompaySetup"
 import { SignupProvider } from "./context/SignUpContext"
 import SelectUser from "./pages/signup/SelectUser"
+import Home from "./pages/home/Home"
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/succusspage" element={<SuccesPage />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
         <Route path="/selectUser" element={<SelectUser />} />
+        <Route path="/home" element={<Home />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </SignupProvider>
