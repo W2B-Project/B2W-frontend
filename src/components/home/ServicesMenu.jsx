@@ -11,7 +11,7 @@ const services = [
 
 function ServicesMenu() {
     return (
-        <div className="shadow p-5 rounded-xl">
+        <div className="shadow p-5 rounded-xl bg-white">
             <h3 className="text-xl font-semibold mb-3">Services</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {services.map(({ link, image, name }) => (

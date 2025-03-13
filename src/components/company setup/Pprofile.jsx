@@ -11,7 +11,7 @@ function Pprofile() {
             
             <div className="flex justify-between items-center my-7">
                 <div className="flex gap-3 align-middle">
-                    <img src={csetup.person} alt="" className="rounded-full" />
+                    <img src={csetup.person} alt=""loading=" lazy" className="rounded-full" />
                     <div>
                         <p>Murad Mohamed</p>
                         <p className="text-sm text-dark_gray">Product manager</p>
