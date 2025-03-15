@@ -12,12 +12,12 @@ import ResetPassword from "./components/signup/ResetPassword"
 import CompaySetup from "./pages/company setup/CompaySetup"
 import { SignupProvider } from "./context/SignUpContext"
 import SelectUser from "./pages/signup/SelectUser"
-
+import Chatbot from "./pages/services/Chatbot"
 function App() {
   return (
     <SignupProvider>
       <Routes>
-        <Route path="/" element={<Splash />} />
+        <Route path="/" element={<Chatbot />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/login" element={<Login />} />        
         <Route path="/signup" element={<Createaccount />} />

@@ -15,7 +15,7 @@ function Landing() {
                         <p className="text-[40px] leading-tight w-10/12 font-lato font-bold">Welcome to <span className="text-primry_purble">Bridge to Work:</span> Empowering abilities and opening opportunities for everyone.</p>
                         <p className="text-[#66666E] text-lg mt-5 font-roboto" id="Services">Where skills meet opportunity for a brighter tomorrow.</p>
                     </div>
-                    <div className="">
+                    <div >
                         <img src={Landingassets.header} alt="hero image" width={"1000rem"} loading="lazy" />
                     </div>
                 </div>

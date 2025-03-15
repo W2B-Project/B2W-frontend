@@ -30,7 +30,7 @@ function SelectUser() {
             </div>
 
             {/* Main Container */}
-            <div className="flex flex-col justify-center items-center h-screen">
+            <div className="flex flex-col justify-center items-center h-screen font-lato">
                 <HeadingText mainText="Please select one of the following" subText="You are a/an " />
 
                 <div className="flex justify-around w-full mt-6">
@@ -62,7 +62,7 @@ function SelectUser() {
                 </div>
 
                 {/* "Next" Button */}
-                <Button btn_text="Next" className="mt-6" onHandleClick={handleNext} />
+                <Button btn_text="Next" className="mt-6" onHandleClick={handleNext} marg={7} />
                 
             </div>
         </div>

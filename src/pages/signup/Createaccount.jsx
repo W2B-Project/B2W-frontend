@@ -13,14 +13,14 @@ function Createaccount() {
         <div className="grid grid-cols-2 h-screen bg-primry_purble">
             <Banner image={bannerImage} text="Where Hope starts" bgColor="primry_purble" logoColor="white" />
             <div className="bg-white p-8 rounded-lg shadow-md w-full flex flex-col justify-center px-20 rounded-bl-[6%] rounded-tl-[6%]">
-                <h2 className="text-3xl font-bold text-center text-gray-900 mb-6">
+                <h2 className="text-3xl font-bold text-center text-gray-900 mb-6 font-lato">
                     Create Your Account
                 </h2>
                 <form>
                     {/* First & Last Name */}
                     <div className="flex gap-4">
                         <div className="flex flex-col w-1/2">
-                            <label className="text-gray-600">First Name</label>
+                            <label className="text-gray-600 font-roboto">First Name</label>
                             <input
                                 type="text"
                                 required
@@ -29,7 +29,7 @@ function Createaccount() {
                                 />
                         </div>
                         <div className="flex flex-col w-1/2">
-                            <label className="text-gray-600">Last Name</label>
+                            <label className="text-gray-600 font-roboto">Last Name</label>
                             <input
                                 type="text"
                                 required
@@ -41,7 +41,7 @@ function Createaccount() {
 
                     {/* Email */}
                     <div className="mt-4">
-                        <label className="text-gray-600">Email Address</label>
+                        <label className="text-gray-600 font-roboto">Email Address</label>
                         <input
                             required
                             type="email"
@@ -52,7 +52,7 @@ function Createaccount() {
 
                     {/* Password */}
                     <div className="mt-4 relative">
-                        <label className="text-gray-600">Password</label>
+                        <label className="text-gray-600 font-roboto">Password</label>
                         <input
                             required
                             type={showPassword ? "text" : "password"}
@@ -61,7 +61,7 @@ function Createaccount() {
                             />
                         <button
                             type="button"
-                            className="absolute right-3 top-[40px]  text-gray-500"
+                            className="absolute right-3 top-[40px] font-roboto text-gray-500"
                             onClick={() => setShowPassword(!showPassword)}
                         >
                             {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -70,13 +70,13 @@ function Createaccount() {
 
                     {/* Submit Button */}
                     <Link to="/">
-                        <Button btn_text="Sign Up" />
+                        <Button btn_text="Sign Up" marg={7} />
                     </Link>
-                <p>Already have an account? <span className="text-primry_purble font-bold">
+                <p className="font-roboto text-dark_gray font-medium">Already have an account? <span className="text-primry_purble font-bold">
                     <Link to="/Login">Login</Link>
                     </span>  
                 </p>
-                <div className="flex items-center my-4">
+                <div className="flex items-center my-4 font-roboto">
                     <div className="flex-1 border-gray-300 border"></div>
                     <p className="mx-3">OR sign up with</p>
                     <div className="flex-1 border-gray-300 border-t"></div>
