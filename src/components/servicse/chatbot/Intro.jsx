@@ -14,7 +14,7 @@ function Intro({setstep}) {
             <p className='font-roboto text-2xl font-bold'>
                 Welcome! Ready to ace your next interview?
             </p>
-            <img src={chatbot.introAi} alt="intro-ai" width={450} className='self-center' />
+            <img src={chatbot.introAi} alt="intro-ai" width={430} className='self-center' />
                 <Button btn_text='Get Started' onHandleClick={clickHandler} marg={0} />
         </div>
     )

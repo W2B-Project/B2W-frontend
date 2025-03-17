@@ -2,9 +2,13 @@
 import { useState } from "react"
 import { chatbot } from "../../../assets/images/services/services"
 import Button from "../../global/Button"
+import { useContext } from "react"
+import { ChatContext } from "../../../context/ChatbotContext"
+
+
 function Level_field({ setstep }) {
-    const [level, setlevel] = useState('')
-    const [field, setfield] = useState('')
+    const { level, setLevel, field, setField, startInterview } = useContext(ChatContext);
+
     const [toggle, setToggle] = useState(null)
     const [err, seterr] = useState(false)
 
@@ -15,12 +19,15 @@ function Level_field({ setstep }) {
     ]
     const handleLevel = (index, lvl) => {
         setToggle(index)
-        setlevel(lvl)
+        setLevel(lvl)
     }
-    const startInterview = () => {
-        level !== '' && field !== '' ?
+    
+    const handlestartInterview = () => {
+        level !== '' && field !== '' ?(
+            startInterview(),
             setstep(s => s + 1)
-            : seterr(true)
+        )
+        : seterr(true)
     }
     return (
         <>
@@ -43,11 +50,11 @@ function Level_field({ setstep }) {
                     <p className="text-xl font-bold mb-5">Enter Your Field</p>
                     <input type="text" placeholder="Your Field" value={field}
                         className=" w-full border-2 border-light_gray rounded-xl p-3 text-lg"
-                        onChange={(e) => setfield(e.target.value)}
+                        onChange={(e) => setField(e.target.value)}
                     />
                 </div>
                 {/* start */}
-                <Button btn_text='Start Interview' onHandleClick={startInterview} marg={2} />
+                <Button btn_text='Start Interview' onHandleClick={handlestartInterview} marg={2} />
                 {err?<div className="text-center text-red-500 text-lg">Please choose your level and field!</div>
                     :null
                 }

@@ -12,12 +12,21 @@ import ResetPassword from "./components/signup/ResetPassword"
 import CompaySetup from "./pages/company setup/CompaySetup"
 import { SignupProvider } from "./context/SignUpContext"
 import SelectUser from "./pages/signup/SelectUser"
+import Home from "./pages/home/Home"
+import Accessibility from "./components/setup/Accessibility"
+import SavedJobs from "./components/home/SavedJobs"
+import PostsList from "./components/home/PostsList"
+import JobsList from "./components/home/JobsList"
+import Chats from "./components/home/Chats"
+import Applied from "./components/home/Applied"
 import Chatbot from "./pages/services/Chatbot"
+
+
 function App() {
   return (
     <SignupProvider>
       <Routes>
-        <Route path="/" element={<Chatbot />} />
+        <Route path="/" element={<Splash />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/login" element={<Login />} />        
         <Route path="/signup" element={<Createaccount />} />
@@ -28,6 +37,15 @@ function App() {
         <Route path="/succusspage" element={<SuccesPage />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
         <Route path="/selectUser" element={<SelectUser />} />
+        <Route path="/Accessibility" element={<Accessibility />} />
+        <Route path="/SavedJobs" element={<SavedJobs />} />
+        <Route path="/home" element={<Home />}>
+            <Route index element={<PostsList />} /> 
+            <Route path="posts" element={<PostsList />} />
+            <Route path="jobs" element={<JobsList />} />
+            <Route path="chats" element={<Chats />} />
+            <Route path="applied" element={<Applied />} />
+          </Route>
         <Route path="*" element={<Error />} />
       </Routes>
     </SignupProvider>

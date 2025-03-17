@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { setup } from '../../assets/images/setup/setupAssets'
 import Toggle from './Toggle'
 import { useContext } from 'react'

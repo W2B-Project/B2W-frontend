@@ -8,7 +8,10 @@ createRoot(document.getElementById('root')).render(
   <BrowserRouter basename='/'>
     <StrictMode>
       <AccessibilityProvider>
-        <App />
+        <div className='font-roboto'>
+          <App />
+        </div>
+        
       </AccessibilityProvider>
     </StrictMode>
   </BrowserRouter>
