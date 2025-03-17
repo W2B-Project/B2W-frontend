@@ -13,7 +13,7 @@ function Error() {
                 The page you are looking for cannot be found. Take a break before trying again.
             </p>
             <Link to="/">
-                <Button btn_text="Go To Home Page" />
+                <Button btn_text="Go To Home Page" marg={7} />
             </Link>
 
 

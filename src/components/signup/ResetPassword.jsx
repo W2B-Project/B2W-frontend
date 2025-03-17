@@ -51,7 +51,7 @@ function ResetPassword() {
                     
                     {/* Submit Button */}
                     <Link to="/succusspage">
-                        <Button btn_text="Send" />
+                        <Button btn_text="Send" marg={7}/>
                     </Link>
 
                 </form>

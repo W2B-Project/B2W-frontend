@@ -5,10 +5,13 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { AccessibilityProvider } from './context/AccessibilityContext.jsx'
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+  <BrowserRouter basename='/'>
     <StrictMode>
       <AccessibilityProvider>
-        <App />
+        <div className='font-roboto'>
+          <App />
+        </div>
+        
       </AccessibilityProvider>
     </StrictMode>
   </BrowserRouter>

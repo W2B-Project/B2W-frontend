@@ -8,7 +8,6 @@ function Pprofile() {
     }
     return (
         <>
-            
             <div className="flex justify-between items-center my-7">
                 <div className="flex gap-3 align-middle">
                     <img src={csetup.person} alt=""loading=" lazy" className="rounded-full" />

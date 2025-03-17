@@ -1,7 +1,7 @@
-function Button({btn_text ,onHandleClick}) {
+/* eslint-disable react/prop-types */
+function Button({btn_text ,onHandleClick,marg=0}) {
     return (
-
-    <button type="submit" onClick={onHandleClick} className="p-2 bg-primry_purble w-full my-4 rounded-2xl border-primry_purble border-2 text-white">
+    <button type="submit" onClick={onHandleClick} className={`p-2 bg-primry_purble w-full my-${marg} rounded-2xl border-primry_purble border-2 text-white font-roboto`}>
         {btn_text}
     </button>
     )

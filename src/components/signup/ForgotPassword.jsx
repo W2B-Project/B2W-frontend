@@ -23,7 +23,7 @@ function ForgotPassword() {
                     
                     {/* Submit Button */}
                     <Link to="/verifyEmail">
-                        <Button btn_text="Send" />
+                        <Button btn_text="Send" marg={7}/>
                     </Link>
 
                 </form>

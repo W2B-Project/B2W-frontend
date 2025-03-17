@@ -19,6 +19,7 @@ import PostsList from "./components/home/PostsList"
 import JobsList from "./components/home/JobsList"
 import Chats from "./components/home/Chats"
 import Applied from "./components/home/Applied"
+import Chatbot from "./pages/services/Chatbot"
 
 
 function App() {

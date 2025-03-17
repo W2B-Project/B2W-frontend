@@ -42,7 +42,7 @@ function VerifyEmail() {
 
         {/* Verify Button */}
         <Link to="/resetPassword" className="mt-6">
-          <Button btn_text="Verify" />
+          <Button btn_text="Verify" marg={7} />
         </Link>
       </div>
     </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 
 function Company({ isSelected }) {
     const fillColor = isSelected ? "#7F00FF" : "#75757b";

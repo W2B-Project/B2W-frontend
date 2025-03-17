@@ -8,7 +8,7 @@ function SuccesPage() {
             <img loading="lazy" src={succussImage} alt="succussImage" />
             <p className="text-gray-600  max-w-md text-xl md:text-2xl leading-6 md:leading-8 font-normal mt-7">Your password has been successfully changed.</p>
             <Link to="/">
-                <Button btn_text="Okay" />
+                <Button btn_text="Okay" marg={7} />
             </Link>
         </div>
     )

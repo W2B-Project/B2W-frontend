@@ -11,20 +11,20 @@ const navLinks = [
     { to: "/home/applied", label: "Applied" },
 ];
 
-function Header() {
+function Header({setService}) {
     const linkClass = ({ isActive }) =>
         `text-base font-bold border-b-4 rounded-[4px] transition-all ${
             isActive ? "text-primry_purble border-primry_purble" : "text-black border-transparent hover:text-primry_purble hover:border-primry_purble"
         }`;
 
     return (
-        <header className="flex items-center justify-between py-3 shadow-sm mb-3 bg-white px-6">
+        <header className="flex items-center justify-between py-3 shadow-sm fixed w-full bg-white px-6">
             <div className="w-16 h-16">
                 <Logo logoColor="#7F00FF" />
             </div>
             <nav className="flex gap-8">
                 {navLinks.map(({ to, label }) => (
-                    <NavLink key={to} to={to} className={linkClass}>
+                    <NavLink key={to} to={to} className={linkClass} onClick={()=>setService('')}>
                         {label}
                     </NavLink>
                 ))}
