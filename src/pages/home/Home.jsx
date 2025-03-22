@@ -10,6 +10,7 @@ import CvAnalysis from "../services/CvAnalysis";
 function Home() {
     const [service, setService] = useState('')
     return (
+
         <>
         <Header setService={setService}/>
         <div className="px-8 h-auto bg-[#f4f4f6] pt-28">
