@@ -20,7 +20,11 @@ import JobsList from "./components/home/JobsList"
 import Chats from "./components/home/Chats"
 import Applied from "./components/home/Applied"
 import Chatbot from "./pages/services/Chatbot"
-
+import UserProfile from "./pages/userprofile/UserProfile"
+import Posts from './components/UserProfile/posts/Posts'
+import ProfessionalInfo from "./components/UserProfile/Professional Info/ProfessionalInfo"
+import Achievements from "./components/UserProfile/Achievements/Achievements"
+import Saved from './components/UserProfile/Saved/Saved'
 
 function App() {
   return (
@@ -45,7 +49,13 @@ function App() {
             <Route path="jobs" element={<JobsList />} />
             <Route path="chats" element={<Chats />} />
             <Route path="applied" element={<Applied />} />
-          </Route>
+        </Route>
+        <Route path='/userProfile' element={<UserProfile/>}>
+          <Route path="posts" element={<Posts/>} />
+          <Route path="Info" element={<ProfessionalInfo/>} />
+          <Route path="Achievements" element={<Achievements/>} />
+          <Route path="Saved" element={<Saved/>} />
+        </Route>
         <Route path="*" element={<Error />} />
       </Routes>
     </SignupProvider>

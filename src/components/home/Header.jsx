@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink,Link } from "react-router-dom";
 import Logo from "../global/Logo";
 import profileImage from "../../assets/images/home/cca3d1cbd0af0cf081dd88cf66a24693.jpg";
 import BellIcon from "../svg/company setup/BellIcon";
@@ -32,9 +32,9 @@ function Header({setService}) {
             <div className="flex items-center gap-4">
                 <SearchIcon />
                 <BellIcon />
-                <NavLink to="/profile">
+                <Link to='/userProfile'>
                     <img className="w-10 h-10 rounded-full border border-gray-300 shadow-sm" loading="lazy" src={profileImage} alt="User Profile" />
-                </NavLink>
+                </Link>
             </div>
         </header>
     );
