@@ -1,6 +1,6 @@
 import { FiFilter } from "react-icons/fi";
 import JobItem from "./JobItem";
-const jobs = [
+export const jobs = [
     {
         id: 1,
         company: "Google",
@@ -10,7 +10,6 @@ const jobs = [
         employment: ["Onsite", "Full-time"],
         salary: "$50-70K",
         location: "New York, NY",
-        isSaved: true,
     },
     {
         id: 2,
@@ -21,7 +20,6 @@ const jobs = [
         employment: ["Remotely","Full-time"],
         salary: "$50-70K",
         location: "New York, NY",
-        isSaved: false,
     },
     {
         id: 3,
@@ -32,9 +30,9 @@ const jobs = [
         employment: ["Onsite", "Part-time"],
         salary: "$50-70K",
         location: "New York, NY",
-        isSaved: true,
     },
 ];
+
 function JobsList() {
     return (
         <div>

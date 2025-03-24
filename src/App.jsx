@@ -25,39 +25,42 @@ import Posts from './components/UserProfile/posts/Posts'
 import ProfessionalInfo from "./components/UserProfile/Professional Info/ProfessionalInfo"
 import Achievements from "./components/UserProfile/Achievements/Achievements"
 import Saved from './components/UserProfile/Saved/Saved'
+import JobProvider from "./context/JobContext"
 
 function App() {
   return (
     <SignupProvider>
-      <Routes>
-        <Route path="/" element={<Splash />} />
-        <Route path="/landing" element={<Landing />} />
-        <Route path="/login" element={<Login />} />        
-        <Route path="/signup" element={<Createaccount />} />
-        <Route path="/Setup" element={<Setup />} />
-        <Route path="/companysetup" element={<CompaySetup />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path="/verifyEmail" element={<VerifyEmail />} />
-        <Route path="/succusspage" element={<SuccesPage />} />
-        <Route path="/resetPassword" element={<ResetPassword />} />
-        <Route path="/selectUser" element={<SelectUser />} />
-        <Route path="/Accessibility" element={<Accessibility />} />
-        <Route path="/SavedJobs" element={<SavedJobs />} />
-        <Route path="/home" element={<Home />}>
-            <Route index element={<PostsList />} /> 
+      <JobProvider>
+        <Routes>
+          <Route path="/" element={<Splash />} />
+          <Route path="/landing" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Createaccount />} />
+          <Route path="/Setup" element={<Setup />} />
+          <Route path="/companysetup" element={<CompaySetup />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/verifyEmail" element={<VerifyEmail />} />
+          <Route path="/succusspage" element={<SuccesPage />} />
+          <Route path="/resetPassword" element={<ResetPassword />} />
+          <Route path="/selectUser" element={<SelectUser />} />
+          <Route path="/Accessibility" element={<Accessibility />} />
+          <Route path="/SavedJobs" element={<SavedJobs />} />
+          <Route path="/home" element={<Home />}>
+            <Route index element={<PostsList />} />
             <Route path="posts" element={<PostsList />} />
             <Route path="jobs" element={<JobsList />} />
             <Route path="chats" element={<Chats />} />
             <Route path="applied" element={<Applied />} />
-        </Route>
-        <Route path='/userProfile' element={<UserProfile/>}>
-          <Route path="posts" element={<Posts/>} />
-          <Route path="Info" element={<ProfessionalInfo/>} />
-          <Route path="Achievements" element={<Achievements/>} />
-          <Route path="Saved" element={<Saved/>} />
-        </Route>
-        <Route path="*" element={<Error />} />
-      </Routes>
+          </Route>
+          <Route path='/userProfile' element={<UserProfile />}>
+            <Route path="posts" element={<Posts />} />
+            <Route path="Info" element={<ProfessionalInfo />} />
+            <Route path="Achievements" element={<Achievements />} />
+            <Route path="Saved" element={<Saved />} />
+          </Route>
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </JobProvider>
     </SignupProvider>
   )
 }

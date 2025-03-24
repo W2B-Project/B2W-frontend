@@ -1,11 +1,12 @@
 import { FiBookmark } from "react-icons/fi";
 import Button from "../global/Button";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext } from "react";
+import { jobContext } from "../../context/JobContext";
 
 function JobItem({ job }) {
-    const [saved, setSaved] = useState(job.isSaved);
-
+    const {toggleSaved, savedJobs}=useContext(jobContext)
+    const isSaved=savedJobs.includes(job.id)
     return (
         <div className="bg-white rounded-xl p-4 flex flex-col gap-4 px-5 shadow">
             {/* Job Header */}
@@ -15,8 +16,8 @@ function JobItem({ job }) {
                     <h3 className="font-bold text-xl">{job.company}</h3>
                 </div>
                 <FiBookmark
-                    className={`w-6 h-6 cursor-pointer transition-colors ${saved ? "fill-purple-600 stroke-purple-600" : "stroke-purple-600"}`}
-                    onClick={() => setSaved(!saved)}
+                    className={`w-6 h-6 cursor-pointer transition-colors ${isSaved ? "fill-purple-600 stroke-purple-600" : "stroke-purple-600"}`}
+                    onClick={() => toggleSaved(job.id)}
                 />
             </div>
 

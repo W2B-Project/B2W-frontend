@@ -5,7 +5,7 @@ function UserProfile() {
     return (
             <div className="w-full h-[230px] shadow p-5 rounded-xl bg-white flex flex-col  justify-center items-center">
                 <img className="w-20 h-20 rounded-full" loading="lazy" src={profileImage} alt="" />
-                <h3 className="text-2xl font-bold">Alaa Mohamed</h3>
+                <h3 className="text-2xl font-bold font-lato">Alaa Mohamed</h3>
                 <Link to='/userProfile'>
                     <Button btn_text="Update profile" marg={5} />
                 </Link>

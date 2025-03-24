@@ -1,7 +1,12 @@
+import AboutMe from "./AboutMe"
+import Education from "./Education"
 
 function ProfessionalInfo() {
     return (
-        <div>ProfessionalInfo</div>
+        <div className="flex flex-col gap-5">
+            <AboutMe/>
+            <Education/>
+        </div>
     )
 }
 

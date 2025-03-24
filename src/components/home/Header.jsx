@@ -18,7 +18,7 @@ function Header({setService}) {
         }`;
 
     return (
-        <header className="flex items-center justify-between py-3 shadow-sm fixed w-full bg-white px-6">
+        <header className="flex items-center justify-between py-3 shadow-sm fixed w-full bg-white px-6 z-10">
             <div className="w-16 h-16">
                 <Logo logoColor="#7F00FF" />
             </div>

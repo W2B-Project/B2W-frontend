@@ -16,13 +16,13 @@ function UserProfile() {
     return (
         <>
             <Header />
-            <div className="px-8 h-auto pt-28 w-[99%] m-auto">
-                <div className="bg-[#f4f4f6] h-screen rounded-xl">
+            <div className="px-8 h-auto pt-28 w-[99%] m-auto ">
+                <div className="bg-[#f4f4f6]  rounded-xl pb-5">
                     {/* cover image */}
                     <img src={userprofileassets.bg} alt="profile" className="w-full" />
                     <div className="flex gap-24">
                         <ProfileCard />
-                        <div>
+                        <div className="flex-auto pr-16">
                             <div className="py-8 flex gap-24">
                                 {navLinks.map(({to,title})=>(
                                     <NavLink key={to} to={to} className={linkClass}>
