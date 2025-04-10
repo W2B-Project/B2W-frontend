@@ -19,13 +19,15 @@ import PostsList from "./components/home/PostsList"
 import JobsList from "./components/home/JobsList"
 import Chats from "./components/home/Chats"
 import Applied from "./components/home/Applied"
-import Chatbot from "./pages/services/Chatbot"
 import UserProfile from "./pages/userprofile/UserProfile"
 import Posts from './components/UserProfile/posts/Posts'
 import ProfessionalInfo from "./components/UserProfile/Professional Info/ProfessionalInfo"
 import Achievements from "./components/UserProfile/Achievements/Achievements"
 import Saved from './components/UserProfile/Saved/Saved'
 import JobProvider from "./context/JobContext"
+import InfoProvider from "./context/Professinoal_InfoContext"
+import EditAllPage from "./components/UserProfile/Professional Info/global/EditAllPage"
+import EditSkills from "./components/UserProfile/Professional Info/skills/EditSkills"
 
 function App() {
   return (
@@ -45,6 +47,7 @@ function App() {
           <Route path="/selectUser" element={<SelectUser />} />
           <Route path="/Accessibility" element={<Accessibility />} />
           <Route path="/SavedJobs" element={<SavedJobs />} />
+          {/* home routes */}
           <Route path="/home" element={<Home />}>
             <Route index element={<PostsList />} />
             <Route path="posts" element={<PostsList />} />
@@ -52,12 +55,20 @@ function App() {
             <Route path="chats" element={<Chats />} />
             <Route path="applied" element={<Applied />} />
           </Route>
-          <Route path='/userProfile' element={<UserProfile />}>
+          {/* userProfile Routes */}
+          <Route path='/userProfile' element={
+            <InfoProvider>
+              <UserProfile />
+            </InfoProvider>}>
             <Route path="posts" element={<Posts />} />
-            <Route path="Info" element={<ProfessionalInfo />} />
+            <Route path="Info" element={<ProfessionalInfo />} >
+              <Route path="edit" element={<EditAllPage />} />
+              <Route path="editSkills" element={<EditSkills/>}/>
+            </Route>
             <Route path="Achievements" element={<Achievements />} />
             <Route path="Saved" element={<Saved />} />
           </Route>
+          {/* error routes */}
           <Route path="*" element={<Error />} />
         </Routes>
       </JobProvider>
