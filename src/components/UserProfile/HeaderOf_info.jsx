@@ -1,6 +1,6 @@
 import { Edit,PlusIcon } from "lucide-react"
 
-function HeaderOf_info({icon,text,available,setEdit,edit}) {
+function HeaderOf_info({icon,text,available,setEditabout,setEdit,addModal,AddSkill}) {
     return (
         <>
         <div>
@@ -11,8 +11,8 @@ function HeaderOf_info({icon,text,available,setEdit,edit}) {
                 </div>
                 {
                     available?
-                    <Edit color="gray" className="cursor-pointer" onClick={()=>setEdit(!edit)}/>
-                    :<PlusIcon color="gray" className="cursor-pointer" onClick={()=>setEdit(!edit)}/>
+                    <Edit color="gray" className="cursor-pointer" onClick={setEditabout||setEdit}/>
+                    :<PlusIcon color="gray" className="cursor-pointer" onClick={setEditabout||addModal||AddSkill}/>
                 }
                 
             </div>
