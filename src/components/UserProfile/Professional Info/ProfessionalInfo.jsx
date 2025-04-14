@@ -5,6 +5,8 @@ import { Outlet } from "react-router-dom"
 import { InfoContext } from "../../../context/Professinoal_InfoContext"
 import Experience from "./Experience/Experience"
 import Skills from "./skills/Skills"
+import Certificates from "./Cetificates/Certificates"
+import Resume from "./resume/Resume"
 
 function ProfessionalInfo() {
     const {editPage}=useContext(InfoContext)
@@ -18,6 +20,8 @@ function ProfessionalInfo() {
                     <Education type="Education" />
                     <Experience type="Experience"/>
                     <Skills/>
+                    <Certificates/>
+                    <Resume/>
                 </>
             }
 

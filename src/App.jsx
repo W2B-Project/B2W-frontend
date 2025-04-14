@@ -28,7 +28,12 @@ import JobProvider from "./context/JobContext"
 import InfoProvider from "./context/Professinoal_InfoContext"
 import EditAllPage from "./components/UserProfile/Professional Info/global/EditAllPage"
 import EditSkills from "./components/UserProfile/Professional Info/skills/EditSkills"
-
+import EditResume from "./components/UserProfile/Professional Info/resume/EditResume"
+import Settings from "./pages/Settings/Settings"
+import Language from "./components/Settings/Language"
+import Managepasswords from "./components/Settings/Managepasswords"
+import NotificationSettings from "./components/Settings/NotificationSettings"
+import Logout from './components/Settings/Logout'
 function App() {
   return (
     <SignupProvider>
@@ -60,13 +65,23 @@ function App() {
             <InfoProvider>
               <UserProfile />
             </InfoProvider>}>
+            <Route index element={<Posts/>} />
             <Route path="posts" element={<Posts />} />
             <Route path="Info" element={<ProfessionalInfo />} >
               <Route path="edit" element={<EditAllPage />} />
-              <Route path="editSkills" element={<EditSkills/>}/>
+              <Route path="editSkills" element={<EditSkills />} />
+              <Route path="editCV" element={<EditResume />} />
             </Route>
             <Route path="Achievements" element={<Achievements />} />
             <Route path="Saved" element={<Saved />} />
+          </Route>
+          {/* settigs */}
+          <Route path="/settings" element={<Settings />}>
+            <Route index element={<Language />} />
+            <Route path="lang" element={<Language/>}/>
+            <Route path="managepass" element={<Managepasswords/>}/>
+            <Route path="notification" element={<NotificationSettings/>}/>
+            <Route path="logout" element={<Logout/>}/>
           </Route>
           {/* error routes */}
           <Route path="*" element={<Error />} />

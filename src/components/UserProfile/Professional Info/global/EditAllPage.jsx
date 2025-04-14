@@ -5,44 +5,64 @@ import { InfoContext } from "../../../../context/Professinoal_InfoContext"
 import FormModal from "../global/FormModal"
 
 function EditAllPage() {
-    const { ExperienceList, setExperienceList, EducationList, setEducationList, showModalEx, setShowModalEx, showModalEdu, setShowModalEdu } = useContext(InfoContext)
+    const {
+        ExperienceList,
+        setExperienceList,
+        EducationList,
+        setEducationList,
+        showModalEx,
+        setShowModalEx,
+        showModalEdu,
+        setShowModalEdu,
+        setModalCertificate,
+        modalCertificate,
+        certificate,
+        setCertificate }
+        = useContext(InfoContext)
     const [editIndex, setEditIndex] = useState(null)
     const [editMode, setEditMode] = useState(false)
     const location = useLocation()
 
     const { type } = location.state
     const typeEX = type === 'Experience'
+    const typeCertifecates = type === 'certificate'
     /* add new education or experience */
     const handleAdd = () => {
         setEditIndex(null)
         setEditMode(false)
-        typeEX ? setShowModalEx(true) : setShowModalEdu(true)
+        typeEX ? setShowModalEx(true) : typeCertifecates ? setModalCertificate(true) : setShowModalEdu(true)
     }
-    
+
     /* edit exist education or experience */
     const handleEdit = (index) => {
         setEditIndex(index)
         setEditMode(true)
-        typeEX ? setShowModalEx(true) : setShowModalEdu(true)
+        typeEX ? setShowModalEx(true) : typeCertifecates ? setModalCertificate(true) : setShowModalEdu(true)
     }
 
     /* save added or updated experience or education */
     const handleSave = (data) => {
         if (editMode) {
-            const updated = typeEX ? [...ExperienceList] : [...EducationList]
+            const updated = typeEX ? [...ExperienceList] : typeCertifecates ? [...certificate] : [...EducationList]
             updated[editIndex] = data
-            typeEX ? setExperienceList(updated) : setEducationList(updated)
+            typeEX ? setExperienceList(updated) : typeCertifecates ? setCertificate(updated) : setEducationList(updated)
         }
         else {
-            typeEX ? setExperienceList([...ExperienceList, data]) : setEducationList([...EducationList, data])
+            typeEX ?
+                setExperienceList([...ExperienceList, data])
+                : typeCertifecates ?
+                    setCertificate([...certificate, data])
+                    : setEducationList([...EducationList, data])
         }
     }
-     /* determine if its education or experience */
-    const currentList = typeEX ? ExperienceList : EducationList;
+    /* determine if its education or experience */
+    const currentList = typeEX ? ExperienceList : typeCertifecates ? certificate : EducationList;
     const fields = typeEX
         ? { primary: 'CompanyName', secondary: 'JobTitle' }
-        : { primary: 'Faculty', secondary: 'University' };
-    
+        : typeCertifecates
+            ? { primary: 'OrganizationName', secondary: 'CourseName' }
+            : { primary: 'Faculty', secondary: 'University' }
+
     return (
         <>
             <div className="w-full px-10 bg-white rounded-lg min-h-52">
@@ -59,26 +79,34 @@ function EditAllPage() {
                                     <div>
                                         <p className="text-lg ">{item[fields.primary]}</p>
                                         <p className="text-dark_gray">{item[fields.secondary]}</p>
-                                        <div className="flex gap-5 text-sm text-dark_gray">
-                                            <p>{item.FromMonth} {item.FromYear}</p>
-                                            <p>{item.ToMonth} {item.ToYear}</p>
-                                        </div>
+                                        {
+                                            type !== typeCertifecates &&
+                                            <div className="flex gap-5 text-sm text-dark_gray">
+                                                <p>{item.FromMonth} {item.FromYear}</p>
+                                                <p>{item.ToMonth} {item.ToYear}</p>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                                 <Edit color="gray" className="cursor-pointer" onClick={() => handleEdit(index)} />
                             </div>
                         ))
-                        :<p className="text-center my-16 bg-veryLight_purple p-2 rounded-xl w-3/4 m-auto text-2xl">No {type} to view , please add new one</p>
+                        : <p className="text-center my-16 bg-veryLight_purple p-2 rounded-xl w-3/4 m-auto text-2xl">No {type} to view , please add new one</p>
                 }
                 {
-                    typeEX ? showModalEx : showModalEdu &&
+                    (typeEX ? showModalEx : typeCertifecates ? modalCertificate : showModalEdu) &&
                         <FormModal
-                            type={typeEX ? "Experience" : "Education"}
-                            onClose={() => typeEX ? setShowModalEx(false) : setShowModalEdu(false)}
+                            type={typeEX ? "Experience" : typeCertifecates ? 'certificate' : "Education"}
+                            onClose={() =>
+                                typeEX ?
+                                    setShowModalEx(false)
+                                    : typeCertifecates ?
+                                        setModalCertificate(false)
+                                        : setShowModalEdu(false)}
                             onSave={handleSave}
                             editMode={editMode}
                             editData=
-                            {editMode ?currentList[editIndex]:null}
+                            {editMode ? currentList[editIndex] : null}
                         />
                 }
             </div>
