@@ -13,6 +13,10 @@ const InfoProvider = ({ children }) => {
     const [type, setType] = useState('Education');
     const [skill, setSkill] = useState('')
     const [skillSet, setSkillSet] = useState([])
+    const [certificate,setCertificate]=useState([])
+    const [modalCertificate,setModalCertificate]=useState(false)
+    const [cv,setCv]=useState(null)
+    const [cvShowModal,setCVShowModal]=useState(false)
 
     const location = useLocation();
 
@@ -22,7 +26,29 @@ const InfoProvider = ({ children }) => {
     },[location.pathname])
 
     const eduValue = {
-        type, setType,EducationList, setEducationList,ExperienceList, setExperienceList,showModalEx, setShowModalEx, showModalEdu, setShowModalEdu, setEditPage, editPage,skill, setSkill,skillSet, setSkillSet
+        type,
+        setType,
+        EducationList,
+        setEducationList,
+        ExperienceList,
+        setExperienceList,
+        showModalEx,
+        setShowModalEx,
+        showModalEdu,
+        setShowModalEdu, 
+        setEditPage,
+        editPage,
+        skill,
+        setSkill,
+        skillSet,
+        setSkillSet,
+        certificate,
+        setCertificate,
+        modalCertificate,
+        setModalCertificate,
+        cvShowModal,
+        setCVShowModal,
+        cv,setCv
     }
     return (
         <InfoContext.Provider value={eduValue}>
