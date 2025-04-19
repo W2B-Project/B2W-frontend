@@ -20,7 +20,7 @@ function UserProfile() {
         <>
             <Header />
             <div className="px-8 h-auto pt-28 w-[99%] m-auto ">
-                <div className="bg-[#f4f4f6]  rounded-xl pb-5">
+                <div className="bg-[#f4f4f6] rounded-xl pb-5">
                     {/* cover image */}
                     <div className="relative">
                         <img src={userprofileassets.bg} alt="profile" className="w-full" />

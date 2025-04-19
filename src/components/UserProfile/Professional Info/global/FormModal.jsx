@@ -4,18 +4,24 @@ import SelectFromTo from "./SelectFromTo"
 
 function FormModal({ onClose, onSave, editMode = false, editData = null, type }) {
 
-
     /* form state */
     const [form, setForm] = useState({
-        Faculty: "", Degree: "", University: "", CompanyName: "", JobTitle: "", OrganizationName: "", CourseName: "", FromMonth: "", ToMonth: "", FromYear: "", ToYear: ""
+        Faculty: "", Degree: "", University: ""               /* education */
+        ,CompanyName: "", JobTitle: ""                        /* job experience */
+        ,OrganizationName: "", CourseName: "",                /* certificates */
+        OrganizationNameMil: '', MillstoneTitle: ''           /* millistones*/
+        ,FromMonth: "", ToMonth: "", FromYear: "", ToYear: ""
     })
     const [err, setErr] = useState(null)
+    
+    /*to make it edit modal */
     useEffect(() => {
         if (editData && editMode) {
             setForm(editData)
         }
     }, [editMode, editData])
 
+    /* form fields based on type: millistone, certificate, Education, experience */
     let formdata = {
         textFields:
             type === 'Education' ? [
@@ -27,10 +33,15 @@ function FormModal({ onClose, onSave, editMode = false, editData = null, type })
                     { name: "OrganizationName", value: form.OrganizationName, placeholder: 'Organization Name' },
                     { name: "CourseName", value: form.CourseName, placeholder: 'Course Name' },
                 ]
-                    : [
-                        { name: "CompanyName", value: form.CompanyName, placeholder: 'Company Name' },
-                        { name: "JobTitle", value: form.JobTitle, placeholder: 'Job Title' },
-                    ],
+                    : type === 'millistone' ?
+                        [
+                            { name: "MillstoneTitle", value: form.MillstoneTitle, placeholder: 'Millstone Title' },
+                            { name: "OrganizationNameMil", value: form.OrganizationNameMil, placeholder: 'Organization Name' },
+                        ]
+                        : [
+                            { name: "CompanyName", value: form.CompanyName, placeholder: 'Company Name' },
+                            { name: "JobTitle", value: form.JobTitle, placeholder: 'Job Title' },
+                        ],
         selectList: {
             From: [
                 { name: "FromMonth", value: form.FromMonth },
@@ -46,7 +57,10 @@ function FormModal({ onClose, onSave, editMode = false, editData = null, type })
 
     let submitHandler = (e) => {
         e.preventDefault()
-        if (type === 'Education' ? !form.Faculty || !form.Degree || !form.University : type === 'certificate' ? !form.OrganizationName || !form.CourseName : !form.CompanyName || !form.JobTitle) {
+        if (type === 'Education' ? !form.Faculty || !form.Degree || !form.University
+            : type === 'certificate' ? !form.OrganizationName || !form.CourseName :
+                type === 'millistone' ? !form.MillstoneTitle || !form.OrganizationNameMil :
+                    !form.CompanyName || !form.JobTitle) {
             setErr("this field is required")
             return;
         }
@@ -74,11 +88,15 @@ function FormModal({ onClose, onSave, editMode = false, editData = null, type })
                             </div>
                         ))}
                         {
-                            type !== 'certificate' &&
+                            (type !== 'certificate' && type !== 'millistone') &&
                             <>
                                 <SelectFromTo fromorto={formdata.selectList.From} name='From' changeHandler={changeHandler} />
                                 <SelectFromTo fromorto={formdata.selectList.To} name='To' changeHandler={changeHandler} />
                             </>
+                        }
+                        {
+                            type === 'millistone' &&
+                            <SelectFromTo fromorto={formdata.selectList.From} name='Date' changeHandler={changeHandler} />
                         }
                         <Button btn_text={editMode ? 'Save' : 'Add'} marg={2} />
                     </form>
@@ -89,3 +107,23 @@ function FormModal({ onClose, onSave, editMode = false, editData = null, type })
 }
 
 export default FormModal
+
+/*     
+    const {setCertificate,setMillistons,setExperienceList,setEducationList}=useContext(InfoContext)
+    const typeEX = type === 'Experience'
+    const typeCertifecates = type === 'certificate'
+    const MilType = type === 'millistone'
+    const SetCurrentFun = typeEX ? setExperienceList : typeCertifecates ? setCertificate : MilType ? setMillistons : setEducationList 
+    
+    {editMode?
+        <div className="flex gap-5">
+            <Button btn_text={'Delete'} marg={2} bg={'bg-red-500 text-white border-red-500'} width={'w-fit px-20'} />
+            <Button btn_text={'Save'} marg={2} />
+        </div>
+        :<Button btn_text={'Add'} marg={2} onHandleClick={handleDelete}/>
+    }
+        const handleDelete = (id) => {
+        SetCurrentFun(prev => prev.filter(cur => cur.id !== id))
+    }
+
+*/

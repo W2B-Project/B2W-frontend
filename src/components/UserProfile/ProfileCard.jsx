@@ -1,13 +1,16 @@
+import { useState } from 'react'
 import { userprofileassets } from '../../assets/images/user Profile/userprofileAssets'
 import { Edit, Github, Facebook, Mail } from 'lucide-react'
+import EditPersonalInfo from './EditPersonalInfo'
 
 
 function ProfileCard() {
+    const [personalModal, setPersonalModal] = useState(false)
     return (
         <div className='bg-white w-[23%] relative -top-24 left-10 p-5 pt-0 rounded-xl h-fit'>
             <div className='flex'>
                 <img src={userprofileassets.profileImage} className='relative -top-8 left-4 rounded-full w-20 m-auto' alt="" />
-                <Edit color='gray' className='mt-2 cursor-pointer ' />
+                <Edit color='gray' className='mt-2 cursor-pointer' onClick={() => setPersonalModal(true)} />
             </div>
             <div className='text-center'>
                 <p className='text-xl font-bold font-lato'>Alaa Mohamed</p>
@@ -19,14 +22,14 @@ function ProfileCard() {
             {/* followers */}
             <div className='flex justify-between my-3'>
                 <div className='flex items-center gap-2'>
-                    <img src={userprofileassets.followers} alt="followers" />
+                    <img src={userprofileassets.followers} alt="followers" className='cursor-pointer' />
                     <div>
                         <p className='font-medium text-lg'>1k</p>
                         <p className='text-xs text-dark_gray'>followers</p>
                     </div>
                 </div>
                 <div className='flex items-center gap-2'>
-                    <img src={userprofileassets.followers} alt="following" />
+                    <img src={userprofileassets.followers} alt="following" className='cursor-pointer' />
                     <div>
                         <p className='font-medium text-lg'>1k</p>
                         <p className='text-xs text-dark_gray'>following</p>
@@ -39,7 +42,9 @@ function ProfileCard() {
                 <Facebook color='#7F00FF' />
                 <Mail color='#7F00FF' />
             </div>
-
+            {
+                personalModal && <EditPersonalInfo onClose={()=>setPersonalModal(false)}/>
+            }
         </div>
     )
 }
