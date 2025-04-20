@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import Millistons from './millistons/millistons'
+import Millistons from './millistons/Millistons'
 import Projects from './projects/Projects'
 import { useContext } from 'react'
 import { InfoContext } from '../../../context/Professinoal_InfoContext'
