@@ -24,8 +24,8 @@ function Createaccount() {
                             <input
                                 type="text"
                                 required
-                                placeholder="first name"
-                                className="mt-1 p-2 border border-gray-300 rounded-2xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                placeholder="First Name"
+                                className="mt-1 p-2 border placeholder:text-zinc-400 border-gray-300 rounded-2xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                                 />
                         </div>
                         <div className="flex flex-col w-1/2">
@@ -33,8 +33,8 @@ function Createaccount() {
                             <input
                                 type="text"
                                 required
-                                placeholder="last name"
-                                className="mt-1 p-2 border border-gray-300 rounded-2xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                placeholder="Last Name"
+                                className="mt-1 p-2 border border-gray-300 placeholder:text-zinc-400 rounded-2xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                                 />
                         </div>
                     </div>
@@ -46,7 +46,7 @@ function Createaccount() {
                             required
                             type="email"
                             placeholder="Example@gmail.com"
-                            className="mt-1 p-2 border border-gray-300 rounded-2xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                            className="mt-1 p-2 border placeholder:text-zinc-400 border-gray-300 rounded-2xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                             />
                     </div>
 
@@ -57,7 +57,7 @@ function Createaccount() {
                             required
                             type={showPassword ? "text" : "password"}
                             placeholder="* * * * * * * * * *"
-                            className="mt-1 p-2 border border-gray-300 rounded-2xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                            className="mt-1 p-2 border border-gray-300 placeholder:text-zinc-400 rounded-2xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                             />
                         <button
                             type="button"

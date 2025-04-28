@@ -9,7 +9,7 @@ function Accessibility() {
     const { setscale, setWordspacing,Wordspacing,LineHieght, setLinehight,contrastMode, setContrastMode } = useContext(AccessibilityContext)
 
     return (
-        <>
+        <div>
             {/* fonts */}
             <div className='flex gap-2 font-roboto items-center'>
                 <img src={setup.font} alt="font" width={27} loading="lazy" />
@@ -20,7 +20,7 @@ function Accessibility() {
                 <div className='flex justify-between'>
                     {font.map(f => (
                         <div className='flex gap-2 mt-2 ' key={f}>
-                            <input type="radio" value={f} className='checked:accent-primry_purble w-4' name='fonts' onChange={(e) => setscale(e.target.value)} />
+                            <input type="radio" value={f} className='checked:accent-primry_purble checked:!bg-primry_purble w-4 h-4' name='fonts' onChange={(e) => setscale(e.target.value)} />
                             <label htmlFor={f}>{f}</label>
                         </div>
                     ))}
@@ -46,7 +46,7 @@ function Accessibility() {
             </div>
 
 
-        </>
+        </div>
     )
 }
 

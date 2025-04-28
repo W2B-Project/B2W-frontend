@@ -4,14 +4,16 @@ import Header from "../../components/setup/Header"
 import { useState } from "react"
 import Accessibility from "../../components/setup/Accessibility"
 import Info from "../../components/setup/Info"
+import { useNavigate } from "react-router-dom"
 function Setup() {
     const [step, setStep] = useState(0)
-    const [checked,setchecked]=useState(null)
+    const [checked, setchecked] = useState(null)
     const getnextstep = () => {
         setStep(s => s + 1)
         setchecked(null)
     }
     let destructInfo = info[step]
+    const navigate = useNavigate()
     return (
         <>
             {/* header */}
@@ -27,11 +29,11 @@ function Setup() {
                 }
                 {
                     <button type="submit"
-                        onClick={() => getnextstep()}
+                        onClick={() => info[step].step === 7? navigate('/home') :getnextstep()  }
                         className="p-2 bg-primry_purble w-full my-7 rounded-2xl border-primry_purble border-2 text-white">
-                        {info[step].step === 7 ?'Save and start':'Next'}
+                        {info[step].step === 7 ? 'Save and start' : 'Next'}
                     </button>
-                    
+
                 }
 
             </form>

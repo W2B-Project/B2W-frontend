@@ -1,8 +1,9 @@
-import { NavLink,Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Logo from "../global/Logo";
 import profileImage from "../../assets/images/home/cca3d1cbd0af0cf081dd88cf66a24693.jpg";
 import BellIcon from "../svg/company setup/BellIcon";
 import SearchIcon from "../svg/company setup/SearchIcon";
+import { CompanyProAssets } from "../../Company/assests/companyAssets";
 
 const navLinks = [
     { to: "/home/posts", label: "Home" },
@@ -10,11 +11,18 @@ const navLinks = [
     { to: "/home/chats", label: "Chats" },
     { to: "/home/applied", label: "Applied" },
 ];
+const navLinksCompany = [
+    { to: "/home-Company/applications", label: "Home" },
+    { to: "/home-Company/PostJob", label: "Post Job" },
+    { to: "/home-Company/chats", label: "Chats" },
+];
 
-function Header({setService}) {
+
+function Header({ setService, usertype = 'employee' }) {
+    const currList = usertype === 'company' ? navLinksCompany : navLinks
+
     const linkClass = ({ isActive }) =>
-        `text-base font-bold border-b-4 rounded-[4px] transition-all ${
-            isActive ? "text-primry_purble border-primry_purble" : "text-black border-transparent hover:text-primry_purble hover:border-primry_purble"
+        `text-base font-bold border-b-4 rounded-[4px] transition-all ${isActive ? "text-primry_purble border-primry_purble" : "text-black border-transparent hover:text-primry_purble hover:border-primry_purble"
         }`;
 
     return (
@@ -23,8 +31,8 @@ function Header({setService}) {
                 <Logo logoColor="#7F00FF" />
             </div>
             <nav className="flex gap-8">
-                {navLinks.map(({ to, label }) => (
-                    <NavLink key={to} to={to} className={linkClass} onClick={()=>setService('')}>
+                {currList.map(({ to, label }) => (
+                    <NavLink key={to} to={to} className={linkClass} onClick={() => setService('')}>
                         {label}
                     </NavLink>
                 ))}
@@ -32,9 +40,9 @@ function Header({setService}) {
             <div className="flex items-center gap-4">
                 <SearchIcon />
                 <BellIcon />
-                <Link to='/userProfile'>
-                    <img className="w-10 h-10 rounded-full border border-gray-300 shadow-sm" loading="lazy" src={profileImage} alt="User Profile" />
-                </Link>
+                        <Link to={`${usertype === 'company' ?'/companyProfile':'/userProfile' }`}>
+                            <img className="w-10 h-10 rounded-full border border-gray-300 shadow-sm" loading="lazy" src={usertype==='company'?CompanyProAssets.profPho:profileImage} alt="user Profile" />
+                        </Link>
             </div>
         </header>
     );

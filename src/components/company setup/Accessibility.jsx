@@ -1,16 +1,19 @@
-/* eslint-disable react/prop-types */
 import Feature from './Feature'
-import { accessibilityfeatures } from '../../content/setup/Companyinfo'
-function Accessibility({info}) {
+import Button from '../global/Button'
+
+
+function Accessibility({info,editmode=false,toggleSelect,handleSave, featuresList}) {
+    
     return (
         <>
             <p className='my-7 text-center font-lato text-xl font-bold'>{info.desc}</p>
             <div className='grid grid-cols-2 gap-10 '>
-                {accessibilityfeatures.map((f)=>(
-                    <Feature f={f} key={f.title}/>
+                { featuresList.map((f)=>(
+                    <Feature f={f} key={f.title} toggleSelect={toggleSelect} selected={f.selected} />
                 ))}
                 
             </div>
+            {!editmode&&<Button btn_text={'Next'} onHandleClick={handleSave} marg={5}/>}
         </>
     )
 }
