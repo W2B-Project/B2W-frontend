@@ -7,6 +7,8 @@ import { useState } from "react";
 import Chatbot from "../services/Chatbot";
 import SignLanguageTranslator from "../services/SignLanguageTranslator";
 import CvAnalysis from "../services/CvAnalysis";
+import SavedJobs from "../../components/home/SavedJobs";
+import Accessibility  from "../../components/home/Accessibility";
 function Home() {
     const [service, setService] = useState('')
     return (
@@ -22,9 +24,13 @@ function Home() {
                     <SignLanguageTranslator/>
                 :service==='Resume Reviewer'?
                     <CvAnalysis/>
+                :service==='Saved Jobs'?
+                    <SavedJobs/>
+                :service==='Accessibility'?
+                    <Accessibility/>
                 : (
                     <>
-                        <ProfileMenu />
+                        <ProfileMenu setService={setService}/>
                         <div className="col-span-6 flex flex-col gap-3 w-full">
                             <Outlet />
                         </div>

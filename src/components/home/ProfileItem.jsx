@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-function ProfileItem({ text, Icon, profileLink }) {
+function ProfileItem({ text, Icon, setService }) {
   return (
-    <Link to={profileLink} className="flex justify-between items-center shadow p-5 rounded-xl bg-white">
+    <div className="flex justify-between items-center shadow p-5 rounded-xl bg-white cursor-pointer" onClick={()=>setService(text)}>
         <h3 className="text-xl font-lato">{text}</h3>
         <Icon className="text-primry_purble w-6 h-6" /> 
-    </Link>
+    </div>
   );
 }
 
