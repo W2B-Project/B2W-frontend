@@ -44,6 +44,7 @@ import Reviews from "./Company/components/CompanyProfile/reviews/Reviews"
 import EditCompanyInfo from "./Company/components/CompanyProfile/EditCompanyInfo"
 import Applications from "./Company/components/home/Applications"
 
+
 /* providers */
 import { SignupProvider } from "./context/SignUpContext"
 import JobProvider from "./context/JobContext"
