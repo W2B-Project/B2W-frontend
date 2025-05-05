@@ -26,7 +26,7 @@ function PeopleList() {
             <h3 className="text-xl font-semibold mb-3">People</h3>
             <div className="grid grid-cols-1 gap-4">
                 {usersList.map((user, index) => (
-                    <div key={index} className="flex items-center gap-4 py-4">
+                    <div key={index} className="flex items-center gap-4">
                         <PeopleItem user={user}/>
                     </div>
                 ))}
