@@ -1,30 +1,35 @@
-import React, { useContext } from 'react';
-import { JobContext } from '../../../../context/JobContext';
+import { useContext } from "react";
+import { jobContext } from "../../../../context/JobContext";
 
-const Job_content = () => {
-  const { jobData } = useContext(JobContext);
+function PostedJobsList() {
+  const { postedJobs } = useContext(jobContext);
 
-  if (!jobData || Object.keys(jobData).length === 0) return null;
+  if (postedJobs.length === 0)
+    return <p className="text-center">No jobs posted yet.</p>;
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-4 bg-white rounded-lg shadow mt-10">
-      <h2 className="text-2xl font-semibold mb-6">Applications</h2>
+    <div className="space-y-4 mt-10">
+      {postedJobs.map((job, index) => (
+        <div key={index} className="p-4 border rounded shadow bg-white space-y-2">
+          <h3 className="font-bold text-xl">{job.jobLevel} {job.jobTitle} {job.workingmodel}</h3>
+          
+          <p className="text-sm text-gray-600">
+            <strong>Type:</strong> {job.jobType} | <strong>Salary:</strong> {job.minSalary} to {job.maxSalary}  {job.currency}
+          </p>
 
-      <div className="bg-gray-50 rounded-lg p-4 shadow-md space-y-3">
-        <h3 className="text-lg font-bold border-b pb-2">Job Preview</h3>
+          <p><strong>Description:</strong> {job.description}</p>
+          <p><strong>Requirements:</strong> {job.requirements}</p>
+          <p><strong>About Company:</strong> {job.AboutCompany}</p>
 
-        <div className="text-gray-800">
-          <p><span className="font-medium">Title:</span> {jobData.jobTitle}</p>
-          <p><span className="font-medium">Level:</span> {jobData.jobLevel || "N/A"}</p>
-          <p><span className="font-medium">Type:</span> {jobData.jobType}</p>
-          <p><span className="font-medium">Salary:</span> {jobData.salary} {jobData.currency || "USD"}</p>
-          <p><span className="font-medium">Description:</span> {jobData.description}</p>
-          <p><span className="font-medium">Requirements:</span> {jobData.requirements}</p>
-          <p><span className="font-medium">Contact Person:</span> {jobData.personName}</p>
+          <div className="mt-2">
+            <p className="text-sm"><strong>Contact Person:</strong> {job.personName}</p>
+            <p className="text-sm"><strong>Phone:</strong> {job.phoneNumber}</p>
+            {/* <p className="text-sm"><strong>Email:</strong> {job.email}</p> */}
+          </div>
         </div>
-      </div>
+      ))}
     </div>
   );
-};
+}
 
-export default Job_content;
+export default PostedJobsList;
