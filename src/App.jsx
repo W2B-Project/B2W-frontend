@@ -44,6 +44,7 @@ import Reviews from "./Company/components/CompanyProfile/reviews/Reviews"
 import EditCompanyInfo from "./Company/components/CompanyProfile/EditCompanyInfo"
 import Applications from "./Company/components/home/Applications"
 
+
 /* providers */
 import { SignupProvider } from "./context/SignUpContext"
 import JobProvider from "./context/JobContext"
@@ -87,18 +88,23 @@ function App() {
               {/* userProfile Routes */}
               <Route path='/userProfile' element={<UserProfile />}>
                 <Route index element={<Posts />} />
+                
                 <Route path="posts" element={<Posts />} />
+                
                 <Route path="Info" element={<ProfessionalInfo />} >
                   <Route path="edit" element={<EditAllPage />} />
                   <Route path="editSkills" element={<EditSkills />} />
                   <Route path="editCV" element={<EditResume />} />
                 </Route>
+                
                 <Route path="Achievements" element={<Achievements />}>
                   <Route path="edit" element={<EditAllPage />} />
                 </Route>
+                
                 <Route path="Saved" element={<Saved />} />
               </Route>
               {/* Company Home */}
+                
                 <Route path="/home-Company" element={<HomeCom />}>
                   <Route index element={<Applications />} />
                   <Route path="applications" element={<Applications />} />
@@ -107,6 +113,7 @@ function App() {
                 </Route>
                 <Route path="EditAccessability" element={<EditAccessability />} />
               {/* company Profile Routes */}
+              
               <Route path='/companyProfile' element={<CompanyProfile />}>
                 <Route index element={<About />} />
                 <Route path="about" element={<About />} />
@@ -116,8 +123,10 @@ function App() {
                 </Route>
                 <Route path="reviews" element={<Reviews />} />
               </Route>
+              
               <Route path="EditCompanyInfo" element={<EditCompanyInfo />} />
               {/* settigs */}
+              
               <Route path="/settings" element={<Settings />}>
                 <Route index element={<Language />} />
                 <Route path="lang" element={<Language />} />
@@ -126,6 +135,7 @@ function App() {
                 <Route path="logout" element={<Logout />} />
               </Route>
               {/* error routes */}
+              
               <Route path="*" element={<Error />} />
             </Routes>
           </JobProvider>

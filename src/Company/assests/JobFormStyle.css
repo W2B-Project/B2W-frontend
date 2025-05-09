@@ -1,0 +1,51 @@
+
+/* sallary slider */
+.noUi-horizontal {
+    height: 8px;
+}
+
+.noUi-connect {
+    background: gray;
+}
+
+.noUi-horizontal .noUi-handle {
+    width: 36px;
+    border-radius: 50%;
+    height: 36px;
+    right: -18px;
+    border: 4px solid gray;
+    top: -15px;
+    background: #fff;
+}
+
+.noUi-handle:before, .noUi-handle:after {
+    content: "";
+    display: none;
+    position: absolute;
+    height: 14px;
+    width: 1px;
+    background: #E8E7E6;
+    left: 14px;
+    top: 6px;
+}
+
+
+/* phone style input */
+.react-tel-input .flag-dropdown {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid #cacaca;
+    border-radius: 18px 0 0 18px;
+}
+
+.react-tel-input .form-control {
+    position: relative;
+    font-size: 14px;
+    letter-spacing: .01rem;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-left: 70px;
+}
