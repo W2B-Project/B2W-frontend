@@ -6,7 +6,7 @@ import  { csetup } from '../../../../assets/images/company setup/csetup';
 const Aside_profile = () => {
   return (
     <>
-      <aside className="w-[330px] flex flex-col justify-start gap-5 bg-light_gray"> 
+      <Link to="/companyProfile" className="w-[330px] flex flex-col justify-start gap-5 bg-light_gray"> 
         
         <div className="profile_box flex items-center justify-evenly flex-col bg-white  w-full h-[229px] p-5 pt-0 rounded-xl">
           <img src={CompanyProAssets.profPho} className=' rounded-full w-20 ' alt="" />
@@ -29,7 +29,7 @@ const Aside_profile = () => {
         </Link>
 
 
-      </aside>
+      </Link>
     </>
   )
 }

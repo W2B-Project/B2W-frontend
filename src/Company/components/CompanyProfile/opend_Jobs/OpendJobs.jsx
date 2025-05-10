@@ -351,11 +351,10 @@ function OpendJobs() {
         {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}
       </div>
 
-
       {/* Submit */}
       <button
         type="submit"
-        className="w-full py-2 rounded-[18px] h-14 text-white transition-colors bg-purple-600 hover:bg-purple-700"
+        className="w-full py-2 rounded-[18px] h-14 text-white transition-colors bg-primry_purble hover:bg-primaryLight"
       >
         Post
       </button>
