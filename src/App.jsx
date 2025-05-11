@@ -43,6 +43,7 @@ import OpendJobs from "./Company/components/CompanyProfile/opend_Jobs/OpendJobs"
 import Reviews from "./Company/components/CompanyProfile/reviews/Reviews"
 import EditCompanyInfo from "./Company/components/CompanyProfile/EditCompanyInfo"
 import JobDetails from "./Company/components/CompanyProfile/Company_Home/JobDetails"
+import JobContent from "./Company/components/CompanyProfile/Company_Home/Job_content"
 import Applications from "./Company/components/home/Applications"
 
 /* providers */
@@ -107,11 +108,12 @@ function App() {
               {/* Company Home */}
                 <Route path="/company/chats" element={<Chats />} />   
                 <Route path="/home-Company" element={<HomeCom />}>
-                  <Route index element={<Applications />} />
-                  <Route path="applications" element={<Applications />} />
+                  <Route index element={<JobContent />} />
+                  <Route path="applications" element={<JobContent />} />
                   <Route path="chats" element={<Chats />} />
-                  <Route path="PostJob" element={<PostJob />} />
                   <Route path="postjob" element={<OpendJobs />} />
+                  
+                  {/* <Route path="PostJob" element={<PostJob />} /> */}
 
                 </Route>
                  <Route path="jobdetails" element={<JobDetails/>} />

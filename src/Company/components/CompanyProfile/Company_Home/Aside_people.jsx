@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { peoplesetup } from "../../../../Company/assests/people/peoplesetup";
+import { peoplesetup } from "../../../assests/people/peoplesetup";
 import { csetup } from "../../../../assets/images/company setup/csetup";
 
 const Aside_people = () => {
@@ -43,9 +43,9 @@ const Aside_people = () => {
                   gap: "10px",
                 }}
               >
-                <div>
+                <div className="w-[60px] h-[60px]">
                   <img
-                    className="w-[60px] h-[60px] rounded-full"
+                    className="w-[50px] h-[50px] rounded-full"
                     src={item.image}
                     alt=""
                   />
@@ -57,7 +57,7 @@ const Aside_people = () => {
                   </h4>
 
                   <p className="font-normal text-xs text-dark_gray capitalize">
-                    {item.jpb}
+                    {item.job}
                   </p>
                 </div>
               </div>

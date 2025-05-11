@@ -35,7 +35,7 @@ function PostedJobsList() {
               </div>
             </div>
 
-            <Link to="" className="w-8 h-8 bg-primry_purble rounded-full text-white flex items-center justify-center text-xl font-medium">
+            <Link to="applications" className="w-8 h-8 bg-primry_purble rounded-full text-white flex items-center justify-center text-xl font-medium">
               6
             </Link>
           </div>

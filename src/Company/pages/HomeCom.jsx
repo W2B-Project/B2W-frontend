@@ -1,32 +1,30 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, Outlet } from 'react-router-dom';
 
 import Header from '../../components/home/Header';
 import Aside_profile from '../components/CompanyProfile/Company_Home/Aside_profile';
 import Aside_people from '../components/CompanyProfile/Company_Home/Aside_people';
-import Job_content from '../components/CompanyProfile/Company_Home/Job_content';
-import OpendJobs from '../components/CompanyProfile/opend_Jobs/OpendJobs';
-import chat from '../../components/CompanyProfile/Chats'
+
 function HomeCom() {
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState('applications');
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (activeSection === 'chats') {
-      navigate('/company/chats'); 
+    switch (activeSection) {
+      case 'applications':
+        navigate('/home-Company/applications');
+        break;
+      case 'postjob':
+        navigate('/home-Company/postjob');
+        break;
+      case 'chats':
+        navigate('/company/chats');
+        break;
+      default:
+        navigate('/home-Company');
+        break;
     }
   }, [activeSection, navigate]);
-
-  const renderSection = () => {
-    switch (activeSection) {
-      case 'home':
-        return <Job_content />;
-      case 'postjob':
-        return <OpendJobs />;
-      default:
-        return <Job_content />;
-    }
-  };
 
   return (
     <>
@@ -34,9 +32,8 @@ function HomeCom() {
       <div className="bg-light_gray">
         <div className="body pt-28 flex items-start justify-center gap-6 w-full">
           <Aside_profile />
-          {/* < JobsList /> */}
           <div className="w-[684px]">
-            {renderSection()}
+            <Outlet />
           </div>
           <Aside_people />
         </div>
