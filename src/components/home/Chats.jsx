@@ -1,8 +1,8 @@
 function Chats() {
     return (
-        <div>
-            Chats
-        </div>
+        <>
+            <h2>الشات هيبقى هنا</h2>
+        </>
     )
 }
 

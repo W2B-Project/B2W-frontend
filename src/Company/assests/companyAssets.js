@@ -9,6 +9,12 @@ import EGPFlag from "./eg.svg";
 import USDFlag from "./us.svg";
 import EURFlag from "./ue.svg";
 import SARFlag from "./sar.svg";
+import Walletc from "./wallet.svg";
+import Babc from "./bagcolred.svg";
+import Chartc from "./chartcolerd.svg";
+import Manc from "./mancolred.svg";
+
+
 
 export const CompanyProAssets={
     bg,
@@ -21,6 +27,10 @@ export const CompanyProAssets={
     EGPFlag,
     USDFlag,
     EURFlag,
-    SARFlag
+    SARFlag,
+    Walletc,
+    Babc,
+    Chartc,
+    Manc
 
 }

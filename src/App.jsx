@@ -42,8 +42,8 @@ import People from "./Company/components/CompanyProfile/People/People"
 import OpendJobs from "./Company/components/CompanyProfile/opend_Jobs/OpendJobs"
 import Reviews from "./Company/components/CompanyProfile/reviews/Reviews"
 import EditCompanyInfo from "./Company/components/CompanyProfile/EditCompanyInfo"
+import JobDetails from "./Company/components/CompanyProfile/Company_Home/JobDetails"
 import Applications from "./Company/components/home/Applications"
-
 
 /* providers */
 import { SignupProvider } from "./context/SignUpContext"
@@ -103,17 +103,21 @@ function App() {
                 
                 <Route path="Saved" element={<Saved />} />
               </Route>
+              
               {/* Company Home */}
-                
+                <Route path="/company/chats" element={<Chats />} />   
                 <Route path="/home-Company" element={<HomeCom />}>
                   <Route index element={<Applications />} />
                   <Route path="applications" element={<Applications />} />
                   <Route path="chats" element={<Chats />} />
                   <Route path="PostJob" element={<PostJob />} />
+                  <Route path="postjob" element={<OpendJobs />} />
+
                 </Route>
+                 <Route path="jobdetails" element={<JobDetails/>} />
                 <Route path="EditAccessability" element={<EditAccessability />} />
-              {/* company Profile Routes */}
               
+              {/* company Profile Routes */}
               <Route path='/companyProfile' element={<CompanyProfile />}>
                 <Route index element={<About />} />
                 <Route path="about" element={<About />} />
@@ -125,8 +129,8 @@ function App() {
               </Route>
               
               <Route path="EditCompanyInfo" element={<EditCompanyInfo />} />
-              {/* settigs */}
               
+              {/* settigs */}
               <Route path="/settings" element={<Settings />}>
                 <Route index element={<Language />} />
                 <Route path="lang" element={<Language />} />

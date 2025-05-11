@@ -1,14 +1,21 @@
-import { useState } from 'react';
-import Header from '../../components/home/Header';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import Header from '../../components/home/Header';
 import Aside_profile from '../components/CompanyProfile/Company_Home/Aside_profile';
 import Aside_people from '../components/CompanyProfile/Company_Home/Aside_people';
 import Job_content from '../components/CompanyProfile/Company_Home/Job_content';
 import OpendJobs from '../components/CompanyProfile/opend_Jobs/OpendJobs';
-
-
+import chat from '../../components/CompanyProfile/Chats'
 function HomeCom() {
-  const [activeSection, setActiveSection] = useState('home'); // home | postjob | chats
+  const [activeSection, setActiveSection] = useState('home');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (activeSection === 'chats') {
+      navigate('/company/chats'); 
+    }
+  }, [activeSection, navigate]);
 
   const renderSection = () => {
     switch (activeSection) {
@@ -16,8 +23,6 @@ function HomeCom() {
         return <Job_content />;
       case 'postjob':
         return <OpendJobs />;
-      case 'chats':
-        return <div>الشات هيبقى هنا</div>;
       default:
         return <Job_content />;
     }
@@ -29,9 +34,8 @@ function HomeCom() {
       <div className="bg-light_gray">
         <div className="body pt-28 flex items-start justify-center gap-6 w-full">
           <Aside_profile />
-         
-                      
-          <div className='w-[684px]'>
+          {/* < JobsList /> */}
+          <div className="w-[684px]">
             {renderSection()}
           </div>
           <Aside_people />

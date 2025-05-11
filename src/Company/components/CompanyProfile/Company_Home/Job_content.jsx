@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { jobContext } from "../../../../context/JobContext";
+import { CompanyProAssets } from "../../../assests/companyAssets";
+import { Link } from "react-router-dom";
 
 function PostedJobsList() {
   const { postedJobs } = useContext(jobContext);
@@ -8,23 +10,51 @@ function PostedJobsList() {
     return <p className="text-center">No jobs posted yet.</p>;
 
   return (
-    <div className="space-y-4 mt-10">
+    <div className="space-y-6 w-[684px] rounded-xl">
+      <h3 className="capitalize font-normal text-2xl">
+        Applications
+      </h3>
+
       {postedJobs.map((job, index) => (
-        <div key={index} className="p-4 border rounded shadow bg-white space-y-2">
-          <h3 className="font-bold text-xl">{job.jobLevel} {job.jobTitle} {job.workingmodel}</h3>
-          
-          <p className="text-sm text-gray-600">
-            <strong>Type:</strong> {job.jobType} | <strong>Salary:</strong> {job.minSalary} to {job.maxSalary}  {job.currency}
-          </p>
+        <div
+          key={index}
+          className="border bg-white rounded-xl p-5 shadow-sm  transition space-y-4"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4 pb-4">
+              <img
+                src={CompanyProAssets.profPho}
+                alt="Company Logo"
+                className="w-20 h-20 rounded-full object-cover"
+              />
+              <div>
+                <h2 className="text-xl font-bold text-black">
+                  Digital Creative Agency
+                </h2>
+                <p className="text-sm text-gray-500">5 days ago</p>
+              </div>
+            </div>
 
-          <p><strong>Description:</strong> {job.description}</p>
-          <p><strong>Requirements:</strong> {job.requirements}</p>
-          <p><strong>About Company:</strong> {job.AboutCompany}</p>
+            <Link to="" className="w-8 h-8 bg-primry_purble rounded-full text-white flex items-center justify-center text-xl font-medium">
+              6
+            </Link>
+          </div>
 
-          <div className="mt-2">
-            <p className="text-sm"><strong>Contact Person:</strong> {job.personName}</p>
-            <p className="text-sm"><strong>Phone:</strong> {job.phoneNumber}</p>
-            {/* <p className="text-sm"><strong>Email:</strong> {job.email}</p> */}
+          {/* تفاصيل الوظيفة */}
+          <div className="space-y-2">
+            <h3 className="font-normal text-2xl  text-black">
+              {job.jobLevel} {job.jobTitle} - {job.workingmodel}
+            </h3>
+
+            <hr className="bg-gradient-to-l from-primry_purble to-white rounded-lg h-[4px] w-[400px] my-8 mx-auto" />
+
+            <Link
+              to="/jobdetails"
+              state={{ job }}
+              className="w-[604px] h-[48px] bg-primry_purble hover:bg-primaryLight duration-300 text-white flex items-center justify-center  rounded-[15px] font-bold  text-lg !mt-5 "
+            >
+              Show Job Applications
+            </Link>
           </div>
         </div>
       ))}
