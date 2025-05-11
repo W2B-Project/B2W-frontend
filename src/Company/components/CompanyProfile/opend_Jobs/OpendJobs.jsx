@@ -5,11 +5,11 @@ import { CompanyProAssets } from "../../../../Company/assests/companyAssets";
 import Select from "react-select";
 import noUiSlider from "nouislider";
 import "nouislider/dist/nouislider.css";
-//phone input 
+//phone input
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-// style in css 
-import "../../../../Company/assests/JobFormStyle.css"
+// style in css
+import "../../../../Company/assests/JobFormStyle.css";
 function OpendJobs() {
   const { addJob } = useContext(jobContext);
 
@@ -18,7 +18,11 @@ function OpendJobs() {
       value: "EGP",
       label: (
         <div className="flex items-center gap-2">
-          <img src={CompanyProAssets.EGPFlag} alt="EGP" className="w-5 h-4 rounded-sm" />
+          <img
+            src={CompanyProAssets.EGPFlag}
+            alt="EGP"
+            className="w-5 h-4 rounded-sm"
+          />
           EGP (جنيه)
         </div>
       ),
@@ -27,7 +31,11 @@ function OpendJobs() {
       value: "USD",
       label: (
         <div className="flex items-center gap-2">
-          <img src={CompanyProAssets.USDFlag} alt="USD" className="w-5 h-4 rounded-sm" />
+          <img
+            src={CompanyProAssets.USDFlag}
+            alt="USD"
+            className="w-5 h-4 rounded-sm"
+          />
           USD ($)
         </div>
       ),
@@ -36,7 +44,11 @@ function OpendJobs() {
       value: "EUR",
       label: (
         <div className="flex items-center gap-2">
-          <img src={CompanyProAssets.EURFlag} alt="EUR" className="w-5 h-4 rounded-sm" />
+          <img
+            src={CompanyProAssets.EURFlag}
+            alt="EUR"
+            className="w-5 h-4 rounded-sm"
+          />
           EUR (€)
         </div>
       ),
@@ -45,7 +57,11 @@ function OpendJobs() {
       value: "SAR",
       label: (
         <div className="flex items-center gap-2">
-          <img src={CompanyProAssets.SARFlag} alt="SAR" className="w-5 h-4 rounded-sm" />
+          <img
+            src={CompanyProAssets.SARFlag}
+            alt="SAR"
+            className="w-5 h-4 rounded-sm"
+          />
           SAR (ريال)
         </div>
       ),
@@ -96,8 +112,8 @@ function OpendJobs() {
       });
 
       salarySliderRef.current.noUiSlider.on("update", (values) => {
-        const [min, max] = values.map((val) =>
-          parseInt(val.replace("K", "")) * 1000
+        const [min, max] = values.map(
+          (val) => parseInt(val.replace("K", "")) * 1000
         );
         setFormData((prev) => ({
           ...prev,
@@ -130,13 +146,18 @@ function OpendJobs() {
     if (!formData.jobTitle) newErrors.jobTitle = "Job title is required";
     if (!formData.jobLevel) newErrors.jobLevel = "Job level is required";
     if (!formData.jobType) newErrors.jobType = "Job type is required";
-    if (!formData.workingmodel) newErrors.workingmodel = "Working Model is required";
+    if (!formData.workingmodel)
+      newErrors.workingmodel = "Working Model is required";
     if (!formData.currency) newErrors.currency = "Currency is required";
-    if (!formData.description) newErrors.description = "Description is required";
-    if (!formData.requirements) newErrors.requirements = "Requirements are required";
-    if (!formData.AboutCompany) newErrors.AboutCompany = "AboutCompany is required";
+    if (!formData.description)
+      newErrors.description = "Description is required";
+    if (!formData.requirements)
+      newErrors.requirements = "Requirements are required";
+    if (!formData.AboutCompany)
+      newErrors.AboutCompany = "AboutCompany is required";
     if (!formData.personName) newErrors.personName = "Person name is required";
-    if (!formData.phoneNumber) newErrors.phoneNumber = "Phone number is required";
+    if (!formData.phoneNumber)
+      newErrors.phoneNumber = "Phone number is required";
 
     if (formData.minSalary > formData.maxSalary) {
       newErrors.salary = "Min salary should be less than max salary";
@@ -162,7 +183,7 @@ function OpendJobs() {
       requirements: "",
       AboutCompany: "",
       personName: "",
-      phoneNumber: ""
+      phoneNumber: "",
     });
 
     setErrors({});
@@ -172,7 +193,10 @@ function OpendJobs() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full bg-white rounded-[20px] shadow p-6 space-y-6">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full bg-white rounded-[20px] shadow p-6 space-y-6"
+    >
       <h2 className="text-xl font-bold">1. Quick Job Overview</h2>
 
       <div className="space-y-4">
@@ -185,23 +209,33 @@ function OpendJobs() {
             value={formData.jobTitle}
             onChange={handleChange}
             placeholder="EX : Product manager"
-            className={`text-dark_gray text-base font-normal w-full border pl-4 p-2 rounded-[18px] h-14 ${errors.jobTitle ? "border-red-500" : "border-gray-300"}`}
+            className={`text-dark_gray text-base font-normal w-full border pl-4 p-2 rounded-[18px] h-14 ${
+              errors.jobTitle ? "border-red-500" : "border-light_gray"
+            }`}
           />
-          {errors.jobTitle && <p className="text-red-500 text-sm">{errors.jobTitle}</p>}
+          {errors.jobTitle && (
+            <p className="text-red-500 text-sm">{errors.jobTitle}</p>
+          )}
         </div>
 
         {/* Job Level */}
         <div>
           <label className="text-lg font-normal">Job Level</label>
           <div className="relative">
-            <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
-              <img src={CompanyProAssets.levelchart} className="w-6 h-6" alt="Level Icon" />
+            <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-dark_gray">
+              <img
+                src={CompanyProAssets.levelchart}
+                className="w-6 h-6"
+                alt="Level Icon"
+              />
             </span>
             <select
               name="jobLevel"
               value={formData.jobLevel}
               onChange={handleChange}
-              className={`text-dark_gray text-base font-normal w-full border p-2 pl-12 rounded-[18px] h-14 ${errors.jobLevel ? "border-red-500" : "border-gray-300"}`}
+              className={`text-dark_gray text-base font-normal w-full border p-2 pl-12 rounded-[18px] h-14 ${
+                errors.jobLevel ? "border-red-500" : "border-light_gray"
+              }`}
             >
               <option value="">Select one</option>
               <option value="Entry">Entry</option>
@@ -210,49 +244,67 @@ function OpendJobs() {
               <option value="Lead">Lead</option>
             </select>
           </div>
-          {errors.jobLevel && <p className="text-red-500 text-sm">{errors.jobLevel}</p>}
+          {errors.jobLevel && (
+            <p className="text-red-500 text-sm">{errors.jobLevel}</p>
+          )}
         </div>
 
         {/* Job Type */}
         <div>
           <label className="text-lg font-normal">Job Type</label>
           <div className="relative">
-            <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
-              <img src={CompanyProAssets.bag} className="w-6 h-6" alt="Job Type Icon" />
+            <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-light_gray">
+              <img
+                src={CompanyProAssets.bag}
+                className="w-6 h-6"
+                alt="Job Type Icon"
+              />
             </span>
             <select
               name="jobType"
               value={formData.jobType}
               onChange={handleChange}
-              className={`text-dark_gray text-base font-normal w-full border p-2 pl-12 rounded-[18px] h-14 ${errors.jobType ? "border-red-500" : "border-gray-300"}`}
+              className={`text-dark_gray text-base font-normal w-full border p-2 pl-12 rounded-[18px] h-14 ${
+                errors.jobType ? "border-red-500" : "border-light_gray"
+              }`}
             >
               <option value="">Select Job Type</option>
               <option value="Full Time">Full Time</option>
               <option value="Part Time">Part Time</option>
             </select>
           </div>
-          {errors.jobType && <p className="text-red-500 text-sm">{errors.jobType}</p>}
+          {errors.jobType && (
+            <p className="text-red-500 text-sm">{errors.jobType}</p>
+          )}
         </div>
 
         {/* Working Model */}
         <div>
           <label className="text-lg font-normal">Working Model</label>
           <div className="relative">
-            <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
-              <img src={CompanyProAssets.workman} className="w-6 h-6" alt="icon" />
+            <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-light_gray">
+              <img
+                src={CompanyProAssets.workman}
+                className="w-6 h-6"
+                alt="icon"
+              />
             </span>
             <select
               name="workingmodel"
               value={formData.workingmodel}
               onChange={handleChange}
-              className={`text-dark_gray text-base font-normal w-full border p-2 pl-12 rounded-[18px] h-14 ${errors.workingmodel ? "border-red-500" : "border-gray-300"}`}
+              className={`text-dark_gray text-base font-normal w-full border p-2 pl-12 rounded-[18px] h-14 ${
+                errors.workingmodel ? "border-red-500" : "border-light_gray"
+              }`}
             >
               <option value="">Select one</option>
               <option value="Remotly">Remotly</option>
               <option value="On-site">On-site</option>
             </select>
           </div>
-          {errors.workingmodel && <p className="text-red-500 text-sm">{errors.workingmodel}</p>}
+          {errors.workingmodel && (
+            <p className="text-red-500 text-sm">{errors.workingmodel}</p>
+          )}
         </div>
 
         {/* Currency */}
@@ -261,7 +313,9 @@ function OpendJobs() {
           <Select
             options={currencyOptions}
             onChange={handleCurrencyChange}
-            value={currencyOptions.find((opt) => opt.value === formData.currency)}
+            value={currencyOptions.find(
+              (opt) => opt.value === formData.currency
+            )}
             classNames={{
               control: () =>
                 "text-dark_gray text-base font-normal w-full border border-gray-300 p-2 !rounded-[18px] h-14 shadow-none ",
@@ -270,14 +324,18 @@ function OpendJobs() {
             }}
             classNamePrefix="react-select"
           />
-          {errors.currency && <p className="text-red-500 text-sm">{errors.currency}</p>}
+          {errors.currency && (
+            <p className="text-red-500 text-sm">{errors.currency}</p>
+          )}
         </div>
 
         {/* Salary Range */}
         <div className="h-20">
           <label className="text-lg font-normal mb-4">Salary</label>
           <div ref={salarySliderRef} className="mt-2"></div>
-          {errors.salary && <p className="text-red-500 text-sm">{errors.salary}</p>}
+          {errors.salary && (
+            <p className="text-red-500 text-sm">{errors.salary}</p>
+          )}
         </div>
       </div>
 
@@ -285,41 +343,59 @@ function OpendJobs() {
       <div className="space-y-4">
         {/* Description */}
         <div>
-          <label className="font-normal text-lg text-dark_gray">Description</label>
+          <label className="font-normal text-lg text-dark_gray">
+            Description
+          </label>
           <textarea
             name="description"
             value={formData.description}
             onChange={handleChange}
             placeholder="Type here..."
-            className={`text-dark_gray text-base font-normal w-full border pl-4 resize-none p-2 rounded-[18px] h-[186px] ${errors.description ? "border-red-500" : "border-gray-300"}`}
+            className={`text-dark_gray text-base font-normal w-full border pl-4 resize-none p-2 rounded-[18px] h-[186px] ${
+              errors.description ? "border-red-500" : "border-light_gray"
+            }`}
           />
-          {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
+          {errors.description && (
+            <p className="text-red-500 text-sm">{errors.description}</p>
+          )}
         </div>
 
         {/* Requirements */}
         <div>
-          <label className="font-normal text-lg text-dark_gray">Requirements</label>
+          <label className="font-normal text-lg text-dark_gray">
+            Requirements
+          </label>
           <textarea
             name="requirements"
             value={formData.requirements}
             onChange={handleChange}
             placeholder="Type here..."
-            className={`text-dark_gray text-base font-normal w-full border pl-4 resize-none p-2 rounded-[18px] h-[186px] ${errors.requirements ? "border-red-500" : "border-gray-300"}`}
+            className={`text-dark_gray text-base font-normal w-full border pl-4 resize-none p-2 rounded-[18px] h-[186px] ${
+              errors.requirements ? "border-red-500" : "border-light_gray"
+            }`}
           />
-          {errors.requirements && <p className="text-red-500 text-sm">{errors.requirements}</p>}
+          {errors.requirements && (
+            <p className="text-red-500 text-sm">{errors.requirements}</p>
+          )}
         </div>
 
         {/* About Company */}
         <div>
-          <label className="font-normal text-lg text-dark_gray">About Company</label>
+          <label className="font-normal text-lg text-dark_gray">
+            About Company
+          </label>
           <textarea
             name="AboutCompany"
             value={formData.AboutCompany}
             onChange={handleChange}
             placeholder="Type here..."
-            className={`text-dark_gray text-base font-normal w-full border pl-4 resize-none p-2 rounded-[18px] h-[186px] ${errors.AboutCompany ? "border-red-500" : "border-gray-300"}`}
+            className={`text-dark_gray text-base font-normal w-full border pl-4 resize-none p-2 rounded-[18px] h-[186px] ${
+              errors.AboutCompany ? "border-red-500" : "border-light_gray"
+            }`}
           />
-          {errors.AboutCompany && <p className="text-red-500 text-sm">{errors.AboutCompany}</p>}
+          {errors.AboutCompany && (
+            <p className="text-red-500 text-sm">{errors.AboutCompany}</p>
+          )}
         </div>
       </div>
 
@@ -333,9 +409,13 @@ function OpendJobs() {
           value={formData.personName}
           onChange={handleChange}
           placeholder="EX : Hany Ahmed"
-          className={`text-dark_gray text-base font-normal w-full border pl-4 p-2 rounded-[18px] h-14 ${errors.personName ? "border-red-500" : "border-gray-300"}`}
+          className={`text-dark_gray text-base font-normal w-full border pl-4 p-2 rounded-[18px] h-14 ${
+            errors.personName ? "border-red-500" : "border-light_gray"
+          }`}
         />
-        {errors.personName && <p className="text-red-500 text-sm">{errors.personName}</p>}
+        {errors.personName && (
+          <p className="text-red-500 text-sm">{errors.personName}</p>
+        )}
       </div>
 
       {/* Phone Number */}
@@ -344,11 +424,17 @@ function OpendJobs() {
         <PhoneInput
           country={"eg"}
           value={formData.phoneNumber}
-          onChange={(phone) => setFormData((prev) => ({ ...prev, phoneNumber: phone }))}
-          inputClass={`text-dark_gray text-base font-normal !w-full !h-14 !rounded-[18px] ${errors.phoneNumber ? "border-red-500" : "border-gray-300"}`}
+          onChange={(phone) =>
+            setFormData((prev) => ({ ...prev, phoneNumber: phone }))
+          }
+          inputClass={`text-dark_gray text-base font-normal !w-full !h-14 !rounded-[18px] ${
+            errors.phoneNumber ? "border-red-500" : "border-light_gray"
+          }`}
           containerClass="w-full"
         />
-        {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}
+        {errors.phoneNumber && (
+          <p className="text-red-500 text-sm">{errors.phoneNumber}</p>
+        )}
       </div>
 
       {/* Submit */}
