@@ -4,7 +4,7 @@ import { Plus, XIcon } from "lucide-react"
 import { useState } from "react"
 import Button from "../global/Button"
 
-function Form({getnextstep}) {
+function Form({ getnextstep, btn_text }) {
     const [link, setlink] = useState('')
     const [Social, setSocial] = useState([])
 
@@ -74,7 +74,7 @@ function Form({getnextstep}) {
                     <textarea rows='4' name="description" placeholder="type here..." className="border-2 border-light_gray p-2 placeholder:text-dark_gray focus:border-primry_purble rounded-2xl" />
                 </div>
             </div>
-            <Button onHandleClick={()=>getnextstep()} btn_text={'Next'} marg={5} />
+            <Button onHandleClick={() => getnextstep()} btn_text={btn_text || 'Next'} marg={5} />
         </form>
     )
 }

@@ -1,13 +1,13 @@
 import { useContext } from "react";
-import { jobContext } from "../../../../context/JobContext";
-import { CompanyProAssets } from "../../../assests/companyAssets";
+import { jobContext } from "../../../context/JobContext";
+import { CompanyProAssets } from "../../assests/companyAssets";
 import { Link } from "react-router-dom";
 
 function PostedJobsList() {
   const { postedJobs } = useContext(jobContext);
 
   if (postedJobs.length === 0)
-    return <p className="text-center">No jobs posted yet.</p>;
+    return <p className="text-center mt-20 ">No jobs posted yet.</p>;
 
   return (
     <div className="space-y-6 w-[684px] rounded-xl">
