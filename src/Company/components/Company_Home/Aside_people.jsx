@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { peoplesetup } from "../../../../Company/assests/people/peoplesetup";
-import { csetup } from "../../../../assets/images/company setup/csetup";
+import { peoplesetup } from "../../assests/people/peoplesetup";
+import { csetup } from "../../../assets/images/company setup/csetup";
 
 const Aside_people = () => {
   const items = [
@@ -16,7 +16,7 @@ const Aside_people = () => {
     <>
       <aside className="w-[330px] flex flex-col justify-start gap-5">
         <div className="profile_box  bg-white rounded-[20px]">
-          <div className="profile_box_header flex items-center justify-between w-full pt-6 p-5 pt-0 ">
+          <div className="profile_box_header flex items-center justify-between w-full pt-6 p-5 ">
             <h2 className="font-bold text-xl">People</h2>
 
             <Link to="/" className="text-primry_purble font-normal text-base">
@@ -30,22 +30,17 @@ const Aside_people = () => {
               gap: "8px",
               flexDirection: "column",
               width: "100%",
+              paddingBottom:'15px'
             }}
           >
             {items.map((item) => (
               <div
                 key={item.id}
-                style={{
-                  padding: "0px 20px 0 20px",
-                  width: "100%",
-                  textAlign: "start",
-                  display: "flex",
-                  gap: "10px",
-                }}
+                className="flex gap-3 items-center ps-5 w-full  "
               >
                 <div>
                   <img
-                    className="w-[60px] h-[60px] rounded-full"
+                    className="max-w-[50px] max-h-[50px] rounded-full"
                     src={item.image}
                     alt=""
                   />

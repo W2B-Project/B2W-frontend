@@ -1,44 +1,28 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import Header from '../../components/home/Header';
-import Aside_profile from '../components/CompanyProfile/Company_Home/Aside_profile';
-import Aside_people from '../components/CompanyProfile/Company_Home/Aside_people';
-import Job_content from '../components/CompanyProfile/Company_Home/Job_content';
-import OpendJobs from '../components/CompanyProfile/opend_Jobs/OpendJobs';
-import chat from '../../components/CompanyProfile/Chats'
+import Aside_profile from '../components/Company_Home/Aside_profile';
+import Aside_people from '../components/Company_Home/Aside_people';
+
 function HomeCom() {
-  const [activeSection, setActiveSection] = useState('home');
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (activeSection === 'chats') {
-      navigate('/company/chats'); 
-    }
-  }, [activeSection, navigate]);
-
-  const renderSection = () => {
-    switch (activeSection) {
-      case 'home':
-        return <Job_content />;
-      case 'postjob':
-        return <OpendJobs />;
-      default:
-        return <Job_content />;
-    }
-  };
-
   return (
     <>
-      <Header usertype="company" setActiveSection={setActiveSection} />
-      <div className="bg-light_gray">
-        <div className="body pt-28 flex items-start justify-center gap-6 w-full">
-          <Aside_profile />
-          {/* < JobsList /> */}
-          <div className="w-[684px]">
-            {renderSection()}
+      <Header usertype="company"  />
+      <div className="px-8 bg-[#f4f4f6] min-h-screen">
+        <div className=" pt-28 grid grid-cols-12 gap-5">
+          <div className='col-span-3'>
+            <Aside_profile />
           </div>
-          <Aside_people />
+          
+          {/* < JobsList /> */}
+          <div className="col-span-6">
+            <Outlet/>
+          </div>
+          <div className='col-span-3'>
+            <Aside_people />
+          </div>
+          
         </div>
       </div>
     </>

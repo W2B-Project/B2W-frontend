@@ -9,8 +9,8 @@ function EditCompanyInfo() {
                 <div className="w-[98%] m-auto pt-5  rounded-lg bg-white ">
                     <p className="my-7 text-2xl font-semibold text-center font-lato">Edit Company Information</p>
                     <div className="w-1/3 m-auto">
-                        <Form />
-                        <Button btn_text={'Update'} marg={5}/>
+                        <Form btn_text={'Update'} />
+
                     </div>
                 </div>
             </div>

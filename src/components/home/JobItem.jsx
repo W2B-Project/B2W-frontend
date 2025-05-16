@@ -6,7 +6,7 @@ import { jobContext } from "../../context/JobContext";
 
 function JobItem({ job }) {
     const {toggleSaved, savedJobs}=useContext(jobContext)
-    const isSaved=savedJobs.includes(job.id)
+    const isSaved=savedJobs?.includes(job.id)
     return (
         <div className="bg-white rounded-xl p-4 flex flex-col gap-4 px-5 shadow">
             {/* Job Header */}
