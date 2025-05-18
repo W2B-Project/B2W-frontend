@@ -14,7 +14,7 @@ const Aside_people = () => {
   ];
   return (
     <>
-      <aside className="w-[330px] flex flex-col justify-start gap-5">
+      <aside className="flex flex-col justify-start gap-5">
         <div className="profile_box  bg-white rounded-[20px]">
           <div className="profile_box_header flex items-center justify-between w-full pt-6 p-5 ">
             <h2 className="font-bold text-xl">People</h2>
