@@ -8,7 +8,7 @@ const Aside_profile = () => {
     <>
       <Link
         to="/companyProfile"
-        className="w-[330px] flex flex-col justify-start gap-5 bg-[#f4f4f6]"
+        className="flex flex-col justify-start gap-5 bg-[#f4f4f6]"
       >
         <div className="profile_box flex items-center justify-evenly flex-col bg-white  w-full h-[229px] p-5 pt-0 rounded-xl">
           <img

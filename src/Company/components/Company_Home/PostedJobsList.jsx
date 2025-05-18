@@ -10,7 +10,7 @@ function PostedJobsList() {
     return <p className="text-center mt-20 ">No jobs posted yet.</p>;
 
   return (
-    <div className="space-y-6 w-[684px] rounded-xl">
+    <div className="space-y-6 rounded-xl">
       <h3 className="capitalize font-normal text-2xl">
         Applications
       </h3>
@@ -51,7 +51,7 @@ function PostedJobsList() {
             <Link
               to="/jobdetails"
               state={{ job }}
-              className="w-[604px] h-[48px] bg-primry_purble hover:bg-primaryLight duration-300 text-white flex items-center justify-center  rounded-[15px] font-bold  text-lg !mt-5 "
+              className="h-[48px] bg-primry_purble hover:bg-primaryLight duration-300 text-white flex items-center justify-center  rounded-[15px] font-bold  text-lg !mt-5 "
             >
               Show Job Applications
             </Link>
