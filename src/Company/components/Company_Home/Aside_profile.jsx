@@ -17,11 +17,11 @@ const Aside_profile = () => {
             alt=""
           />
 
-          <h2 className="font-bold text-2xl">Digital Creative Agency</h2>
+          <h3 className="font-bold text-2xl font-lato">Digital Creative Agency</h3>
 
           <Link
-            to="/EditCompanyInfo"
-            className="text-white bg-primry_purble text-sm h-[40px] w-[165px] flex items-center justify-center rounded-[20px] font-bold"
+            to="/companyProfile"
+            className="text-white bg-primry_purble mt-4 h-[40px] w-[165px]  flex items-center justify-center rounded-[20px]"
           >
             update profile
           </Link>

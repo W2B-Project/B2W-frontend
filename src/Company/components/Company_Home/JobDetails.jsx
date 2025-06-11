@@ -31,8 +31,8 @@ const JobDetails = () => {
                 <IoIosArrowBack />
               </Link>
 
-              <h1 className="text-center text-[28px] capitalize font-normal text-black">
-                {job.jobLevel} {job.jobTitle}
+              <h1 className="text-center text-[28px] font-lato capitalize font-normal text-black">
+                {job?.jobData?.jobLevel} {job?.jobData?.jobTitle}
               </h1>
 
               <Link to="/home-Company" className=" text-xl block">
@@ -48,7 +48,7 @@ const JobDetails = () => {
                   className="w-20 h-20 rounded-full object-cover"
                 />
                 <div>
-                  <h2 className="text-xl font-bold text-black">
+                  <h2 className="text-xl font-bold text-black font-lato">
                     Digital Creative Agency
                   </h2>
 
@@ -57,10 +57,10 @@ const JobDetails = () => {
               </div>
 
               <div>
-                <div className="text-black text-2xl font-normal">
-                  {job.jobLevel} {job.jobTitle}
+                <div className="text-black text-2xl font-normal font-lato">
+                  {job?.jobData?.jobLevel} {job?.jobData?.jobTitle}
                 </div>
-                <div className="text-xs text-dark_gray capitalize flex flex-row items-center justify-start gap-1 ">
+                <div className="text-sm font-lato text-dark_gray capitalize flex flex-row items-center justify-start gap-1 ">
                   <CiLocationOn className="w-6 h-6" />{" "}
                   {job.location || "mansoura"}
                 </div>
@@ -77,7 +77,7 @@ const JobDetails = () => {
 
               <h3 className="text-base font-normal text-dark_gray">Level</h3>
 
-              <p className="text-black font-bold">{job.jobLevel}</p>
+              <p className="text-black font-bold font-lato">{job?.jobData?.jobLevel}</p>
             </div>
 
             <div className="flex flex-col items-center justify-center gap-1">
@@ -87,7 +87,7 @@ const JobDetails = () => {
 
               <h3 className="text-base font-normal text-dark_gray">Job type</h3>
 
-              <p className="text-black font-bold">{job.jobType}</p>
+              <p className="text-black font-bold font-lato">{job?.jobData?.jobType}</p>
             </div>
 
             <div className="flex flex-col items-center justify-center gap-1">
@@ -101,8 +101,8 @@ const JobDetails = () => {
 
               <h3 className="text-base font-normal text-dark_gray">Salary</h3>
 
-              <p className="text-black font-bold">
-                {job.minSalary}-{job.maxSalary} {job.currency}
+              <p className="text-black font-bold font-lato">
+                {job?.jobData?.minSalary}-{job?.jobData?.maxSalary} {job?.jobData?.currency}
               </p>
             </div>
 
@@ -115,7 +115,7 @@ const JobDetails = () => {
                 Working model
               </h3>
 
-              <p className="text-black font-bold">{job.workingmodel}</p>
+              <p className="text-black font-bold font-lato">{job?.jobData?.workingmodel}</p>
             </div>
           </div>
 
@@ -136,28 +136,28 @@ const JobDetails = () => {
           </div>
 
           <div className="p-6 text-black h-full bg-white text-xl font-normal leading-6 capitalize">
-            {tab === "description" && <p>{job.description}</p>}
-            {tab === "requirements" && <p>{job.requirements}</p>}
+            {tab === "description" && <div className="flex flex-wrap w-fit">{job?.jobData?.description}</div>}
+            {tab === "requirements" && <div className="flex flex-wrap w-fit">{job?.jobData?.requirements}</div>}
             {tab === "company" && (
               <div className="flex items-start justify-start gap-3 flex-col pl-6">
-                <h5 className="font-bold text-lg">company</h5>
+                <h5 className="font-semibold text-xl font-lato">Company</h5>
 
-                <p className="font-normal text-lg">{job.AboutCompany}</p>
+                <div className="font-normal text-lg flex flex-wrap">{job?.jobData?.AboutCompany}</div>
 
-                <h5 className="font-bold text-lg">contact</h5>
 
-                <div className="flex items-start justify-start gap-3">
+                <h5 className="font-semibold text-xl font-lato">Contact</h5>
+                <div className="flex items-center justify-start gap-3">
                   <div>
                     <img
                       src={csetup.person}
-                      className="w-20 h-20 rounded-full"
+                      className="w-16 h-16 rounded-full"
                       alt=""
                     />
                   </div>
 
                   <div>
                     <h5 className="capitalize font-normal text-lg">
-                      {job.personName}
+                      {job?.jobData?.personName}
                     </h5>
 
                     <p className="font-normal text-base text-dark_gray uppercase">
@@ -165,10 +165,8 @@ const JobDetails = () => {
                     </p>
                   </div>
 
-                  <div className="flex items-start justify-start  gap-3">
-                    <FiPhone className="w-8 h-8 text-dark_gray" />
-
-                    {job.phoneNumber}
+                  <div className="flex items-center justify-start  gap-3">
+                    <FiPhone className="w-8 h-8 text-dark_gray" title={job?.jobData?.phoneNumber} />
                   </div>
                 </div>
               </div>

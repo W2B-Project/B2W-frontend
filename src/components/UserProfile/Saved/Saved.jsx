@@ -4,8 +4,8 @@ import { useContext } from 'react';
 import { jobContext } from '../../../context/JobContext';
 
 function Saved() {
-  const {savedJobs}=useContext(jobContext)
-  const SavedList=jobs.filter((job=>savedJobs.includes(job.id)))
+  const {savedJobs,postedJobs}=useContext(jobContext)
+  const SavedList=postedJobs?.filter((job=>savedJobs?.includes(job.id)))
   return (
     <>
       <div className="flex flex-col gap-5">

@@ -6,7 +6,7 @@ function Model({ onClose, children }) {
             onClick={onClose}
         >
             <div
-                className="bg-white p-6 rounded-xl w-1/3 relative h-1/2 overflow-y-auto"
+                className="bg-white p-6 rounded-xl w-1/3 relative h-fit overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
             >
                 <button

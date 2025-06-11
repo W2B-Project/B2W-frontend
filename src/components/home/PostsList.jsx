@@ -61,7 +61,7 @@ function PostsList() {
           <h3 className="text-xl font-semibold mb-4 pb-4 border-b text-center">Share Post</h3>
           <textarea
             rows={10}
-            className="w-full border-none p-2 rounded"
+            className="w-full border-none p-2 rounded placeholder:text-zinc-400"
             placeholder="What do you think?"
           />
           <div className="mt-4 flex justify-between items-center">
