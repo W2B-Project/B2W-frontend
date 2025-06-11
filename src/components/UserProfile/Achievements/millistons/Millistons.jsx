@@ -56,10 +56,8 @@ function Millistons() {
                         >Show More</p>
                     }
                     <Plus className="cursor-pointer bg-[#E5CCFF] rounded-full p-1" color="#7F00FF" width={30} height={30} onClick={handleAdd} />
-
                 </div>
             </div>
-
             <div className='bg-white rounded-lg my-5 min-h-52 p-2'>
                 {
                     millistons.length !== 0 ?

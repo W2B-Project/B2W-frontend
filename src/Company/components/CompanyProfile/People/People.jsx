@@ -30,7 +30,7 @@ function People() {
                                 <PeopleItem user={user} />
                                 <XIcon color="gray" className="cursor-pointer" />
                             </div>
-                            <hr className="w-1/2 m-auto" />
+                            <hr className="w-1/2 m-auto my-2" />
                         </div>
                     ))}
                 </>

@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 function PostedJobsList() {
   const { postedJobs } = useContext(jobContext);
-
-  if (postedJobs.length === 0)
+  console.log(postedJobs)
+  if (postedJobs?.length === 0)
     return <p className="text-center mt-20 ">No jobs posted yet.</p>;
 
   return (
@@ -15,9 +15,9 @@ function PostedJobsList() {
         Applications
       </h3>
 
-      {postedJobs.map((job, index) => (
+      {postedJobs?.map((job) => (
         <div
-          key={index}
+          key={job.id}
           className="border bg-white rounded-xl p-5 shadow-sm  transition space-y-4"
         >
           <div className="flex items-center justify-between">
@@ -25,7 +25,7 @@ function PostedJobsList() {
               <img
                 src={CompanyProAssets.profPho}
                 alt="Company Logo"
-                className="w-20 h-20 rounded-full object-cover"
+                className="w-16 h-16 rounded-full object-cover"
               />
               <div>
                 <h2 className="text-xl font-bold text-black">
@@ -43,7 +43,7 @@ function PostedJobsList() {
           {/* تفاصيل الوظيفة */}
           <div className="space-y-2">
             <h3 className="font-normal text-2xl  text-black">
-              {job.jobLevel} {job.jobTitle} - {job.workingmodel}
+              {job?.jobData?.jobLevel} {job?.jobData?.jobTitle} - {job?.jobData?.workingmodel}
             </h3>
 
             <hr className="bg-gradient-to-l from-primry_purble to-white rounded-lg h-[4px] w-[400px] my-8 mx-auto" />

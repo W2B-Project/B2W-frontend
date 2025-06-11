@@ -1,4 +1,5 @@
 import { useState, useContext, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { jobContext } from "../../../context/JobContext";
 import { CompanyProAssets } from "../../assests/companyAssets";
 //slider config
@@ -11,6 +12,7 @@ import "react-phone-input-2/lib/style.css";
 // style in css
 import "../../assests/JobFormStyle.css";
 function PostJob() {
+    const navigate=useNavigate()
     const { addJob } = useContext(jobContext);
 
     const currencyOptions = [
@@ -190,6 +192,7 @@ function PostJob() {
         setIsFormValid(false);
 
         salarySliderRef.current.noUiSlider.set([10000, 70000]);
+        navigate('/home-Company')
     };
 
     return (

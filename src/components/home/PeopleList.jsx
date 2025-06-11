@@ -2,6 +2,7 @@ import PeopleItem from "./PeopleItem"
 import userImage1 from "../../assets/images/home/user1.png";
 import userImage2 from "../../assets/images/home/user2.png";
 import userImage3 from "../../assets/images/home/user3.png";
+import Footer from "../global/Footer";
 
 export const usersList = [
     {
@@ -22,6 +23,7 @@ export const usersList = [
 ];
 function PeopleList() {
     return (
+        <>
         <div className="shadow p-5 rounded-xl bg-white">
             <h3 className="text-xl font-semibold mb-3">People</h3>
             <div className="grid grid-cols-1 gap-4">
@@ -32,6 +34,9 @@ function PeopleList() {
                 ))}
             </div>
         </div>
+        <Footer/>
+        </>
+        
     )
 }
 
