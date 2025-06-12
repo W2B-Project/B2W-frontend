@@ -42,7 +42,7 @@ function PostedJobsList() {
 
           {/* تفاصيل الوظيفة */}
           <div className="space-y-2">
-            <h3 className="font-normal text-2xl  text-black">
+            <h3 className="font-normal text-2xl text-black">
               {job?.jobData?.jobLevel} {job?.jobData?.jobTitle} - {job?.jobData?.workingmodel}
             </h3>
 
@@ -50,7 +50,8 @@ function PostedJobsList() {
 
             <Link
               to="/jobdetails"
-              state={{ job }}
+              state={{ job,company: true }}
+              
               className="h-[48px] bg-primry_purble hover:bg-primaryLight duration-300 text-white flex items-center justify-center  rounded-[15px] font-bold  text-lg !mt-5 "
             >
               Show Job Applications

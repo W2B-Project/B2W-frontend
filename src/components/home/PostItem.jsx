@@ -1,18 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "../global/Button";
 import Model from "../global/Model";
-import { FiSend } from "react-icons/fi"; // make sure to install react-icons
+import { FiSend } from "react-icons/fi"; 
+import { postContext } from "../../context/PostContext";
 
-const initialComments = [
-
-];
 
 const PostItem = ({ post }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [comments, setComments] = useState(initialComments);
+  const {posts,setPosts}=useContext(postContext)
   const [commentInput, setCommentInput] = useState("");
-
-  const handleAddComment = () => {
+  
+  const handleAddComment = (postId) => {
     if (commentInput.trim() === "") return;
 
     const newComment = {
@@ -22,7 +20,12 @@ const PostItem = ({ post }) => {
       comment: commentInput
     };
 
-    setComments([newComment, ...comments]);
+    setPosts(prevPosts =>
+    prevPosts.map(post =>
+      post.id === postId
+        ? { ...post, comments: [...post.comments, newComment] }
+        : post
+    ))
     setCommentInput("");
   };
 
@@ -59,7 +62,7 @@ const PostItem = ({ post }) => {
 
         {post.image && (
           <img
-            src={post.image}
+            src={typeof post.image === "string" ? post.image : URL.createObjectURL(post.image)}
             alt="post visual"
             className="w-full rounded-lg mt-3"
           />
@@ -85,14 +88,14 @@ const PostItem = ({ post }) => {
               placeholder="Write a comment..."
               className="flex-1 border rounded-full px-4 py-2"
             />
-            <button onClick={handleAddComment} className="text-2xl text-blue-600">
+            <button onClick={()=>handleAddComment(post.id)} className="text-2xl text-blue-600">
               <FiSend />
             </button>
           </div>
 
           {/* Comments */}
           <div className="mt-4 flex flex-col justify-between items-center">
-            {comments.map((el, index) => (
+            {post?.comments?.map((el, index) => (
               <div key={index} className="p-4 border-b w-full">
                 <div className="flex items-center gap-4 mb-2">
                   <img

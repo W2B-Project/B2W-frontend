@@ -25,7 +25,7 @@ export const jobs = [
     },
 ];
 
-function JobsList({ companyProfile = false }) {
+function JobsList({ companyProfile = false,company=false }) {
     const { postedJobs } = useContext(jobContext);
     return (
         <div>
@@ -39,7 +39,7 @@ function JobsList({ companyProfile = false }) {
                 {
                     postedJobs?.length !== 0 ?
                         postedJobs?.map((job, index) => (
-                            <JobItem job={job} key={index} />
+                            <JobItem job={job} key={index} company={company} />
                         ))
                         : <div>no jobs</div>
                 }

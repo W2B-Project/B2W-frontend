@@ -13,7 +13,7 @@ function Model({ onClose, children }) {
                     className="absolute text-lg top-7 right-7 text-gray-500 transition-all hover:text-gray-600"
                     onClick={onClose}
                 >
-                    ✖
+                    ✖ 
                 </button>
                 {children}
             </div>
