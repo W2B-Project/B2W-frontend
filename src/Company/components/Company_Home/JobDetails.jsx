@@ -14,6 +14,7 @@ const JobDetails = () => {
   const [tab, setTab] = useState("description");
   const location = useLocation();
   const job = location.state?.job;
+  const company=location.state?.company
 
   if (!job) {
     return <p className="text-center mt-10">No job selected.</p>;
@@ -21,7 +22,13 @@ const JobDetails = () => {
 
   return (
     <>
-    <Header usertype="company"/>
+    {
+      company?
+      <Header usertype="company"/>
+      :
+      <Header/>
+    }
+    
       <div className="min-h-screen w-full p-9  font-sans pt-28">
         {/* Main Card */}
         <div className="  bg-veryLight_purple  h-[860px] rounded-[40px] overflow-hidden shadow-lg">
@@ -135,9 +142,9 @@ const JobDetails = () => {
             ))}
           </div>
 
-          <div className="p-6 text-black h-full bg-white text-xl font-normal leading-6 capitalize">
-            {tab === "description" && <div className="flex flex-wrap w-fit">{job?.jobData?.description}</div>}
-            {tab === "requirements" && <div className="flex flex-wrap w-fit">{job?.jobData?.requirements}</div>}
+          <div className="p-6 text-black h-full bg-white text-lg font-normal leading-6 capitalize ">
+            {tab === "description" && <pre className="whitespace-pre-wrap font-roboto">{job?.jobData?.description}</pre>}
+            {tab === "requirements" && <pre className="whitespace-pre-wrap font-roboto">{job?.jobData?.requirements}</pre>}
             {tab === "company" && (
               <div className="flex items-start justify-start gap-3 flex-col pl-6">
                 <h5 className="font-semibold text-xl font-lato">Company</h5>

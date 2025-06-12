@@ -1,9 +1,8 @@
 import JobsList from "../../../../components/home/JobsList";
-import PostedJobsList from "../../Company_Home/PostedJobsList";
 
 function OpendJobs() {
   return <>
-  <JobsList companyProfile={true}/>
+  <JobsList companyProfile={true} company={true}/>
   </>
 }
 

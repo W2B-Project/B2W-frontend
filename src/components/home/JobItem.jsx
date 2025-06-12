@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { jobContext } from "../../context/JobContext";
 import { CompanyProAssets } from "../../Company/assests/companyAssets";
 
-function JobItem({ job }) {
+function JobItem({ job,company }) {
     const { toggleSaved, savedJobs } = useContext(jobContext)
     const isSaved = savedJobs?.includes(job.id)
     console.log(job.id)
@@ -17,10 +17,12 @@ function JobItem({ job }) {
                     <img loading="lazy" src={CompanyProAssets.profPho} className="w-16 h-16 object-contain rounded-full" alt='profile photo' />
                     <h3 className="font-bold text-xl">Digital Creative Agency</h3>
                 </div>
+                {!company&&
                 <FiBookmark
                     className={`w-6 h-6 cursor-pointer transition-colors ${isSaved ? "fill-purple-600 stroke-purple-600" : "stroke-purple-600"}`}
                     onClick={() => toggleSaved(job.id)}
                 />
+                }
             </div>
 
             {/* Job Title */}
@@ -48,7 +50,7 @@ function JobItem({ job }) {
                     <h4 className="font-semibold">{job?.jobData?.currency} {job?.jobData?.minSalary}-{job?.jobData?.maxSalary}</h4>
                     <span className="text-gray-600">Cairo, Egypt</span>
                 </div>
-                <Link to="/jobdetails" state={{ job }}>
+                <Link to="/jobdetails" state={{ job,company:company }}>
                     <Button btn_text="More Details..." />
                 </Link>
             </div>

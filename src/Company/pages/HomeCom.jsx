@@ -8,7 +8,7 @@ import Aside_people from '../components/Company_Home/Aside_people';
 function HomeCom() {
   return (
     <>
-      <Header usertype="company"  />
+      <Header usertype="company"/>
       <div className="px-8 bg-[#f4f4f6] min-h-screen">
         <div className=" pt-28 grid grid-cols-12 gap-5">
           <div className='col-span-3'>
