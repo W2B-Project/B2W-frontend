@@ -12,7 +12,7 @@ function Header(props) {
                     </div>
                 </div>
                 
-                <button className="text-primry_purble underline text-lg font-medium" onClick={props.next}>skip</button>
+                
             </div>
         </>
     )

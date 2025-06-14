@@ -45,7 +45,7 @@ function Chat() {
                         )}
                     </div>
                     <form className="flex gap-5 items-center mt-5 sticky bottom-0" onSubmit={handleSend}>
-                        <input type="text" value={userInput}  onChange={(e) => setUserInput(e.target.value)} className="focus:outline-primry_purble w-11/12 p-3 rounded-xl placeholder:text-gray" placeholder="type here.." />
+                        <input type="text" value={userInput}  onChange={(e) => setUserInput(e.target.value)} className="focus:outline-primry_purble border-0 placeholder:text-gray-500 w-11/12 p-3 rounded-xl placeholder:text-gray" placeholder="type here.." />
                         <button type="sumbit" className="bg-white p-3 rounded-xl"><SendHorizonal color="gray" /></button>
                     </form>
 

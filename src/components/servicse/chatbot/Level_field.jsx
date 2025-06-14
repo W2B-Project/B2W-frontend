@@ -49,7 +49,7 @@ function Level_field({ setstep }) {
                 <div className="font-roboto mb-5">
                     <p className="text-xl font-bold mb-5">Enter Your Field</p>
                     <input type="text" placeholder="Your Field" value={field}
-                        className=" w-full border-2 border-light_gray rounded-xl p-3 text-lg"
+                        className=" w-full border-2 border-light_gray rounded-xl p-3 text-lg placeholder:text-gray-500 focus:border-primry_purble"
                         onChange={(e) => setField(e.target.value)}
                     />
                 </div>
