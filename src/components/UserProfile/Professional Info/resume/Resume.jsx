@@ -7,9 +7,9 @@ import { BsFilePdf } from "react-icons/bs"
 import ResumeModal from "./ResumeModal"
 
 function Resume() {
-    const{setEditPage,cv,setCv,cvShowModal,setCVShowModal}=useContext(InfoContext)
+    const { setEditPage, cv, setCv, cvShowModal, setCVShowModal } = useContext(InfoContext)
     console.log(cv)
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     return (
         <>
             <div className="bg-white w-full rounded-lg">
@@ -27,19 +27,21 @@ function Resume() {
                         }}
                     />
                     <div className="pb-5">
-                        {cv?
-                                <div className="flex gap-2 my-2 items-center text-dark_gray text-[17px]">
-                                    <BsFilePdf color="red" className="w-8 h-8"/>
-                                    <p className="text-lg">{cv.name}</p>
-                                </div>
-                            
+                        {cv ?
+                            <div className="flex gap-2 my-2 items-center text-dark_gray text-[17px]">
+                                <BsFilePdf color="red" className="w-8 h-8" />
+                                <a href={URL.createObjectURL(cv)} 
+                                    target="_blank"
+                                    rel="noopener noreferrer" className="text-lg">{cv.name}</a>
+                            </div>
+
                             : <p className="text-dark_gray text-[17px]">Please upload your resume</p>}
                     </div>
                 </div>
                 {
-                cvShowModal &&
-                <ResumeModal onClose={() => setCVShowModal(false)} onSave={(newCV) => setCv(newCV)} />
-            }
+                    cvShowModal &&
+                    <ResumeModal onClose={() => setCVShowModal(false)} onSave={(newCV) => setCv(newCV)} />
+                }
             </div>
         </>
     )

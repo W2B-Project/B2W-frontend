@@ -3,6 +3,9 @@ import { useState, useContext } from "react"
 import { useLocation } from "react-router-dom"
 import { InfoContext } from "../../../../context/Professinoal_InfoContext"
 import FormModal from "../global/FormModal"
+import { userprofileassets } from "../../../../assets/images/user Profile/userprofileAssets"
+const MillistoneImages = [userprofileassets.millistone1, userprofileassets.millistone2, userprofileassets.millistone3]
+
 
 function EditAllPage() {
     const {
@@ -17,73 +20,102 @@ function EditAllPage() {
         setModalCertificate,
         modalCertificate,
         certificate,
-        setCertificate }
+        setCertificate,
+        millistons,
+        setMillistons,
+        showModalMIL,
+        setShowModalMIL
+    }
         = useContext(InfoContext)
     const [editIndex, setEditIndex] = useState(null)
     const [editMode, setEditMode] = useState(false)
     const location = useLocation()
-
     const { type } = location.state
+
+    const RandomImage = () => {
+        const randomIndex = Math.floor(Math.random() * MillistoneImages.length)
+        console.log(randomIndex)
+        return MillistoneImages[randomIndex]
+    }
+
     const typeEX = type === 'Experience'
     const typeCertifecates = type === 'certificate'
-    /* add new education or experience */
+    const MilType = type === 'millistone'
+    /* determine if its education , experience , millistons ,certificate */
+    const currentList = typeEX ? ExperienceList : typeCertifecates ? certificate : MilType ? millistons : EducationList;
+    const ShowModal = typeEX ? showModalEx : typeCertifecates ? modalCertificate : MilType ? showModalMIL : showModalEdu;
+    const SetShowModal = typeEX ? setShowModalEx : typeCertifecates ? setModalCertificate : MilType ? setShowModalMIL : setShowModalEdu;
+    const SetCurrentFun = typeEX ? setExperienceList : typeCertifecates ? setCertificate : MilType ? setMillistons : setEducationList;
+
+    /* add new education , experience , millistons ,certificate */
     const handleAdd = () => {
         setEditIndex(null)
         setEditMode(false)
-        typeEX ? setShowModalEx(true) : typeCertifecates ? setModalCertificate(true) : setShowModalEdu(true)
+        SetShowModal(true)
     }
 
-    /* edit exist education or experience */
+    /* edit exist education , experience , millistons ,certificate */
     const handleEdit = (index) => {
         setEditIndex(index)
         setEditMode(true)
-        typeEX ? setShowModalEx(true) : typeCertifecates ? setModalCertificate(true) : setShowModalEdu(true)
+        SetShowModal(true)
     }
 
-    /* save added or updated experience or education */
+    /* save added or updated experience , education , millistons ,certificate */
     const handleSave = (data) => {
         if (editMode) {
-            const updated = typeEX ? [...ExperienceList] : typeCertifecates ? [...certificate] : [...EducationList]
+            const updated = [...currentList]
             updated[editIndex] = data
-            typeEX ? setExperienceList(updated) : typeCertifecates ? setCertificate(updated) : setEducationList(updated)
+            SetCurrentFun(updated)
         }
         else {
-            typeEX ?
-                setExperienceList([...ExperienceList, data])
-                : typeCertifecates ?
-                    setCertificate([...certificate, data])
-                    : setEducationList([...EducationList, data])
+            const milData = { ...data, image: RandomImage() }
+            MilType ?
+                setMillistons([...millistons, milData])
+                :SetCurrentFun([...currentList,data])
         }
     }
-    /* determine if its education or experience */
-    const currentList = typeEX ? ExperienceList : typeCertifecates ? certificate : EducationList;
+    /*fields to show*/
     const fields = typeEX
         ? { primary: 'CompanyName', secondary: 'JobTitle' }
         : typeCertifecates
             ? { primary: 'OrganizationName', secondary: 'CourseName' }
-            : { primary: 'Faculty', secondary: 'University' }
+            : MilType ?
+                { primary: 'MillstoneTitle', secondary: 'OrganizationNameMil' }
+                : { primary: 'Faculty', secondary: 'University' }
 
     return (
         <>
-            <div className="w-full px-10 bg-white rounded-lg min-h-52">
+            <div className="w-full px-10 bg-white rounded-lg min-h-52 py-3">
                 <div className="flex justify-between items-center text-xl font-bold my-5">
                     <p className="w-1/2 m-auto text-center">{`Edit ${type}`}</p>
-                    <Plus className="cursor-pointer bg-[#E5CCFF] rounded-full p-1" color="#7F00FF" onClick={handleAdd} />
+                    <Plus className="cursor-pointer bg-[#E5CCFF] rounded-full p-1" color="#7F00FF" onClick={handleAdd} width={30} height={30} />
                 </div>
                 {
                     currentList.length !== 0 ?
                         currentList.map((item, index) => (
                             <div key={index} className="flex justify-between items-center mb-5">
                                 <div className="flex gap-5 items-center">
-                                    <div className="rounded-xl bg-primry_purble w-16 h-16"></div>
+                                    {MilType ?
+                                        <div className="rounded-full bg-veryLight_purple w-16 h-16">
+                                            <img src={item.image} alt="" className='m-auto w-[55%] my-[10px]' />
+                                        </div>
+                                        : <div className="rounded-xl bg-primry_purble w-16 h-16"></div>
+                                    }
                                     <div>
                                         <p className="text-lg ">{item[fields.primary]}</p>
                                         <p className="text-dark_gray">{item[fields.secondary]}</p>
                                         {
-                                            type !== typeCertifecates &&
+                                            (type !== typeCertifecates && type !== MilType) &&
                                             <div className="flex gap-5 text-sm text-dark_gray">
                                                 <p>{item.FromMonth} {item.FromYear}</p>
                                                 <p>{item.ToMonth} {item.ToYear}</p>
+                                            </div>
+                                        }
+                                        {
+                                            type === MilType &&
+                                            <div className="flex gap-5 text-sm text-dark_gray">
+                                                <p>{item.FromMonth} {item.FromYear}</p>
                                             </div>
                                         }
                                     </div>
@@ -94,20 +126,15 @@ function EditAllPage() {
                         : <p className="text-center my-16 bg-veryLight_purple p-2 rounded-xl w-3/4 m-auto text-2xl">No {type} to view , please add new one</p>
                 }
                 {
-                    (typeEX ? showModalEx : typeCertifecates ? modalCertificate : showModalEdu) &&
-                        <FormModal
-                            type={typeEX ? "Experience" : typeCertifecates ? 'certificate' : "Education"}
-                            onClose={() =>
-                                typeEX ?
-                                    setShowModalEx(false)
-                                    : typeCertifecates ?
-                                        setModalCertificate(false)
-                                        : setShowModalEdu(false)}
-                            onSave={handleSave}
-                            editMode={editMode}
-                            editData=
-                            {editMode ? currentList[editIndex] : null}
-                        />
+                    ShowModal &&
+                    <FormModal
+                        type={typeEX ? "Experience" : typeCertifecates ? 'certificate' : MilType ? 'millistone' : "Education"}
+                        onClose={() =>SetShowModal(false)}
+                        onSave={handleSave}
+                        editMode={editMode}
+                        editData=
+                        {editMode ? currentList[editIndex] : null}
+                    />
                 }
             </div>
         </>

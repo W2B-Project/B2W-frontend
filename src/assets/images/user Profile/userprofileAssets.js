@@ -5,6 +5,9 @@ import uploadCV from './Upload-amico 1.svg'
 import uploaded from './Group 131.png'
 import logout from './freepik--speech-bubble--inject-59.svg'
 import notification from './Notification img.svg'
+import millistone1 from './Launch Icon.svg'
+import millistone2 from './Level Icon.svg'
+import millistone3 from './Vector.svg'
 export const userprofileassets={
     profileImage,
     bg,
@@ -12,5 +15,8 @@ export const userprofileassets={
     uploadCV,
     uploaded,
     logout,
-    notification
+    notification,
+    millistone1,
+    millistone2,
+    millistone3
 }
