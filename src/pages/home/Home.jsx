@@ -13,7 +13,7 @@ function Home() {
 
         <>
         <Header setService={setService}/>
-        <div className="px-8 h-auto bg-[#f4f4f6] pt-28">
+        <div className="px-8 h-full bg-[#f4f4f6] pt-28">
             
             <div className="grid grid-cols-12 gap-5">
                 {service === 'Chatbot Interview' ?
