@@ -64,7 +64,7 @@ const PostItem = ({ post }) => {
           <img
             src={typeof post.image === "string" ? post.image : URL.createObjectURL(post.image)}
             alt="post visual"
-            className="w-full rounded-lg mt-3"
+            className="w-full rounded-lg mt-3 max-h-16"
           />
         )}
 
