@@ -7,7 +7,7 @@ import { postContext } from "../../context/PostContext";
 
 const PostItem = ({ post }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const {posts,setPosts}=useContext(postContext)
+  const {setPosts}=useContext(postContext)
   const [commentInput, setCommentInput] = useState("");
   
   const handleAddComment = (postId) => {

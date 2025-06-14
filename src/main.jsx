@@ -11,7 +11,6 @@ createRoot(document.getElementById('root')).render(
         <div className='font-roboto'>
           <App />
         </div>
-        
       </AccessibilityProvider>
     </StrictMode>
   </BrowserRouter>
