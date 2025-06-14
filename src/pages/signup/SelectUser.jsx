@@ -1,4 +1,4 @@
-import { useSignUp } from "../../context/SignUpContext";
+
 import Button from "../../components/global/Button";
 import Logo from "../../components/global/Logo";
 import HeadingText from "../../components/signup/HeadingText";
@@ -6,9 +6,10 @@ import EmployeePhoto from "../../components/signup/EmployeePhoto";
 import Company from "../../components/signup/Company";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 function SelectUser() {
-    const { selectUser, setSelectUser } = useSignUp(); 
+    const { selectUser, setSelectUser } = useAuth(); 
     const [confirmed, setConfirmed] = useState(false); // Track if "Next" was clicked
     const navigate = useNavigate();
 
