@@ -55,11 +55,13 @@ import PostedJobsList from "./Company/components/Company_Home/PostedJobsList"
 import PostProvider from "./context/PostContext"
 import ProtectedRoutes from "./routes/ProtectedRoutes"
 import { AuthProvider } from "./context/AuthContext"
+import SetupProvider from "./context/SetupContext"
 
 
 function App() {
   return (
     <AuthProvider>
+      <SetupProvider>
         <CompanyInfoProvider>
           <InfoProvider>
             <JobProvider>
@@ -144,6 +146,8 @@ function App() {
             </JobProvider>
           </InfoProvider>
         </CompanyInfoProvider>
+      </SetupProvider>
+
     </AuthProvider>
   )
 }

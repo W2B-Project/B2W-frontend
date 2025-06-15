@@ -44,8 +44,6 @@ function Accessibility() {
                         <Toggle t='Contrat Mode' s={contrastMode} st={setContrastMode}/>
                         <Toggle t='Dark Mode'/>
             </div>
-
-
         </div>
     )
 }

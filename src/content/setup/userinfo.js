@@ -10,6 +10,7 @@ export default info = [
     {
         step: 2,
         title: 'Job Type',
+        value:'jobType',
         question: 'What Type of Job Are You Interested In?',
         answers: ["Full-time", "Part-time", "Freelance", "Contract"],
         img:setup.progress2
@@ -17,6 +18,7 @@ export default info = [
     {
         step: 3,
         title: 'Work Model',
+        value:"workModel",
         question: 'What working model do you prefer?',
         answers: ["On-site", "Remote", "Hybrid"],
         img:setup.progress3
@@ -24,6 +26,7 @@ export default info = [
     {
         step: 4,
         title: 'Experience Level',
+        value:"experienceLevel",
         question: 'What is Your Level in of Experience?',
         answers: ["Intern", "Joiner", "Mid-level", "Senior", "Lead"],
         img:setup.progress4
@@ -31,6 +34,7 @@ export default info = [
     {
         step: 5,
         title: 'Job Title',
+        value:"desiredJobTitle",
         question: 'What Job Title Are You Seeking?',
         answers: ["UI/UX designer", "Marketing", "Product Manager", "Developer", "Customer Support", "Quality Assurance", "Data Analyst", "Other"],
         img:setup.progress5
@@ -38,6 +42,7 @@ export default info = [
     {
         step: 6,
         title: 'Accessibility Needs ',
+        value:"disabilityType",
         question: 'Select your type of disability to personalize your experience and job matches',
         answers: ["Physical Disabilities", "Sensory Disabilities", "Learning Disabilities", "Neurological Disabilities", "Developmental Disabilities", "Other"],
         img:setup.progress6
