@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASE_URL = "https://localhost:7287/api/Authentication";
 
-const api = axios.create({
+export const api = axios.create({
     baseURL: BASE_URL,
     withCredentials: true, // Include cookies in requests
     headers: {
