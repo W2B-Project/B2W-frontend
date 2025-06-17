@@ -57,41 +57,42 @@ import ProtectedRoutes from "./routes/ProtectedRoutes"
 import { AuthProvider } from "./context/AuthContext"
 import JobApplications from "./Company/components/Company_Home/JobApplications"
 import ApplicationDetails from "./Company/components/Company_Home/ApplicationDetails"
+import SetupProvider from "./context/SetupContext"
 
 
 function App() {
   return (
     <AuthProvider>
-      <CompanyInfoProvider>
-        <InfoProvider>
-          <JobProvider>
-            <PostProvider>
-              {/* start routing /////////////////////////////////////////////////////////////////////// */}
-              <Routes>
-                <Route path="/" element={<Splash />} />
-                <Route path="/landing" element={<Landing />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Createaccount />} />
-                {/* protected routes */}
-                <Route element={<ProtectedRoutes />}>
-                  <Route path="/Setup" element={<Setup />} />
-                  <Route path="/companysetup" element={<CompaySetup />} />
-                  <Route path="/forgotpassword" element={<ForgotPassword />} />
-                  <Route path="/verifyEmail" element={<VerifyEmail />} />
-                  <Route path="/succusspage" element={<SuccesPage />} />
-                  <Route path="/resetPassword" element={<ResetPassword />} />
-                  <Route path="/selectUser" element={<SelectUser />} />
-                  <Route path="/Accessibility" element={<Accessibility />} />
-                  <Route path="/SavedJobs" element={<SavedJobs />} />
-                  {/* home routes */}
-                  <Route path="/home" element={<Home />}>
-                    <Route index element={<PostsList />} />
-                    <Route path="posts" element={<PostsList />} />
-                    <Route path="jobs" element={<JobsList />} />
-                    <Route path="chats" element={<Chats />} />
-                    <Route path="applied" element={<Applied />} />
-                  </Route>
-
+      <SetupProvider>
+        <CompanyInfoProvider>
+          <InfoProvider>
+            <JobProvider>
+              <PostProvider>
+                {/* start routing /////////////////////////////////////////////////////////////////////// */}
+                <Routes>
+                  <Route path="/" element={<Splash />} />
+                  <Route path="/landing" element={<Landing />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/signup" element={<Createaccount />} />
+                  {/* protected routes */}
+                  <Route element={<ProtectedRoutes />}>
+                    <Route path="/Setup" element={<Setup />} />
+                    <Route path="/companysetup" element={<CompaySetup />} />
+                    <Route path="/forgotpassword" element={<ForgotPassword />} />
+                    <Route path="/verifyEmail" element={<VerifyEmail />} />
+                    <Route path="/succusspage" element={<SuccesPage />} />
+                    <Route path="/resetPassword" element={<ResetPassword />} />
+                    <Route path="/selectUser" element={<SelectUser />} />
+                    <Route path="/Accessibility" element={<Accessibility />} />
+                    <Route path="/SavedJobs" element={<SavedJobs />} />
+                    {/* home routes */}
+                    <Route path="/home" element={<Home />}>
+                      <Route index element={<PostsList />} />
+                      <Route path="posts" element={<PostsList />} />
+                      <Route path="jobs" element={<JobsList />} />
+                      <Route path="chats" element={<Chats />} />
+                      <Route path="applied" element={<Applied />} />
+                    </Route>
                   {/* userProfile Routes */}
                   <Route path='/userProfile' element={<UserProfile />}>
                     <Route index element={<Posts />} />
@@ -144,14 +145,14 @@ function App() {
                     <Route path="notification" element={<NotificationSettings />} />
                     <Route path="logout" element={<Logout />} />
                   </Route>
-                </Route>
-                {/* error routes */}
-                <Route path="*" element={<Error />} />
-              </Routes>
-            </PostProvider>
-          </JobProvider>
-        </InfoProvider>
-      </CompanyInfoProvider>
+                  {/* error routes */}
+                  <Route path="*" element={<Error />} />
+                </Routes>
+              </PostProvider>
+            </JobProvider>
+          </InfoProvider>
+        </CompanyInfoProvider>
+      </SetupProvider>
     </AuthProvider>
   )
 }
