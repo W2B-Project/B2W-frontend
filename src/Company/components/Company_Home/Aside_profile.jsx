@@ -1,9 +1,15 @@
-import { React } from "react";
+import {useContext } from "react";
 import { CompanyProAssets } from "../../assests/companyAssets";
 import { Link } from "react-router-dom";
 import { csetup } from "../../../assets/images/company setup/csetup";
+import { SetupContext } from "../../../context/SetupContext";
 // import EditCompany from './../EditCompanyInfo'
+
 const Aside_profile = () => {
+
+  const {comData}=useContext(SetupContext)
+
+
   return (
     <>
       <Link
@@ -17,7 +23,7 @@ const Aside_profile = () => {
             alt=""
           />
 
-          <h3 className="font-bold text-2xl font-lato">Digital Creative Agency</h3>
+          <h3 className="font-bold text-2xl font-lato capitalize">{comData?.companyName}</h3>
 
           <Link
             to="/companyProfile"

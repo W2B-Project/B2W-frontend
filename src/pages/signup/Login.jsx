@@ -9,7 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { loginUser } from "../../Api_Calls/Authservices";
 import { useAuth } from "../../context/AuthContext";
-
+import { useContext } from "react";
+import { SetupContext } from "../../context/SetupContext";
+import { getCompanyData } from "../../Api_Calls/SetupServices";
+import { getUserData } from "../../Api_Calls/SetupServices";
 
 function Login() {
     const navigate = useNavigate()
@@ -18,6 +21,7 @@ function Login() {
     const [emailError, setEmailError] = useState(null)
     const [PassError, setPassError] = useState(null)
     const { showPassword, setShowPassword, setAuthUser, authUser } = useAuth();
+    const { setUserData, setComData } = useContext(SetupContext);
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (form.email && form.password) {
@@ -37,8 +41,12 @@ function Login() {
                 }
                 setAuthUser(userData);
                 localStorage.setItem("authUser", JSON.stringify(userData));
-                console.log(authUser);
-                navigate('/home')
+
+                await getUserData(authUser.userId, setUserData);
+                await getCompanyData(authUser.userId, setComData);
+
+                authUser?.roles[0] === "User" ? navigate('/home') : navigate('/home-Company')
+
             } catch (err) {
                 console.log(err.response.data || "Login failed");
                 setError(err.response.data)

@@ -4,7 +4,7 @@ import Header from "../../components/setup/Header"
 import { useContext, useState } from "react"
 import Accessibility from "../../components/setup/Accessibility"
 import Info from "../../components/setup/Info"
-import { setupNewUser } from "../../Api_Calls/SetupProfiles"
+import { setupNewUser } from "../../Api_Calls/SetupServices"
 import { useAuth } from "../../context/AuthContext"
 import { SetupContext } from "../../context/SetupContext"
 import { useNavigate } from "react-router-dom"
@@ -19,11 +19,12 @@ function Setup() {
     let destructInfo = info[step]
 
     const {authUser}=useAuth()
-    const {UserInfo}=useContext(SetupContext)
+    const {UserInfo,setUserData}=useContext(SetupContext)
     
     const handleSetup=(e)=>{
         e.preventDefault()
         const finalDate= {...UserInfo,applicationUserId:authUser.userId}
+        setUserData(finalDate)
         setupNewUser(finalDate)
         navigate("/home")
     }

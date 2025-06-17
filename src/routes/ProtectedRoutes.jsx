@@ -3,7 +3,6 @@ import { Outlet, Navigate } from "react-router-dom"
 
 function ProtectedRoutes() {
     const { authUser } = useAuth()
-    console.log(authUser)
     if (!authUser.token) {
         return <Navigate to='/landing' />
     }
