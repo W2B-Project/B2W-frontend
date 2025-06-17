@@ -1,22 +1,16 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState} from "react";
 import Button from "../global/Button";
 import Model from "../global/Model";
 import { FiSend } from "react-icons/fi";
 import { postContext } from "../../context/PostContext";
-import { useAuth } from "../../context/AuthContext";
-import { getUserData } from "../../Api_Calls/SetupProfiles";
+import { SetupContext } from "../../context/SetupContext";
 
 const PostItem = ({ post }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setPosts } = useContext(postContext)
   const [commentInput, setCommentInput] = useState("");
+  const {userData}=useContext(SetupContext)
 
-  /* user name and job title from backend */
-  const [data, setData] = useState({})
-  const { authUser } = useAuth()
-  useEffect(() => {
-    if (authUser.userId) getUserData(authUser.userId, setData);
-  }, [authUser.userId])
   const handleAddComment = (postId) => {
     if (commentInput.trim() === "") return;
 
@@ -47,8 +41,8 @@ const PostItem = ({ post }) => {
               className="w-10 h-10 rounded-full"
             />
             <div>
-              <h2 className="font-semibold">{data.firstName} {data.lastName}</h2>
-              <p className="text-sm text-gray-500">{data.desiredJobTitle}</p>
+              <h2 className="font-semibold">{userData.firstName} {userData.lastName}</h2>
+              <p className="text-sm text-gray-500">{userData.desiredJobTitle}</p>
             </div>
           </div>
           <div>
@@ -112,8 +106,8 @@ const PostItem = ({ post }) => {
                     className="w-14 h-14 rounded-full object-cover"
                   />
                   <div>
-                    <h4 className="text-lg font-semibold">{data.firstName} {data.lastName}</h4>
-                    <p className="text-sm text-gray-500">{data.desiredJobTitle}</p>
+                    <h4 className="text-lg font-semibold">{userData.firstName} {userData.lastName}</h4>
+                    <p className="text-sm text-gray-500">{userData.desiredJobTitle}</p>
                   </div>
                 </div>
                 <p className="text-gray-700">{el.comment}</p>

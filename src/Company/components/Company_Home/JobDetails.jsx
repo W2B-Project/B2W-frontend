@@ -1,32 +1,39 @@
-import { useState } from "react";
+import { useState,useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CompanyProAssets } from "../../assests/companyAssets";
 import { csetup } from "../../../assets/images/company setup/csetup";
-
 import { CiLocationOn } from "react-icons/ci";
 import { FaRegEdit } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import { FiPhone } from "react-icons/fi";
 import Header from "../../../components/home/Header";
+
+import { SetupContext } from "../../../context/SetupContext";
+
 import Button from "../../../components/global/Button";
 import JobApplicationModal from "./JobApplicationModal";
+
 
 const JobDetails = () => {
   const [tab, setTab] = useState("description");
   const location = useLocation();
   const job = location.state?.job;
+
+  const {comData}=useContext(SetupContext)
   const company = location.state?.company;
   const [showModal, setShowModal] = useState(false);
+
 
   if (!job) {
     return <p className="text-center mt-10">No job selected.</p>;
   }
 
+
   return (
     <>
-      {company ? <Header usertype="company" /> : <Header />}
 
+      {company ? <Header usertype="company" /> : <Header />}
       <div className="min-h-screen w-full p-9 font-sans pt-28 relative">
         {/* Main Card */}
         <div className="bg-veryLight_purple h-[860px] rounded-[40px] overflow-hidden shadow-lg">
@@ -48,6 +55,7 @@ const JobDetails = () => {
             <div className="company-info mt-6">
               <div className="flex items-center justify-between gap-4 pb-4">
                 <div>
+
                   <img
                     src={CompanyProAssets.profPho}
                     alt="Company Logo"
@@ -55,10 +63,11 @@ const JobDetails = () => {
                   />
                   <div>
                     <h2 className="text-xl font-bold text-black font-lato">
-                      Digital Creative Agency
+                      {comData.companyName}
                     </h2>
                     <p className="text-sm text-dark_gray">5 days ago</p>
                   </div>
+
                 </div>
                 <button
                   onClick={() => setShowModal(true)}
@@ -74,7 +83,7 @@ const JobDetails = () => {
                 </div>
                 <div className="text-sm font-lato text-dark_gray capitalize flex flex-row items-center justify-start gap-1">
                   <CiLocationOn className="w-6 h-6" />{" "}
-                  {job.location || "mansoura"}
+                  {comData.location}
                 </div>
               </div>
             </div>
@@ -129,6 +138,7 @@ const JobDetails = () => {
               <button
                 key={key}
                 className={`py-2 px-4 w-[437px] h-[56px] ${tab === key
+
                     ? "text-white bg-primry_purble rounded-[20px]"
                     : "text-dark_gray"
                   }`}

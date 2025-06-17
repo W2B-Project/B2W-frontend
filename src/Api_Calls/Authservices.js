@@ -20,6 +20,10 @@ export const loginUser = async (formData) => {
     console.log(res.data)
     return res.data;
 };
+export const AddRole = async (role) => {
+    const res = await api.post(`/AddRole`, role);
+    return res.data
+}
 
 export const sendResetToken = async (email) => {
     const res = await api.post(`/SendToken_ToMail`, { email });

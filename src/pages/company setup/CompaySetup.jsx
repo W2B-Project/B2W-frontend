@@ -7,16 +7,21 @@ import { cinfo } from '../../content/setup/Companyinfo'
 import { useContext } from 'react'
 import { CompanyContext } from '../../context/CompanyInfoContext'
 import { accessibilityfeatures } from '../../content/setup/Companyinfo'
+import { handleFeatures } from '../../Api_Calls/SetupServices'
+import { SetupContext } from '../../context/SetupContext'
+
 function CompaySetup() {
-    const {setAccsesability}=useContext(CompanyContext)
+    const { setAccsesability } = useContext(CompanyContext)
     const [step, setStep] = useState(0)
-    const [checked, setchecked] = useState(null)
+    let currentStep = cinfo[step]
+
+    /* get company data to get companyid to send it to function that handle accesability features */
+    const {comData} = useContext(SetupContext);
+
     /* get next step */
     const getnextstep = () => {
         setStep(s => s + 1)
-        setchecked(null)
     }
-    let destructInfo = cinfo[step]
 
     /* handle add accesability features */
     const [featuresList, setFeaturesList] = useState(
@@ -29,32 +34,31 @@ function CompaySetup() {
             )
         )
     }
-    console.log(featuresList)
-    const handleSave = () => {
+    /* handle add delete accesability features  */
+    const handleSave = async () => {
         const selectedTitles = featuresList
             .filter(f => f.selected)
-            .map(f => f.title)
-        setAccsesability(selectedTitles)
+            .map(f => f.title);
+        setAccsesability(selectedTitles);
+        await handleFeatures(comData?.companyProfileId, featuresList);
         getnextstep()
-    }
-
+    };
     return (
         <>
-            <Header info={destructInfo} next={getnextstep} />
+            <Header info={currentStep} next={getnextstep} />
             {/* setup form */}
             <div className="w-[33%] m-auto mt-5" >
                 {
                     cinfo[step].step === 1 ?
                         <Form getnextstep={getnextstep} />
                         : cinfo[step].step === 2 ?
-                            <Accessibility 
-                            info={destructInfo} 
-                            handleSave={handleSave} 
-                            toggleSelect={toggleSelect}
-                            featuresList={featuresList} />
-                            : <People info={destructInfo} />
+                            <Accessibility
+                                info={currentStep}
+                                handleSave={handleSave}
+                                toggleSelect={toggleSelect}
+                                featuresList={featuresList} />
+                            : <People info={currentStep} />
                 }
-
             </div>
         </>
     )

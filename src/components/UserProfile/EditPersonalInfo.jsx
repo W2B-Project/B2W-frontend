@@ -1,15 +1,9 @@
 import Button from "../global/Button"
 import Form from "../setup/Form"
-import { useAuth } from "../../context/AuthContext"
-import { useState,useEffect } from "react"
-import { getUserData } from "../../Api_Calls/SetupProfiles"
+import { useState } from "react"
 
 function EditPersonalInfo({ onClose }) {
     let [editData, setEditData] = useState({})
-    const {authUser}=useAuth()
-    useEffect(() => {
-        if (authUser.userId) getUserData(authUser.userId, setEditData);
-    }, [authUser.userId])
     return (
         <>
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

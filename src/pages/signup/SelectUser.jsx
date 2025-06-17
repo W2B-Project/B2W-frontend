@@ -1,23 +1,38 @@
-
 import Button from "../../components/global/Button";
 import Logo from "../../components/global/Logo";
 import HeadingText from "../../components/signup/HeadingText";
 import EmployeePhoto from "../../components/signup/EmployeePhoto";
 import Company from "../../components/signup/Company";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import {useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { AddRole } from "../../Api_Calls/Authservices";
 
 function SelectUser() {
-    const { selectUser, setSelectUser } = useAuth(); 
+    const { selectUser, setSelectUser, authUser, setAuthUser } = useAuth();
     const [confirmed, setConfirmed] = useState(false); // Track if "Next" was clicked
     const navigate = useNavigate();
 
     // Handle "Next" Button Click
-    const handleNext = () => {
+    const handleNext = async () => {
         if (selectUser) {
             setConfirmed(true);
-            navigate(selectUser === "company" ? "/companysetup" : "/Setup");
+            if (selectUser === "company")
+                try {
+                    const role = {
+                        userId: `${authUser.userId}`, role: "Admin"
+                    }
+                    await AddRole(role)
+                    const updatedUser = { ...authUser, roles: [role.role] };
+                    setAuthUser(updatedUser);
+                    localStorage.setItem("authUser", JSON.stringify(updatedUser));
+                    navigate("/companysetup");
+                }
+                catch (err) {
+                    console.log(err.response?.data)
+                }
+            else navigate("/setup");
+
         } else {
             alert("Please select an option before proceeding.");
         }
@@ -37,8 +52,8 @@ function SelectUser() {
                 <div className="flex justify-around w-full mt-6">
                     {/* Employee Card */}
                     <div className="flex items-center justify-center flex-col">
-                        <div 
-                            onClick={() => !confirmed && setSelectUser("employee")} 
+                        <div
+                            onClick={() => !confirmed && setSelectUser("employee")}
                             className={`userCard p-4 border rounded-3xl shadow-md cursor-pointer hover:shadow-lg transition 
                                 ${selectUser === "employee" ? "bg-[#F2E5FF]" : "bg-[#F4F4F6]"} 
                                 ${confirmed && selectUser !== "employee" ? "opacity-50 pointer-events-none" : ""}`}
@@ -50,8 +65,8 @@ function SelectUser() {
 
                     {/* Company Card */}
                     <div className="flex items-center justify-center flex-col">
-                        <div 
-                            onClick={() => !confirmed && setSelectUser("company")} 
+                        <div
+                            onClick={() => !confirmed && setSelectUser("company")}
                             className={`userCard p-4 border rounded-3xl shadow-md cursor-pointer hover:shadow-lg transition 
                                 ${selectUser === "company" ? " bg-[#F2E5FF]" : "bg-[#F4F4F6]"} 
                                 ${confirmed && selectUser !== "company" ? "opacity-50 pointer-events-none" : ""}`}
@@ -64,7 +79,7 @@ function SelectUser() {
 
                 {/* "Next" Button */}
                 <Button btn_text="Next" className="mt-6" onHandleClick={handleNext} marg={7} />
-                
+
             </div>
         </div>
     );

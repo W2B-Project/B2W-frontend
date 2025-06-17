@@ -15,6 +15,7 @@ function CompanyProfile() {
         `text-dark_gray font-bold border-b-4 rounded-[4px] transition-all  ${isActive ? "text-primry_purble border-primry_purble" : "border-transparent hover:text-primry_purble hover:border-primry_purble"
         }`;
     const navigate = useNavigate()
+
     return (
         <>
             <Header usertype={'company'} />

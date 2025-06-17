@@ -1,6 +1,5 @@
 import Header from "../../../components/home/Header"
 import Form from "../../../components/company setup/Form"
-import Button from "../../../components/global/Button"
 function EditCompanyInfo() {
     return (
         <>

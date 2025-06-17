@@ -2,10 +2,11 @@ import { useContext } from "react";
 import { jobContext } from "../../../context/JobContext";
 import { CompanyProAssets } from "../../assests/companyAssets";
 import { Link } from "react-router-dom";
-
+import {SetupContext} from '../../../context/SetupContext'
 function PostedJobsList() {
   const { postedJobs } = useContext(jobContext);
-  console.log(postedJobs)
+  const {comData}=useContext(SetupContext)
+
   if (postedJobs?.length === 0)
     return <p className="text-center mt-20 ">No jobs posted yet.</p>;
 
@@ -28,8 +29,8 @@ function PostedJobsList() {
                 className="w-16 h-16 rounded-full object-cover"
               />
               <div>
-                <h2 className="text-xl font-bold text-black">
-                  Digital Creative Agency
+                <h2 className="text-xl font-bold text-black capitalize">
+                  {comData.companyName}
                 </h2>
                 <p className="text-sm text-gray-500">5 days ago</p>
               </div>
