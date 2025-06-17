@@ -13,6 +13,7 @@ import { useAuth } from "../../context/AuthContext";
 import HomeCom from "../../Company/pages/HomeCom";
 function Home() {
     const [service, setService] = useState('')
+
     const { authUser } = useAuth()
     const navigate = useNavigate();
     useEffect(() => {
