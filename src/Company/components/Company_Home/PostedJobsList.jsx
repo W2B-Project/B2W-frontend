@@ -49,7 +49,7 @@ function PostedJobsList() {
             <hr className="bg-gradient-to-l from-primry_purble to-white rounded-lg h-[4px] w-[400px] my-8 mx-auto" />
 
             <Link
-              to="/jobdetails"
+              to="/home-Company/PostJob/allApplications"
               state={{ job,company: true }}
               
               className="h-[48px] bg-primry_purble hover:bg-primaryLight duration-300 text-white flex items-center justify-center  rounded-[15px] font-bold  text-lg !mt-5 "
