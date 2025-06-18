@@ -1,8 +1,6 @@
 function Applied() {
     return (
         <div>
-            Applied
-            Applied
         </div>
     )
 }
