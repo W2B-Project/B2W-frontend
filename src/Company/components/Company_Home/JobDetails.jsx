@@ -1,10 +1,9 @@
-import { useState,useEffect, useContext } from "react";
+import { useState,useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CompanyProAssets } from "../../assests/companyAssets";
 import { csetup } from "../../../assets/images/company setup/csetup";
 import { CiLocationOn } from "react-icons/ci";
-import { FaRegEdit } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import { FiPhone } from "react-icons/fi";
 import Header from "../../../components/home/Header";
