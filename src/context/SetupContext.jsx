@@ -2,7 +2,6 @@ import { useState, createContext, useEffect } from "react";
 import { useAuth } from "./AuthContext";
 import { getUserData } from "../Api_Calls/SetupServices";
 import { getCompanyData } from "../Api_Calls/SetupServices";
-import userinfo from "../content/setup/userinfo";
 export const SetupContext = createContext()
 
 function SetupProvider({ children }) {

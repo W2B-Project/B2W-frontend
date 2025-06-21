@@ -13,6 +13,7 @@ import { SetupContext } from "../../../context/SetupContext";
 
 import Button from "../../../components/global/Button";
 import JobApplicationModal from "./JobApplicationModal";
+import { Edit } from "lucide-react";
 
 
 const JobDetails = () => {
@@ -48,14 +49,13 @@ const JobDetails = () => {
               </h1>
 
               <Link to="/home-Company" className="text-xl block">
-                <FaRegEdit />
+                <Edit />
               </Link>
             </div>
 
             <div className="company-info mt-6">
               <div className="flex items-center justify-between gap-4 pb-4">
-                <div>
-
+                <div className="flex gap-2 items-center">
                   <img
                     src={CompanyProAssets.profPho}
                     alt="Company Logo"
@@ -67,11 +67,10 @@ const JobDetails = () => {
                     </h2>
                     <p className="text-sm text-dark_gray">5 days ago</p>
                   </div>
-
                 </div>
                 <button
                   onClick={() => setShowModal(true)}
-                  className="h-[48px] bg-primry_purble hover:bg-primaryLight duration-300 text-white flex items-center justify-center rounded-[15px] font-bold text-lg !mt-5 px-5"
+                  className="h-[48px] bg-primry_purble hover:bg-primaryLight duration-300 text-white flex items-center justify-center rounded-[15px] font-semibold text-lg !mt-5 px-5"
                 >
                   Apply for the job
                 </button>
