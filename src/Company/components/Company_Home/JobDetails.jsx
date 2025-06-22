@@ -1,6 +1,5 @@
-import { useState,useContext } from "react";
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import { useLocation, Link } from "react-router-dom";
 import { CompanyProAssets } from "../../assests/companyAssets";
 import { csetup } from "../../../assets/images/company setup/csetup";
 import { CiLocationOn } from "react-icons/ci";
@@ -10,29 +9,30 @@ import Header from "../../../components/home/Header";
 
 import { SetupContext } from "../../../context/SetupContext";
 
-import Button from "../../../components/global/Button";
 import JobApplicationModal from "./JobApplicationModal";
 import { Edit } from "lucide-react";
-
 
 const JobDetails = () => {
   const [tab, setTab] = useState("description");
   const location = useLocation();
   const job = location.state?.job;
 
-  const {comData}=useContext(SetupContext)
+  const { comData } = useContext(SetupContext);
   const company = location.state?.company;
   const [showModal, setShowModal] = useState(false);
 
+  const closeModal = () => setShowModal(false); // ✅ Added this function
 
   if (!job) {
     return <p className="text-center mt-10">No job selected.</p>;
   }
 
+  // ✅ Debug logs
+  console.log("Job object:", job);
+  console.log("Job ID:", job.id);
 
   return (
     <>
-
       {company ? <Header usertype="company" /> : <Header />}
       <div className="min-h-screen w-full p-9 font-sans pt-28 relative">
         {/* Main Card */}
@@ -80,8 +80,7 @@ const JobDetails = () => {
                   {job?.jobData?.jobLevel} {job?.jobData?.jobTitle}
                 </div>
                 <div className="text-sm font-lato text-dark_gray capitalize flex flex-row items-center justify-start gap-1">
-                  <CiLocationOn className="w-6 h-6" />{" "}
-                  {comData.location}
+                  <CiLocationOn className="w-6 h-6" /> {comData.location}
                 </div>
               </div>
             </div>
@@ -107,11 +106,7 @@ const JobDetails = () => {
 
             <div className="flex flex-col items-center justify-center gap-1">
               <div className="w-20 h-20 bg-veryLight_purple rounded-full flex items-center justify-center">
-                <img
-                  src={CompanyProAssets.Walletc}
-                  className="w-10 h-10"
-                  alt=""
-                />
+                <img src={CompanyProAssets.Walletc} className="w-10 h-10" alt="" />
               </div>
               <h3 className="text-base font-normal text-dark_gray">Salary</h3>
               <p className="text-black font-bold font-lato">
@@ -123,9 +118,7 @@ const JobDetails = () => {
               <div className="w-20 h-20 bg-veryLight_purple rounded-full flex items-center justify-center">
                 <img src={CompanyProAssets.Manc} className="w-10 h-10" alt="" />
               </div>
-              <h3 className="text-base font-normal text-dark_gray">
-                Working model
-              </h3>
+              <h3 className="text-base font-normal text-dark_gray">Working model</h3>
               <p className="text-black font-bold font-lato">{job?.jobData?.workingmodel}</p>
             </div>
           </div>
@@ -136,9 +129,8 @@ const JobDetails = () => {
               <button
                 key={key}
                 className={`py-2 px-4 w-[437px] h-[56px] ${tab === key
-
-                    ? "text-white bg-primry_purble rounded-[20px]"
-                    : "text-dark_gray"
+                  ? "text-white bg-primry_purble rounded-[20px]"
+                  : "text-dark_gray"
                   }`}
                 onClick={() => setTab(key)}
               >
@@ -179,9 +171,7 @@ const JobDetails = () => {
                     <h5 className="capitalize font-normal text-lg">
                       {job?.jobData?.personName}
                     </h5>
-                    <p className="font-normal text-base text-dark_gray uppercase">
-                      hr
-                    </p>
+                    <p className="font-normal text-base text-dark_gray uppercase">hr</p>
                   </div>
 
                   <div className="flex items-center justify-start gap-3">
@@ -198,7 +188,11 @@ const JobDetails = () => {
 
         {/* Modal */}
         {showModal && (
-          <JobApplicationModal onClose={() => setShowModal(false)} />
+          <JobApplicationModal
+            jobId={job?.id}
+            jobTitle={job?.jobData?.jobTitle}
+            onClose={closeModal}
+          />
         )}
       </div>
     </>

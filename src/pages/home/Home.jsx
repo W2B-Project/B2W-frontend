@@ -24,7 +24,7 @@ function Home() {
         return (
             <>
                 <Header setService={setService} />
-                <div className="px-8 h-auto bg-[#f4f4f6] pt-28">
+                <div className="px-8 h-auto bg-[#f4f4f6] pt-28 min-h-screen">
                     <div className="grid grid-cols-12 gap-5">
                         {service === 'Chatbot Interview' ?
                             <Chatbot />

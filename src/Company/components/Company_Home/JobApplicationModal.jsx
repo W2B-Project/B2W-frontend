@@ -25,17 +25,17 @@ function JobApplicationModal({ jobId, onClose, jobTitle = "UX Designer" }) {
             // Validate file type and size (max 5MB)
             const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
             const maxSize = 5 * 1024 * 1024; // 5MB
-            
+
             if (!validTypes.includes(file.type)) {
                 setSubmitError("Please upload a PDF or Word document");
                 return;
             }
-            
+
             if (file.size > maxSize) {
                 setSubmitError("File size exceeds 5MB limit");
                 return;
             }
-            
+
             setFormData(prev => ({ ...prev, resume: file }));
             setSubmitError(null);
         }
@@ -59,15 +59,28 @@ function JobApplicationModal({ jobId, onClose, jobTitle = "UX Designer" }) {
         e.preventDefault();
         setIsSubmitting(true);
         setSubmitError(null);
-        
+
+        const numericJobId = Number(jobId); 
+
+        if (isNaN(numericJobId)) {
+            setSubmitError("Invalid job ID. Cannot submit application.");
+            setIsSubmitting(false);
+            return;
+        }
+
         try {
-            await addApplication(jobId, {
+            const result = await addApplication(numericJobId, {
                 name: formData.name,
                 email: formData.email,
                 position: jobTitle,
-                resumeFile: formData.resume,
+                resumeUrl: formData.resume?.name || "",
                 comments: formData.comments
             });
+
+            if (!result) {
+                throw new Error("Application submission failed. Job not found.");
+            }
+
             setSubmitSuccess(true);
             setTimeout(() => {
                 onClose();
@@ -78,6 +91,7 @@ function JobApplicationModal({ jobId, onClose, jobTitle = "UX Designer" }) {
             setIsSubmitting(false);
         }
     };
+
 
     if (submitSuccess) {
         return (
@@ -106,8 +120,8 @@ function JobApplicationModal({ jobId, onClose, jobTitle = "UX Designer" }) {
             <div className="bg-white rounded-xl p-6 w-full max-w-md">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-2xl font-bold">Applying for {jobTitle}</h2>
-                    <button 
-                        onClick={onClose} 
+                    <button
+                        onClick={onClose}
                         className="text-gray-500 hover:text-gray-700 transition"
                         disabled={isSubmitting}
                     >
@@ -145,11 +159,10 @@ function JobApplicationModal({ jobId, onClose, jobTitle = "UX Designer" }) {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Upload your resume (CV) *</label>
                         <div
-                            className={`border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition ${
-                                formData.resume 
-                                    ? "border-green-500 bg-green-50" 
+                            className={`border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition ${formData.resume
+                                    ? "border-green-500 bg-green-50"
                                     : "border-gray-300 hover:bg-gray-50"
-                            }`}
+                                }`}
                             onClick={() => !isSubmitting && fileInputRef.current.click()}
                             onDragOver={handleDragOver}
                             onDrop={handleDrop}
@@ -204,9 +217,8 @@ function JobApplicationModal({ jobId, onClose, jobTitle = "UX Designer" }) {
 
                     <button
                         type="submit"
-                        className={`w-full h-[48px] bg-primry_purble hover:bg-primaryLight duration-300 text-white rounded-[15px] font-bold text-lg mt-4 flex items-center justify-center ${
-                            isSubmitting ? "opacity-70 cursor-not-allowed" : ""
-                        }`}
+                        className={`w-full h-[48px] bg-primry_purble hover:bg-primaryLight duration-300 text-white rounded-[15px] font-bold text-lg mt-4 flex items-center justify-center ${isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+                            }`}
                         disabled={isSubmitting}
                     >
                         {isSubmitting ? (

@@ -75,76 +75,76 @@ function App() {
                   <Route path="/signup" element={<Createaccount />} />
                   {/* protected routes */}
                   <Route element={<ProtectedRoutes />}>
-                    <Route path="/Setup" element={<Setup />} />
-                    <Route path="/companysetup" element={<CompaySetup />} />
-                    <Route path="/forgotpassword" element={<ForgotPassword />} />
-                    <Route path="/verifyEmail" element={<VerifyEmail />} />
-                    <Route path="/succusspage" element={<SuccesPage />} />
-                    <Route path="/resetPassword" element={<ResetPassword />} />
-                    <Route path="/selectUser" element={<SelectUser />} />
-                    <Route path="/Accessibility" element={<Accessibility />} />
-                    <Route path="/SavedJobs" element={<SavedJobs />} />
-                    {/* home routes */}
-                    <Route path="/home" element={<Home />}>
-                      <Route index element={<PostsList />} />
-                      <Route path="posts" element={<PostsList />} />
-                      <Route path="jobs" element={<JobsList />} />
-                      <Route path="chats" element={<Chats />} />
-                      <Route path="applied" element={<Applied />} />
-                    </Route>
+                  <Route path="/Setup" element={<Setup />} />
+                  <Route path="/companysetup" element={<CompaySetup />} />
+                  <Route path="/forgotpassword" element={<ForgotPassword />} />
+                  <Route path="/verifyEmail" element={<VerifyEmail />} />
+                  <Route path="/succusspage" element={<SuccesPage />} />
+                  <Route path="/resetPassword" element={<ResetPassword />} />
+                  <Route path="/selectUser" element={<SelectUser />} />
+                  <Route path="/Accessibility" element={<Accessibility />} />
+                  <Route path="/SavedJobs" element={<SavedJobs />} />
+                  {/* home routes */}
+                  <Route path="/home" element={<Home />}>
+                    <Route index element={<PostsList />} />
+                    <Route path="posts" element={<PostsList />} />
+                    <Route path="jobs" element={<JobsList />} />
+                    <Route path="chats" element={<Chats />} />
+                    <Route path="applied" element={<Applied />} />
+                  </Route>
 
-                    {/* userProfile Routes */}
-                    <Route path='/userProfile' element={<UserProfile />}>
-                      <Route index element={<Posts />} />
-                      <Route path="posts" element={<Posts />} />
-                      <Route path="Info" element={<ProfessionalInfo />} >
-                        <Route path="edit" element={<EditAllPage />} />
-                        <Route path="editSkills" element={<EditSkills />} />
-                        <Route path="editCV" element={<EditResume />} />
-                      </Route>
-                      <Route path="Achievements" element={<Achievements />}>
-                        <Route path="edit" element={<EditAllPage />} />
-                      </Route>
-                      <Route path="Saved" element={<Saved />} />
+                  {/* userProfile Routes */}
+                  <Route path='/userProfile' element={<UserProfile />}>
+                    <Route index element={<Posts />} />
+                    <Route path="posts" element={<Posts />} />
+                    <Route path="Info" element={<ProfessionalInfo />} >
+                      <Route path="edit" element={<EditAllPage />} />
+                      <Route path="editSkills" element={<EditSkills />} />
+                      <Route path="editCV" element={<EditResume />} />
                     </Route>
+                    <Route path="Achievements" element={<Achievements />}>
+                      <Route path="edit" element={<EditAllPage />} />
+                    </Route>
+                    <Route path="Saved" element={<Saved />} />
+                  </Route>
 
-                    <Route path="/company/chats" element={<Chats />} />
-                    <Route path="/home-Company" element={<HomeCom />}>
-                      <Route index element={<PostedJobsList />} />
-                      <Route path="applications" element={<PostedJobsList />} />
-                      <Route path="PostJob" element={<PostJob />} />
-                      <Route
-                        path="PostJob/allApplications"
-                        element={<JobApplications />}
-                      />
-                      <Route
-                        path="PostJob/application/:applicationId"
-                        element={<ApplicationDetails />}
-                      />
-                      <Route path="chats" element={<Chats />} />
-                    </Route>
-                    <Route path="jobdetails" element={<JobDetails />} />
-                    <Route path="EditAccessability" element={<EditAccessability />} />
-                    {/* company Profile Routes */}
-                    <Route path='/companyProfile' element={<CompanyProfile />}>
-                      <Route index element={<About />} />
-                      <Route path="about" element={<About />} />
-                      <Route path="opendJobs" element={<OpendJobs />} />
-                      <Route path="people" element={<People />} >
-                        <Route path="AddPeople" element={<AddPeople />} />
-                      </Route>
-                      <Route path="reviews" element={<Reviews />} />
-                    </Route>
-                    <Route path="EditCompanyInfo" element={<EditCompanyInfo />} />
+                  <Route path="/company/chats" element={<Chats />} />
+                  <Route path="/home-Company" element={<HomeCom />}>
+                    <Route index element={<PostedJobsList />} />
+                    <Route path="applications" element={<PostedJobsList />} />
+                    <Route path="allApplications/job/:jobId" element={<JobApplications />} />
+                    <Route
+                      path="allApplications/job/:jobId/application/:applicationId"
+                      element={<ApplicationDetails />}
+                    />
+                    <Route path="PostJob" element={<PostJob />} />
+                    <Route path="chats" element={<Chats />} />
+                  </Route>
 
-                    {/* settigs */}
-                    <Route path="/settings" element={<Settings />}>
-                      <Route index element={<Language />} />
-                      <Route path="lang" element={<Language />} />
-                      <Route path="managepass" element={<Managepasswords />} />
-                      <Route path="notification" element={<NotificationSettings />} />
-                      <Route path="logout" element={<Logout />} />
+
+
+                  <Route path="jobdetails" element={<JobDetails />} />
+                  <Route path="EditAccessability" element={<EditAccessability />} />
+                  {/* company Profile Routes */}
+                  <Route path='/companyProfile' element={<CompanyProfile />}>
+                    <Route index element={<About />} />
+                    <Route path="about" element={<About />} />
+                    <Route path="opendJobs" element={<OpendJobs />} />
+                    <Route path="people" element={<People />} >
+                      <Route path="AddPeople" element={<AddPeople />} />
                     </Route>
+                    <Route path="reviews" element={<Reviews />} />
+                  </Route>
+                  <Route path="EditCompanyInfo" element={<EditCompanyInfo />} />
+
+                  {/* settigs */}
+                  <Route path="/settings" element={<Settings />}>
+                    <Route index element={<Language />} />
+                    <Route path="lang" element={<Language />} />
+                    <Route path="managepass" element={<Managepasswords />} />
+                    <Route path="notification" element={<NotificationSettings />} />
+                    <Route path="logout" element={<Logout />} />
+                  </Route>
                   </Route>
                   {/* error routes */}
                   <Route path="*" element={<Error />} />
