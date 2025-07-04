@@ -7,6 +7,7 @@ import { useState,useEffect } from "react";
 import Chatbot from "../services/Chatbot";
 import SignLanguageTranslator from "../services/SignLanguageTranslator";
 import CvAnalysis from "../services/CvAnalysis";
+import CvAnalysisResult from "../../components/home/CvAnalysisResult";
 import SavedJobs from "../../components/home/SavedJobs";
 import Accessibility from "../../components/home/Accessibility";
 import { useAuth } from "../../context/AuthContext";
@@ -32,10 +33,12 @@ function Home() {
                                 <SignLanguageTranslator />
                                 : service === 'Resume Reviewer' ?
                                     <CvAnalysis />
-                                    : service === 'Saved Jobs' ?
-                                        <SavedJobs />
-                                        : service === 'Accessibility' ?
-                                            <Accessibility />
+                                    : service === 'CvAnalysisResult' ?
+                                        <CvAnalysisResult />
+                                        : service === 'Saved Jobs' ?
+                                            <SavedJobs />
+                                            : service === 'Accessibility' ?
+                                                <Accessibility />
                                             : (
                                                 <>
                                                     <ProfileMenu setService={setService} />

@@ -89,8 +89,8 @@ function App() {
                     <Route index element={<PostsList />} />
                     <Route path="posts" element={<PostsList />} />
                     <Route path="jobs" element={<JobsList />} />
-                    <Route path="chats" element={<Chats />} />
                     <Route path="applied" element={<Applied />} />
+                    <Route path="chats" element={<Chats />} />
                   </Route>
 
                   {/* userProfile Routes */}
