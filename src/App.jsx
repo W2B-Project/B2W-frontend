@@ -112,13 +112,13 @@ function App() {
                     <Route path="/home-Company" element={<HomeCom />}>
                       <Route index element={<PostedJobsList />} />
                       <Route path="applications" element={<PostedJobsList />} />
-                      <Route path="PostJob" element={<PostJob />} />
                       <Route
-                        path="PostJob/allApplications"
+                        path="allApplications"
                         element={<JobApplications />}
                       />
+                      <Route path="PostJob" element={<PostJob />} />
                       <Route
-                        path="PostJob/application/:applicationId"
+                        path="allApplications/:applicationId"
                         element={<ApplicationDetails />}
                       />
                       <Route path="chats" element={<Chats />} />

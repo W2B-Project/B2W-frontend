@@ -19,7 +19,7 @@ const ApplicationDetails = () => {
                     Application data not found
                 </div>
                 <button
-                    onClick={() => navigate('/home-Company/PostJob/allApplications', { state: { job } })}
+                    onClick={() => navigate('/home-Company/allApplications', { state: { job } })}
                     className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                 >
                     Back to Applications
@@ -30,7 +30,7 @@ const ApplicationDetails = () => {
 
     const handleStatusUpdate = (newStatus) => {
         updateApplicationStatus(application.id, { status: newStatus });
-        navigate('/home-Company/PostJob/allApplications', { state: { job } });
+        navigate('/home-Company/allApplications', { state: { job } });
     };
 
     return (
@@ -39,7 +39,7 @@ const ApplicationDetails = () => {
 
             <div className="bg-white p-6 space-y-4 rounded-2xl shadow-sm overflow-hidden">
                 <button
-                    onClick={() => navigate('/home-Company/PostJob/allApplications', { state: { job } })}
+                    onClick={() => navigate('/home-Company/allApplications', { state: { job } })}
                     className="flex items-center text-gray-600 hover:text-gray-800 mb-3 transition-colors"
                 >
                     <ArrowLeft className="mr-2" size={20} />
