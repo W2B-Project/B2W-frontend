@@ -1,8 +1,6 @@
 import { createContext, useState } from "react";
 import run from "../config/gemini";
-
 export const ChatContext = createContext();
-
 const ChatProvider = ({ children }) => {
     const [history, setHistory] = useState([]);
     const [level, setLevel] = useState("");
@@ -32,38 +30,23 @@ const ChatProvider = ({ children }) => {
             setIsLoading(false); 
         }
     };
-
-    
     const sendMessage = async () => {
         if (!userInput.trim()) return; 
-
         const userMessage = { role: "user", content: userInput };
         setHistory(prev => [...prev, userMessage]);
         setUserInput("");
         setIsLoading(true)
-
         const botResponse = await run(userInput, history);
         setIsLoading(false)
         setHistory(prev => [...prev, { role: "model", content: botResponse }]);
     };
-
     return (
         <ChatContext.Provider value={{ 
-            history,
-            sendMessage,
-            startInterview, 
-            interviewStarted,
-            level,
-            field,
-            setLevel,
-            setField,
-            userInput,
-            setUserInput,
-            isLoading
+            history,sendMessage,startInterview, interviewStarted,level,
+            field,setLevel,setField,userInput,setUserInput,isLoading
         }}>
             {children}
         </ChatContext.Provider>
     );
 };
-
 export default ChatProvider;

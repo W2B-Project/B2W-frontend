@@ -13,7 +13,7 @@ function Createaccount() {
     const navigate = useNavigate()
     const [form, setForm] = useState({ firstName: "", lastName: "", email: "", userName: "kk", password: "" });
     const [error, setError] = useState(null)
-    const { showPassword, setShowPassword, setAuthUser, authUser } = useAuth();
+    const { showPassword, setShowPassword, setAuthUser } = useAuth();
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(form)

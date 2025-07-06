@@ -1,18 +1,23 @@
 import { useContext, useMemo } from "react";
 import { jobContext } from "../../context/JobContext";
 import JobItem from "../../components/home/JobItem";
-
+import { useAuth } from "../../context/AuthContext";
 function Applied() {
     const { postedJobs, applications } = useContext(jobContext);
+    const { authUser } = useAuth(); 
+
+    const userApplications = applications.filter(
+        (app) => app.userId === authUser?.userId
+    );
 
     const { acceptedJobs, rejectedJobs, pendingJobs } = useMemo(() => {
         const accepted = [];
         const rejected = [];
         const pending = [];
 
-        applications.forEach((app) => {
+        userApplications.forEach((app) => {
             const job = postedJobs.find((job) => job.id === app.jobId);
-            if (!job) return;
+            if (!job) return ;
 
             if (app.status === "Accepted") {
                 accepted.push(job);
@@ -51,7 +56,7 @@ function Section({ jobs }) {
         <div className="space-y-4">
             <div className="space-y-6">
                 {jobs.map((job, index) => (
-                    <JobItem job={job} key={index} company={true} />
+                    <JobItem job={job} key={index} apply={true} company={false} />
                 ))}
             </div>
         </div>

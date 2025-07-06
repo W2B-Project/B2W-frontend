@@ -16,9 +16,9 @@ const JobDetails = () => {
   const [tab, setTab] = useState("description");
   const location = useLocation();
   const job = location.state?.job;
-
-  const { comData } = useContext(SetupContext);
   const company = location.state?.company;
+  const { comData } = useContext(SetupContext);
+
   const [showModal, setShowModal] = useState(false);
 
   const closeModal = () => setShowModal(false); // ✅ Added this function
@@ -61,18 +61,22 @@ const JobDetails = () => {
                     className="w-20 h-20 rounded-full object-cover"
                   />
                   <div>
-                    <h2 className="text-xl font-bold text-black font-lato">
-                      {comData.companyName}
+                    <h2 className="text-xl font-bold text-black font-lato capitalize">
+                      {job?.jobData?.companyName}
                     </h2>
                     <p className="text-sm text-dark_gray">5 days ago</p>
                   </div>
                 </div>
-                <button
-                  onClick={() => setShowModal(true)}
-                  className="h-[48px] bg-primry_purble hover:bg-primaryLight duration-300 text-white flex items-center justify-center rounded-[15px] font-semibold text-lg !mt-5 px-5"
-                >
-                  Apply for the job
-                </button>
+                {
+                  !company &&
+                  <button
+                    onClick={() => setShowModal(true)}
+                    className="h-[48px] bg-primry_purble hover:bg-primaryLight duration-300 text-white flex items-center justify-center rounded-[15px] font-semibold text-lg !mt-5 px-5"
+                  >
+                    Apply for the job
+                  </button>
+                }
+
               </div>
 
               <div>
@@ -80,7 +84,7 @@ const JobDetails = () => {
                   {job?.jobData?.jobLevel} {job?.jobData?.jobTitle}
                 </div>
                 <div className="text-sm font-lato text-dark_gray capitalize flex flex-row items-center justify-start gap-1">
-                  <CiLocationOn className="w-6 h-6" /> {comData.location}
+                  <CiLocationOn className="w-6 h-6" /> {job?.jobData?.location}
                 </div>
               </div>
             </div>

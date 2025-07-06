@@ -1,9 +1,12 @@
 import { useState, useRef, useContext } from "react";
 import { jobContext } from "../../../context/JobContext";
+import { SetupContext } from "../../../context/SetupContext";
 
 function JobApplicationModal({ jobId, onClose, jobTitle = "UX Designer" }) {
     const { addApplication } = useContext(jobContext);
+    const { userData } = useContext(SetupContext)
     const [formData, setFormData] = useState({
+        userId: "",
         name: "",
         email: "",
         resume: null,
@@ -60,7 +63,7 @@ function JobApplicationModal({ jobId, onClose, jobTitle = "UX Designer" }) {
         setIsSubmitting(true);
         setSubmitError(null);
 
-        const numericJobId = Number(jobId); 
+        const numericJobId = Number(jobId);
 
         if (isNaN(numericJobId)) {
             setSubmitError("Invalid job ID. Cannot submit application.");
@@ -70,6 +73,7 @@ function JobApplicationModal({ jobId, onClose, jobTitle = "UX Designer" }) {
 
         try {
             const result = await addApplication(numericJobId, {
+                userId:userData.applicationUserId,
                 name: formData.name,
                 email: formData.email,
                 position: jobTitle,
@@ -160,8 +164,8 @@ function JobApplicationModal({ jobId, onClose, jobTitle = "UX Designer" }) {
                         <label className="block text-sm font-medium text-gray-700 mb-1">Upload your resume (CV) *</label>
                         <div
                             className={`border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition ${formData.resume
-                                    ? "border-green-500 bg-green-50"
-                                    : "border-gray-300 hover:bg-gray-50"
+                                ? "border-green-500 bg-green-50"
+                                : "border-gray-300 hover:bg-gray-50"
                                 }`}
                             onClick={() => !isSubmitting && fileInputRef.current.click()}
                             onDragOver={handleDragOver}

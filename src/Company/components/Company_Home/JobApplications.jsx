@@ -57,7 +57,7 @@ const JobApplications = () => {
         <div className="max-w-3xl mx-auto p-6 font-sans">
             <div className="flex justify-between items-center mb-6">
                 <button
-                    onClick={() => navigate(-1)}
+                    onClick={() => navigate('/home-Company')}
                     className="text-gray-500 hover:text-gray-700 flex items-center"
                 >
                     <ArrowLeft className="mr-1 text-black" size={25} />

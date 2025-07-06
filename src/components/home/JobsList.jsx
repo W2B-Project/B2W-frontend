@@ -6,7 +6,7 @@ import JobItem from "./JobItem";
 // Optional: if you want mock data
 export const jobs = [ /* ...your mock jobs here... */];
 
-function FilterTags({ label, options, selected, onChange }) {
+function FilterTags({ label, options, selected, onChange}) {
     const toggle = (option) => {
         if (selected.includes(option)) {
             onChange(selected.filter((item) => item !== option));
@@ -37,9 +37,10 @@ function FilterTags({ label, options, selected, onChange }) {
     );
 }
 
-function JobsList({ companyProfile = false, company = false }) {
+function JobsList({ companyProfile = false, company = false, companyJobs = null }) {
     const { postedJobs } = useContext(jobContext);
     const [showFilter, setShowFilter] = useState(false);
+    const AllJobsORCompJobs = companyJobs ? companyJobs : postedJobs
     const [filters, setFilters] = useState({
         title: "",
         types: [],
@@ -48,12 +49,12 @@ function JobsList({ companyProfile = false, company = false }) {
         location: "",
     });
 
-    const filteredJobs = postedJobs?.filter((job) => {
+    const filteredJobs = AllJobsORCompJobs?.filter((job) => {
         const data = job.jobData || {};
         const matchTitle = !filters.title || data.jobTitle?.includes(filters.title);
         const matchType =
-  filters.types.length === 0 ||
-  filters.types.includes(data.jobType?.trim()?.toLowerCase());
+            filters.types.length === 0 ||
+            filters.types.includes(data.jobType?.trim()?.toLowerCase());
         const matchModel = filters.models.length === 0 || filters.models.includes(data.workingmodel);
         const matchLevel = filters.levels.length === 0 || filters.levels.includes(data.jobLevel);
         const matchLocation = !filters.location || data.location === filters.location;
@@ -85,11 +86,11 @@ function JobsList({ companyProfile = false, company = false }) {
                         />
 
                         <FilterTags
-  label="Job type"
-  options={["full time", "part time"]}
-  selected={filters.types}
-  onChange={(vals) => setFilters({ ...filters, types: vals })}
-/>
+                            label="Job type"
+                            options={["full time", "part time"]}
+                            selected={filters.types}
+                            onChange={(vals) => setFilters({ ...filters, types: vals })}
+                        />
 
                         <FilterTags
                             label="Working model"

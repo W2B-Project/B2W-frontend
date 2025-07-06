@@ -4,10 +4,12 @@ import { Link, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { jobContext } from "../../context/JobContext";
 import { CompanyProAssets } from "../../Company/assests/companyAssets";
+import { SetupContext } from "../../context/SetupContext";
 
-function JobItem({ job, company }) {
+function JobItem({ job, apply,company }) {
     const { toggleSaved, savedJobs, applications } = useContext(jobContext);
     const isSaved = savedJobs?.includes(job.id);
+    const {userData}=useContext(SetupContext)
 
     const location = useLocation();
     const isAppliedPage = location.pathname === "/home/applied";
@@ -34,14 +36,14 @@ function JobItem({ job, company }) {
         <div className="bg-white rounded-xl p-4 flex flex-col gap-4 px-5 shadow">
             {/* Header */}
             <div className="flex justify-between items-center">
-                <div className="flex items-center gap-5 px-4">
+                <div className="flex items-center gap-3 px-4">
                     <img
                         loading="lazy"
                         src={CompanyProAssets.profPho}
-                        className="w-16 h-16 object-contain rounded-full"
+                        className="w-16 h-16 object-contain rounded-full "
                         alt="profile"
                     />
-                    <h3 className="font-bold text-xl">Digital Creative Agency</h3>
+                    <h3 className="font-bold text-xl capitalize">{job?.jobData?.companyName}</h3>
                 </div>
                 {isAppliedPage && status && (
                     <span
@@ -52,11 +54,11 @@ function JobItem({ job, company }) {
                         {status === "Accepted" ? "Accepted" : status === "Rejected" ? "Rejected" : "Pending"}
                     </span>
                 )}
-                {!company && (
+                {!apply&& !company && (
                     <FiBookmark
                         className={`w-6 h-6 cursor-pointer transition-colors ${isSaved ? "fill-purple-600 stroke-purple-600" : "stroke-purple-600"
                             }`}
-                        onClick={() => toggleSaved(job.id)}
+                        onClick={() => toggleSaved(job.id,userData.applicationUserId)}
                     />
                 )}
             </div>

@@ -12,8 +12,8 @@ function UserProfile() {
     console.log(userData)
     return (
         <div className="w-full h-[230px] shadow p-5 rounded-xl bg-white flex flex-col  justify-center items-center">
-            <img className="w-20 h-20 rounded-full" loading="lazy" src={profileImage} alt="" />
-            <h3 className="text-2xl font-bold font-lato">{userData.firstName} {userData.lastName}</h3>
+            <img className="w-20 h-20 rounded-full " loading="lazy" src={profileImage} alt="" />
+            <h3 className="text-2xl font-bold font-lato capitalize">{userData.firstName} {userData.lastName}</h3>
             <Link
                 to="/userProfile"
                 className="text-white bg-primry_purble  h-[40px] w-[165px] mt-5  flex items-center justify-center rounded-[20px]"
