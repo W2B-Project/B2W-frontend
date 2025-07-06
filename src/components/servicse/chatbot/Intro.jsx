@@ -2,7 +2,6 @@
 import React from 'react'
 import { chatbot } from '../../../assets/images/services/services'
 import Button from '../../global/Button'
-import { Link } from 'react-router-dom'
 function Intro({setstep}) {
 
     const clickHandler=()=>{

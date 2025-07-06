@@ -11,9 +11,11 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 // style in css
 import "../../assests/JobFormStyle.css";
+import { SetupContext } from "../../../context/SetupContext";
 function PostJob() {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const { addJob } = useContext(jobContext);
+    const { comData } = useContext(SetupContext)
 
     const currencyOptions = [
         {
@@ -71,6 +73,9 @@ function PostJob() {
     ];
 
     const [formData, setFormData] = useState({
+        CompanyId: "",
+        companyName: "",
+        location: "",
         jobTitle: "",
         jobLevel: "",
         jobType: "",
@@ -171,10 +176,19 @@ function PostJob() {
 
         if (!valid) return;
 
-        addJob(formData);
+        const jobData = {
+            ...formData,
+            CompanyId: comData.companyProfileId,
+            companyName: comData.companyName,
+            location: comData.location
+        };
+        addJob(jobData);
 
         setFormData({
+            CompanyId: "",
             jobTitle: "",
+            location: "",
+            companyName: "",
             jobLevel: "",
             jobType: "",
             workingmodel: "",
@@ -190,7 +204,6 @@ function PostJob() {
 
         setErrors({});
         setIsFormValid(false);
-
         salarySliderRef.current.noUiSlider.set([10000, 70000]);
         navigate('/home-Company')
     };

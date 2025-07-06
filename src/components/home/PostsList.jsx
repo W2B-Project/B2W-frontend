@@ -6,11 +6,14 @@ import { FiImage } from "react-icons/fi";
 import ImageUploadIcon from "../global/ImageUploadIcon";
 import { postContext } from "../../context/PostContext";
 import { userprofileassets } from "../../assets/images/user Profile/userprofileAssets";
+import { SetupContext } from "../../context/SetupContext";
 
-function PostsList() {
+function PostsList({ userPosts = null }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const IntialFormdata={
-    id:Date.now(),
+  const { userData } = useContext(SetupContext)
+  const IntialFormdata = {
+    userId: "",
+    id: Date.now(),
     name: "Peter Charles",
     role: "Call Center",
     avatar: userprofileassets.profileImage,
@@ -18,13 +21,19 @@ function PostsList() {
     text: "",
     image: null,
     actions: { like: true, comment: true, views: true },
-    comments:[]
+    comments: []
   }
   const [form, setForm] = useState(IntialFormdata)
-
   const { posts, addPost } = useContext(postContext)
+  const AllPostsORuser = userPosts ? userPosts : posts
   const handleAddPost = () => {
-    addPost(form)
+    const PostData = {
+      ...form,
+      userId: userData.applicationUserId,
+      name: userData.firstName + ' ' + userData.lastName,
+      role: userData.desiredJobTitle
+    }
+    addPost(PostData)
     setIsModalOpen(false)
     setForm(IntialFormdata)
   }
@@ -48,7 +57,7 @@ function PostsList() {
       </div>
 
       <h2 className="text-xl font-semibold mb-4">Posts</h2>
-      {posts.map((post, index) => (
+      {AllPostsORuser.map((post, index) => (
         <PostItem post={post} key={index} />
       ))}
 
@@ -59,21 +68,25 @@ function PostsList() {
             rows={8}
             className="min-h-auto w-full border-none p-2 rounded placeholder:text-zinc-400"
             placeholder="What do you think?"
-            onChange={(e)=>setForm({ ...form, text: e.target.value })}
+            onChange={(e) => setForm({ ...form, text: e.target.value })}
           />
           {
             form?.image &&
             <img
-              src={URL.createObjectURL(form.image)}
+              src={form.image}
               alt="preview"
               className="h-full object-contain rounded-xl m-auto p-1"
             />
           }
           <div className="mt-4 flex justify-between items-center">
             <ImageUploadIcon onFileChange={(e) => {
-              const file = e.target.files[0]
+              const file = e.target.files[0];
               if (file) {
-                setForm({ ...form, image: file })
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                  setForm({ ...form, image: reader.result }); // ⬅️ base64 string
+                };
+                reader.readAsDataURL(file);
               }
 
               <FiImage size={22} className="cursor-pointer" />

@@ -2,9 +2,12 @@ import { jobs } from '../../home/JobsList';
 import JobItem from '../../home/JobItem'
 import { useContext } from 'react';
 import { jobContext } from '../../../context/JobContext';
+import { SetupContext } from '../../../context/SetupContext';
+import SavedJobs from '../../home/SavedJobs';
 
 function Saved() {
   const {savedJobs,postedJobs}=useContext(jobContext)
+  const {userData}=useContext(SetupContext)
   const SavedList=postedJobs?.filter((job=>savedJobs?.includes(job.id)))
   return (
     <>

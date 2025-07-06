@@ -10,7 +10,7 @@ import { AddRole } from "../../Api_Calls/Authservices";
 
 function SelectUser() {
     const { selectUser, setSelectUser, authUser, setAuthUser } = useAuth();
-    const [confirmed, setConfirmed] = useState(false); // Track if "Next" was clicked
+    const [confirmed, setConfirmed] = useState(false);
     const navigate = useNavigate();
 
     // Handle "Next" Button Click
@@ -32,23 +32,19 @@ function SelectUser() {
                     console.log(err.response?.data)
                 }
             else navigate("/setup");
-
         } else {
             alert("Please select an option before proceeding.");
         }
     };
-
     return (
         <div className="flex flex-col items-center">
             {/* Logo Position */}
             <div className="absolute top-[5%] left-[5%]">
                 <Logo logoColor="#7F00FF" />
             </div>
-
             {/* Main Container */}
             <div className="flex flex-col justify-center items-center h-screen font-lato">
                 <HeadingText mainText="Please select one of the following" subText="You are a/an " />
-
                 <div className="flex justify-around w-full mt-6">
                     {/* Employee Card */}
                     <div className="flex items-center justify-center flex-col">
@@ -62,7 +58,6 @@ function SelectUser() {
                         </div>
                         <h2 className="text-center mt-2 font-semibold">Employee</h2>
                     </div>
-
                     {/* Company Card */}
                     <div className="flex items-center justify-center flex-col">
                         <div
@@ -76,10 +71,8 @@ function SelectUser() {
                         <h2 className="text-center mt-2 font-semibold">Company</h2>
                     </div>
                 </div>
-
                 {/* "Next" Button */}
                 <Button btn_text="Next" className="mt-6" onHandleClick={handleNext} marg={7} />
-
             </div>
         </div>
     );

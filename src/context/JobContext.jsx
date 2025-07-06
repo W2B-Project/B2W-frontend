@@ -1,9 +1,9 @@
 import { createContext, useState, useEffect, useCallback } from "react";
 
+
 export const jobContext = createContext();
 
-const JobProvider = ({ children }) => {
-  const loadFromLocalStorage = (key, defaultValue) => {
+export const loadFromLocalStorage = (key, defaultValue) => {
     try {
       const saved = localStorage.getItem(key);
       return saved ? JSON.parse(saved) : defaultValue;
@@ -12,6 +12,7 @@ const JobProvider = ({ children }) => {
       return defaultValue;
     }
   };
+const JobProvider = ({ children }) => {
 
   const [postedJobs, setPostedJobs] = useState(() =>
     loadFromLocalStorage("postedJobs", [])
@@ -96,12 +97,12 @@ const JobProvider = ({ children }) => {
     );
   }, []);
 
-  const toggleSaved = useCallback((jobId) => {
+  const toggleSaved = useCallback((jobId,userid) => {
     const numericJobId = Number(jobId);
     setSavedJobs((prev) =>
       prev.includes(numericJobId)
         ? prev.filter((id) => id !== numericJobId)
-        : [...prev, numericJobId]
+        : [...prev, numericJobId,userid]
     );
   }, []);
 
@@ -114,6 +115,7 @@ const JobProvider = ({ children }) => {
       if (!jobExists) return null;
 
       const newApplication = {
+        userId:applicationData.userId,
         id: Date.now(),
         jobId: numericJobId,
         applicantName: applicationData.name,

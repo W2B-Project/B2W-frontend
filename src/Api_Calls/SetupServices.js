@@ -30,6 +30,9 @@ export const getUserData = async (userid, setdata) => {
         console.error("Error fetching company data:", err);
     }
 };
+export const PostuserPic=async(img)=>{
+    
+}
 
 /* setup company profile */
 export const setupNewCompany = async (formData) => {
@@ -75,6 +78,16 @@ export const handleFeatures = async (companyId,featuresList) => {
         );
     } catch (err) {
         console.error("Error updating features", err.response?.data);
+    }
+};
+/* handle get AccessibilityFeatures */
+export const getFeatures = async (companyId,setfeatures) => {
+    try {
+        const Features = await FEATURE_API.get(`/by-company/${companyId}`);
+        console.log(Features)
+        setfeatures(Features)
+    } catch (err) {
+        console.error("Error getting features", err.response?.data);
     }
 };
 

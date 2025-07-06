@@ -1,4 +1,4 @@
-import { useContext, useState} from "react";
+import { useContext, useState } from "react";
 import Button from "../global/Button";
 import Model from "../global/Model";
 import { FiSend } from "react-icons/fi";
@@ -9,15 +9,15 @@ const PostItem = ({ post }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setPosts } = useContext(postContext)
   const [commentInput, setCommentInput] = useState("");
-  const {userData}=useContext(SetupContext)
+  const { userData } = useContext(SetupContext)
 
   const handleAddComment = (postId) => {
     if (commentInput.trim() === "") return;
 
     const newComment = {
-      name: "You",
+      name: userData.firstName + ' ' + userData.lastName,
       image: "https://i.pravatar.cc/100?u=you",
-      job: "React Developer",
+      job: userData.desiredJobTitle,
       comment: commentInput
     };
 
@@ -41,14 +41,14 @@ const PostItem = ({ post }) => {
               className="w-10 h-10 rounded-full"
             />
             <div>
-              <h2 className="font-semibold">{userData.firstName} {userData.lastName}</h2>
-              <p className="text-sm text-gray-500">{userData.desiredJobTitle}</p>
+              <h2 className="font-semibold capitalize">{post.name}</h2>
+              <p className="text-sm text-gray-500 capitalize">{post.role}</p>
             </div>
           </div>
           <div>
             {post.isFollowing ? (
               <>
-                <Button btn_text="Follow" width="60px" />
+                {post.userId !== userData.applicationUserId && <Button btn_text="Follow" width="60px" />}
                 <span className="cursor-pointer text-xl ml-4">⋮</span>
               </>
             ) : (
@@ -63,9 +63,11 @@ const PostItem = ({ post }) => {
 
         {post.image && (
           <img
-            src={typeof post.image === "string" ? post.image : URL.createObjectURL(post.image)}
+            src={
+              post.image
+            }
             alt="post visual"
-            className="w-full rounded-lg mt-3 max-h-16"
+            className="w-full rounded-lg mt-3 max-h-72"
           />
         )}
 
@@ -106,8 +108,8 @@ const PostItem = ({ post }) => {
                     className="w-14 h-14 rounded-full object-cover"
                   />
                   <div>
-                    <h4 className="text-lg font-semibold">{userData.firstName} {userData.lastName}</h4>
-                    <p className="text-sm text-gray-500">{userData.desiredJobTitle}</p>
+                    <h4 className="text-lg font-semibold">{el.name}</h4>
+                    <p className="text-sm text-gray-500">{el.job}</p>
                   </div>
                 </div>
                 <p className="text-gray-700">{el.comment}</p>
