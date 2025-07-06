@@ -6,24 +6,28 @@ This **frontend** is part of a full graduation project and communicates with a *
 
 ---
 
+# How to Run the Project
+
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/yourusername/b2w-frontend.git
 cd b2w-frontend
-
-
-# How to Run the Project
-## 1. Clone the Repository
-git clone https://github.com/yourusername/b2w-frontend.git
-cd b2w-frontend
+```
 
 ## 2. Install Dependencies
+```bash
 npm install
+```
 
 ## 3. Environment Variables
+```bash
 Create a .env file in the root directory with your Gemini API URL and other environment variables:
 API_GEMINI=https://your-gemini-api-url.com/api
+```
 
 ## 4. Run the Development Server
+```bash
 npm run dev
+```
 
 ## 5. Run Backend server
