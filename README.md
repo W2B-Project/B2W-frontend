@@ -1,8 +1,19 @@
-# React + Vite
+# 🎓 B2W - Frontend Graduation Project
+B2W (Bridge to Work) is a web platform built using React.js, designed to help people with physical disabilities connect with inclusive companies and apply for suitable jobs. This frontend is part of a graduation project and communicates with a backend API to manage users, jobs, applications, and more.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# How to Run the Project
+## 1. Clone the Repository
+git clone https://github.com/yourusername/b2w-frontend.git
+cd b2w-frontend
 
-Currently, two official plugins are available:
+## 2. Install Dependencies
+npm install
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 3. Environment Variables
+Create a .env file in the root directory with your Gemini API URL and other environment variables:
+API_GEMINI=https://your-gemini-api-url.com/api
+
+## 4. Run the Development Server
+npm run dev
+
+## 5. Run Backend server
