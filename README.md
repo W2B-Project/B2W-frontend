@@ -1,7 +1,6 @@
 # 🎓 B2W - Frontend Graduation Project
 
 **B2W (Bridge to Work)** is a web platform built using **React.js**, designed to help people with physical disabilities connect with inclusive companies and apply for suitable jobs.
-
 This **frontend** is part of a full graduation project and communicates with a **backend API** to manage users, jobs, applications, profiles, and more.
 
 ---
