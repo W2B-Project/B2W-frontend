@@ -9,7 +9,7 @@ This **frontend** is part of a full graduation project and communicates with a *
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/b2w-frontend.git
+git clone https://github.com/W2B-Project/B2W-frontend.git
 cd b2w-frontend
 ```
 
