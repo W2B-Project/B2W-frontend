@@ -4,6 +4,7 @@ import { useContext } from "react"
 import { InfoContext } from "../../../../context/Professinoal_InfoContext"
 import { useNavigate } from "react-router-dom"
 import FormModal from "../global/FormModal"
+import { userprofileassets } from "../../../../assets/images/user Profile/userprofileAssets"
 function Certificates() {
     const { certificate,
         setCertificate,
@@ -37,7 +38,7 @@ function Certificates() {
                                 certificate.map((cer, index) => (
                                     <div key={index}>
                                         <div className="flex gap-5 items-center my-5">
-                                            <div className="rounded-xl bg-primry_purble w-16 h-16"></div>
+                                            <img src={userprofileassets.course} className="rounded-xl  w-16 h-16"/>
                                             <div>
                                                 <p className="text-lg ">{cer.OrganizationName}</p>
                                                 <p className="text-dark_gray">{cer.CourseName}</p>

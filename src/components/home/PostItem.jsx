@@ -4,19 +4,21 @@ import Model from "../global/Model";
 import { FiSend } from "react-icons/fi";
 import { postContext } from "../../context/PostContext";
 import { SetupContext } from "../../context/SetupContext";
+import { convertBlobUrlToBase64 } from "../../Api_Calls/SetupServices";
+import { setup } from "../../assets/images/setup/setupAssets";
 
 const PostItem = ({ post }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setPosts } = useContext(postContext)
   const [commentInput, setCommentInput] = useState("");
-  const { userData } = useContext(SetupContext)
+  const { userData,Pic } = useContext(SetupContext)
 
-  const handleAddComment = (postId) => {
+  const handleAddComment =async (postId) => {
     if (commentInput.trim() === "") return;
-
+    const base64Img = await convertBlobUrlToBase64(Pic);
     const newComment = {
       name: userData.firstName + ' ' + userData.lastName,
-      image: "https://i.pravatar.cc/100?u=you",
+      image: Pic?base64Img:setup.defImg,
       job: userData.desiredJobTitle,
       comment: commentInput
     };

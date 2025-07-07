@@ -16,7 +16,6 @@ function Createaccount() {
     const { showPassword, setShowPassword, setAuthUser } = useAuth();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(form)
         const FORM = { ...form, userName: form.email }
         try {
             const data = await registerUser(FORM);

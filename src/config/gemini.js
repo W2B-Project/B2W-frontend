@@ -5,7 +5,6 @@ import {
 } from "@google/generative-ai"
 
 const apiKey = import.meta.env.VITE_GEMINI_API;
-console.log(apiKey)
 
 const genAI = new GoogleGenerativeAI(apiKey);
 
@@ -33,7 +32,6 @@ async function run(prompt,history = []) {
     });
 
     const result = await chatSession.sendMessage(prompt);
-    console.log(result.response.text());
     return result.response.text();
 }
 

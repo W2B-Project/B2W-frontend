@@ -17,7 +17,7 @@ export const registerUser = async (formData) => {
 
 export const loginUser = async (formData) => {
     const res = await api.post(`/Login`, formData);
-    console.log(res.data)
+
     return res.data;
 };
 export const AddRole = async (role) => {

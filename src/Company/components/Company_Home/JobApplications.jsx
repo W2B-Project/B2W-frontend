@@ -36,19 +36,13 @@ const JobApplications = () => {
 
     useEffect(() => {
         const numericJobId = Number(jobId);
-        console.log("📌 jobId from URL:", numericJobId);
-        console.log("📌 postedJobs:", postedJobs);
-        console.log("📌 allApplications:", allApplications);
-
         if (!numericJobId || postedJobs.length === 0 || allApplications.length === 0) return;
 
         const matchedJob = postedJobs.find((j) => Number(j.id) === numericJobId);
-        console.log("📌 matchedJob:", matchedJob);
         setJob(matchedJob);
 
         if (matchedJob) {
             const filtered = allApplications.filter(app => Number(app.jobId) === numericJobId);
-            console.log("📌 Filtered applications:", filtered);
             setFilteredApplications(filtered);
         }
     }, [jobId, allApplications, postedJobs]);
