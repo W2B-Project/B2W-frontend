@@ -8,6 +8,9 @@ import notification from './Notification img.svg'
 import millistone1 from './Launch Icon.svg'
 import millistone2 from './Level Icon.svg'
 import millistone3 from './Vector.svg'
+import company from './company.png'
+import course from './course.png'
+import uni from './university.png'
 export const userprofileassets={
     profileImage,
     bg,
@@ -18,5 +21,8 @@ export const userprofileassets={
     notification,
     millistone1,
     millistone2,
-    millistone3
+    millistone3,
+    company,
+    course,
+    uni
 }

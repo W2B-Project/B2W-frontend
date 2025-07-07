@@ -5,14 +5,15 @@ import { useAuth } from "../../context/AuthContext"
 import { useState,useEffect, useContext } from "react"
 import { getUserData } from "../../Api_Calls/SetupServices"
 import { SetupContext } from "../../context/SetupContext"
+import { setup } from "../../assets/images/setup/setupAssets"
 
 function UserProfile() {
     const { authUser } = useAuth()
-    const {userData}=useContext(SetupContext)
-    console.log(userData)
+    const {userData,Pic}=useContext(SetupContext)
+    
     return (
         <div className="w-full h-[230px] shadow p-5 rounded-xl bg-white flex flex-col  justify-center items-center">
-            <img className="w-20 h-20 rounded-full " loading="lazy" src={profileImage} alt="" />
+            <img className="w-20 h-20 rounded-full " loading="lazy" src={Pic?Pic:setup.defImg} alt="" />
             <h3 className="text-2xl font-bold font-lato capitalize">{userData.firstName} {userData.lastName}</h3>
             <Link
                 to="/userProfile"

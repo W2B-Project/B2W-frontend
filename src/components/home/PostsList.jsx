@@ -7,16 +7,18 @@ import ImageUploadIcon from "../global/ImageUploadIcon";
 import { postContext } from "../../context/PostContext";
 import { userprofileassets } from "../../assets/images/user Profile/userprofileAssets";
 import { SetupContext } from "../../context/SetupContext";
+import { convertBlobUrlToBase64 } from "../../Api_Calls/SetupServices";
+import { setup } from "../../assets/images/setup/setupAssets";
 
 function PostsList({ userPosts = null }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { userData } = useContext(SetupContext)
+  const { userData,Pic } = useContext(SetupContext)
   const IntialFormdata = {
     userId: "",
     id: Date.now(),
     name: "Peter Charles",
     role: "Call Center",
-    avatar: userprofileassets.profileImage,
+    avatar: null,
     isFollowing: true,
     text: "",
     image: null,
@@ -26,25 +28,26 @@ function PostsList({ userPosts = null }) {
   const [form, setForm] = useState(IntialFormdata)
   const { posts, addPost } = useContext(postContext)
   const AllPostsORuser = userPosts ? userPosts : posts
-  const handleAddPost = () => {
+  const handleAddPost =async () => {
+    const base64Img = await convertBlobUrlToBase64(Pic);
     const PostData = {
       ...form,
       userId: userData.applicationUserId,
       name: userData.firstName + ' ' + userData.lastName,
-      role: userData.desiredJobTitle
+      role: userData.desiredJobTitle,
+      avatar:Pic?base64Img:setup.defImg,
     }
     addPost(PostData)
     setIsModalOpen(false)
     setForm(IntialFormdata)
   }
-  console.log(posts)
 
   return (
     <>
       <div className="flex justify-between items-center gap-4">
         <img
           className="w-16 h-16 rounded-full"
-          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src={Pic?Pic:setup.defImg}
           alt=""
         />
         <input

@@ -1,7 +1,6 @@
 
 import services from '../../content/landing/services'
 function Services() {
-    console.log(services[0].alt)
     return (
         <>
             <div className="bg-[#f8f8f8] pb-5" >

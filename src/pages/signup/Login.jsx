@@ -11,7 +11,7 @@ import { loginUser } from "../../Api_Calls/Authservices";
 import { useAuth } from "../../context/AuthContext";
 import { useContext } from "react";
 import { SetupContext } from "../../context/SetupContext";
-import { getCompanyData } from "../../Api_Calls/SetupServices";
+import { getCompanyData, GetUserPic } from "../../Api_Calls/SetupServices";
 import { getUserData } from "../../Api_Calls/SetupServices";
 
 function Login() {
@@ -21,7 +21,7 @@ function Login() {
     const [emailError, setEmailError] = useState(null)
     const [PassError, setPassError] = useState(null)
     const { showPassword, setShowPassword, setAuthUser, authUser } = useAuth();
-    const { setUserData, setComData } = useContext(SetupContext);
+    const { setUserData, setComData,setPic } = useContext(SetupContext);
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (form.email && form.password) {
@@ -37,14 +37,12 @@ function Login() {
                     userId: data.userId,
                     roles: data.roles,
                     isAuthenticated: data.isAuthenticated,
-
                 }
                 setAuthUser(userData);
                 localStorage.setItem("authUser", JSON.stringify(userData));
-
-                await getUserData(authUser.userId, setUserData);
-                await getCompanyData(authUser.userId, setComData);
-
+                authUser.roles[0] === 'User' && await getUserData(authUser.userId, setUserData);
+                authUser.roles[0] === 'Admin' && await getCompanyData(authUser.userId, setComData);
+                await GetUserPic(authUser.userId,setPic)
                 authUser?.roles[0] === "User" ? navigate('/home') : navigate('/home-Company')
 
             } catch (err) {

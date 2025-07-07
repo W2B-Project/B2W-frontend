@@ -12,10 +12,12 @@ import "react-phone-input-2/lib/style.css";
 // style in css
 import "../../assests/JobFormStyle.css";
 import { SetupContext } from "../../../context/SetupContext";
+import {convertBlobUrlToBase64 } from "../../../Api_Calls/SetupServices";
+import { setup } from "../../../assets/images/setup/setupAssets";
 function PostJob() {
     const navigate = useNavigate()
     const { addJob } = useContext(jobContext);
-    const { comData } = useContext(SetupContext)
+    const { comData,Pic } = useContext(SetupContext)
 
     const currencyOptions = [
         {
@@ -75,6 +77,7 @@ function PostJob() {
     const [formData, setFormData] = useState({
         CompanyId: "",
         companyName: "",
+        img:'',
         location: "",
         jobTitle: "",
         jobLevel: "",
@@ -146,7 +149,7 @@ function PostJob() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit =async (e) => {
         e.preventDefault();
 
         const newErrors = {};
@@ -173,20 +176,22 @@ function PostJob() {
         setErrors(newErrors);
         const valid = Object.keys(newErrors).length === 0;
         setIsFormValid(valid);
-
+        const base64Img = await convertBlobUrlToBase64(Pic);
         if (!valid) return;
 
         const jobData = {
             ...formData,
             CompanyId: comData.companyProfileId,
             companyName: comData.companyName,
-            location: comData.location
+            img:Pic?base64Img:setup.defImg,
+            location: comData.location,
         };
         addJob(jobData);
 
         setFormData({
             CompanyId: "",
             jobTitle: "",
+            img:'',
             location: "",
             companyName: "",
             jobLevel: "",

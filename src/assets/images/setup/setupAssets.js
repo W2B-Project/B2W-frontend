@@ -8,6 +8,7 @@ import progress7 from './Progress Indicator-3.svg'
 import addimg from './Add img.svg'
 import color from './material-symbols_invert-colors-outline.svg'
 import font from './material-symbols_font-download-rounded.svg'
+import defImg from './default.png'
 
 export const setup={
     progress1,
@@ -19,5 +20,6 @@ export const setup={
     progress7,
     addimg,
     color,
-    font
+    font,
+    defImg
 }

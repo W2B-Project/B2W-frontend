@@ -16,12 +16,8 @@ const ApplicationDetails = () => {
         if (applicationId && jobId) {
             const app = getApplicationById(applicationId);
             const jobFound = postedJobs.find((j) => Number(j.id) === Number(jobId));
-
             setApplication(app);
             setJob(jobFound);
-
-            console.log("📍 Loaded application:", app);
-            console.log("📍 Loaded job:", jobFound);
         }
     }, [applicationId, jobId, getApplicationById, postedJobs]);
 

@@ -4,9 +4,6 @@ import { useEffect } from 'react'
 
 
 function Accessibility({ info, editmode = false, toggleSelect, handleSave, featuresList }) {
-    useEffect(()=>{
-        console.log(editmode)
-    },[editmode])
     return (
         <>
             <p className='my-7 text-center font-lato text-xl font-bold'>{info.desc}</p>

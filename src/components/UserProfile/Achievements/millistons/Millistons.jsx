@@ -35,7 +35,6 @@ function Millistons() {
 
     const RandomImage = () => {
         const randomIndex = Math.floor(Math.random() * MillistoneImages.length)
-        console.log(randomIndex)
         return MillistoneImages[randomIndex]
     }
 

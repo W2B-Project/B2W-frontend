@@ -1,22 +1,37 @@
 import { useContext, useState } from "react"
 import { setup } from "../../assets/images/setup/setupAssets"
 import { SetupContext } from "../../context/SetupContext"
-import userinfo from "../../content/setup/userinfo"
+import { AddUserPic } from "../../Api_Calls/SetupServices"
+import { useAuth } from "../../context/AuthContext"
 function Form({ getnextstep, edit, editData }) {
-    const [image, setimage] = useState(null)
+    const { Pic, setPic } = useContext(SetupContext)
     const { UserInfo, setUserInfo } = useContext(SetupContext)
+    const { authUser } = useAuth()
+
+    const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        try {
+            const res = await AddUserPic(authUser.userId, file);
+            setPic(`data:image/jpeg;base64,${res.image}`);
+            console.log("Image uploaded successfully:", res);
+        } catch (error) {
+            console.error("Upload error:", error.response?.data || error.message);
+        }
+    };
+
 
     const handleChange = (e) => {
         setUserInfo({ ...UserInfo, [e.target.name]: e.target.value })
     }
     const formVald = UserInfo.firstName && UserInfo.lastName && UserInfo.email && UserInfo.gender && UserInfo.jobTitle ? true : false
-    console.log(formVald)
+
     return (
         <>
             {/* image upload */}
-            <input type="file" id="inputt" className="hidden w-fit" />
+            <input type="file" id="inputt" className="hidden w-fit" onChange={handleImageUpload} />
             <label htmlFor="inputt">
-                <img src={setup.addimg} alt="upload image" loading="lazy" className="m-auto" width={100} />
+                <img src={Pic ? Pic : setup.defImg} alt="upload image" loading="lazy" className="m-auto rounded-full h-28 w-28" />
             </label>
             {/* user info */}
             <div className="mt-5">

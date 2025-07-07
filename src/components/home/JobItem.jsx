@@ -39,8 +39,8 @@ function JobItem({ job, apply,company }) {
                 <div className="flex items-center gap-3 px-4">
                     <img
                         loading="lazy"
-                        src={CompanyProAssets.profPho}
-                        className="w-16 h-16 object-contain rounded-full "
+                        src={job?.jobData?.img}
+                        className="w-16 h-16 rounded-full "
                         alt="profile"
                     />
                     <h3 className="font-bold text-xl capitalize">{job?.jobData?.companyName}</h3>

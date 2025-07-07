@@ -36,7 +36,7 @@ function PostedJobsList() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4 pb-4">
                   <img
-                    src={CompanyProAssets.profPho}
+                    src={job?.jobData?.img}
                     alt="Company Logo"
                     className="w-16 h-16 rounded-full object-cover"
                   />

@@ -26,11 +26,6 @@ const JobDetails = () => {
   if (!job) {
     return <p className="text-center mt-10">No job selected.</p>;
   }
-
-  // ✅ Debug logs
-  console.log("Job object:", job);
-  console.log("Job ID:", job.id);
-
   return (
     <>
       {company ? <Header usertype="company" /> : <Header />}
@@ -56,9 +51,9 @@ const JobDetails = () => {
               <div className="flex items-center justify-between gap-4 pb-4">
                 <div className="flex gap-2 items-center">
                   <img
-                    src={CompanyProAssets.profPho}
+                    src={job?.jobData?.img}
                     alt="Company Logo"
-                    className="w-20 h-20 rounded-full object-cover"
+                    className="w-20 h-20 rounded-full"
                   />
                   <div>
                     <h2 className="text-xl font-bold text-black font-lato capitalize">
@@ -165,7 +160,7 @@ const JobDetails = () => {
                 <div className="flex items-center justify-start gap-3">
                   <div>
                     <img
-                      src={csetup.person}
+                      src={job?.jobData?.img}
                       className="w-16 h-16 rounded-full"
                       alt=""
                     />

@@ -8,7 +8,6 @@ import ResumeModal from "./ResumeModal"
 
 function Resume() {
     const { setEditPage, cv, setCv, cvShowModal, setCVShowModal } = useContext(InfoContext)
-    console.log(cv)
     const navigate = useNavigate()
     return (
         <>

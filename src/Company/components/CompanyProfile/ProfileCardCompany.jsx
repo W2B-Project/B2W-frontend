@@ -1,19 +1,19 @@
 import { useContext } from 'react'
-import { CompanyProAssets } from '../../assests/companyAssets'
+
 import { Edit, Github, Facebook, Mail } from 'lucide-react'
 import { userprofileassets } from '../../../assets/images/user Profile/userprofileAssets'
 import { Link, MapPin } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { SetupContext } from '../../../context/SetupContext'
+import { setup } from '../../../assets/images/setup/setupAssets'
 
 function ProfileCardCompany() {
     const navigate = useNavigate()
-    const { comData } = useContext(SetupContext)
-    console.log(comData)
+    const { comData,Pic } = useContext(SetupContext)
     return (
         <div className='bg-white w-[23%] relative -top-24 left-10 p-5 pt-0 rounded-xl h-fit'>
             <div className='flex'>
-                <img src={CompanyProAssets.profPho} className='relative -top-8 left-4 rounded-full w-20 m-auto' alt="" />
+                <img src={Pic?Pic:setup.defImg} className='relative -top-8 left-4 rounded-full w-20 h-20 m-auto' alt="pic" />
                 <Edit color='gray' className='mt-2 cursor-pointer' onClick={() => navigate('/EditcompanyInfo')} />
             </div>
             <div className='text-center'> 

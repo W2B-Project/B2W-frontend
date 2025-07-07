@@ -35,7 +35,6 @@ function Chat() {
                                 <ReactMarkdown>{msg.content}</ReactMarkdown>
                             </div>
                         ))}
-                        {console.log(isLoading)}
                         {isLoading && (
                             <div className="bot-message flex space-x-1">
                                 <span className="w-3 h-3 bg-primry_purble rounded-full animate-bounce scale-110"></span>

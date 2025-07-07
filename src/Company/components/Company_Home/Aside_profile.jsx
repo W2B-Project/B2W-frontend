@@ -7,8 +7,7 @@ import { SetupContext } from "../../../context/SetupContext";
 
 const Aside_profile = () => {
 
-  const {comData}=useContext(SetupContext)
-
+  const {comData,Pic}=useContext(SetupContext)
 
   return (
     <>
@@ -18,8 +17,8 @@ const Aside_profile = () => {
       >
         <div className="profile_box flex items-center justify-evenly flex-col bg-white  w-full h-[229px] p-5 pt-0 rounded-xl">
           <img
-            src={CompanyProAssets.profPho}
-            className=" rounded-full w-20 "
+            src={Pic}
+            className=" rounded-full w-20 h-20 "
             alt=""
           />
 

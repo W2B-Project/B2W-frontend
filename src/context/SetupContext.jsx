@@ -1,6 +1,6 @@
 import { useState, createContext, useEffect } from "react";
 import { useAuth } from "./AuthContext";
-import { getFeatures, getUserData } from "../Api_Calls/SetupServices";
+import { getFeatures, getUserData, GetUserPic } from "../Api_Calls/SetupServices";
 import { getCompanyData } from "../Api_Calls/SetupServices";
 export const SetupContext = createContext()
 
@@ -35,8 +35,7 @@ function SetupProvider({ children }) {
         applicationUserId: ""
     })
     const [accessibility, setAccessibility] = useState()
-    
-
+    const [Pic,setPic]=useState(null)
     const [userData, setUserData] = useState({})
     const [comData, setComData] = useState({})
 
@@ -47,7 +46,7 @@ function SetupProvider({ children }) {
             try {
                 await getUserData(authUser.userId, setUserData);
                 await getCompanyData(authUser.userId, setComData);
-
+                await GetUserPic(authUser.userId,setPic)
             } catch (err) {
                 console.error("Error loading setup data:", err);
             }
@@ -61,9 +60,8 @@ function SetupProvider({ children }) {
             
         }
     }, [comData?.companyProfileId]);
-console.log(accessibility)
     return (
-        <SetupContext.Provider value={{ UserInfo, setUserInfo, companyInfo, setCompanyInfo, comData, userData, setComData, setUserData }}>
+        <SetupContext.Provider value={{ UserInfo, setUserInfo, companyInfo, setCompanyInfo, comData, userData, setComData, setUserData,Pic,setPic,accessibility,setAccessibility }}>
             {children}
         </SetupContext.Provider>
     )

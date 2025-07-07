@@ -4,6 +4,9 @@ import profileImage from "../../assets/images/home/cca3d1cbd0af0cf081dd88cf66a24
 import BellIcon from "../svg/company setup/BellIcon";
 import SearchIcon from "../svg/company setup/SearchIcon";
 import { CompanyProAssets } from "../../Company/assests/companyAssets";
+import { useContext } from "react";
+import { SetupContext } from "../../context/SetupContext";
+import { setup } from "../../assets/images/setup/setupAssets";
 
 const navLinks = [
     { to: "/home/posts", label: "Home" },
@@ -18,9 +21,11 @@ const navLinksCompany = [
 ];
 
 
-function Header({ setService, usertype = 'employee' }) {
-    const currList = usertype === 'company' ? navLinksCompany : navLinks
 
+
+function Header({ setService, usertype = 'employee' }) {
+    const {Pic}=useContext(SetupContext)
+    const currList = usertype === 'company' ? navLinksCompany : navLinks
     const linkClass = ({ isActive }) =>
         `text-base font-bold border-b-4 rounded-[4px] transition-all ${isActive ? "text-primry_purble border-primry_purble" : "text-black border-transparent hover:text-primry_purble hover:border-primry_purble"
         }`;
@@ -41,7 +46,7 @@ function Header({ setService, usertype = 'employee' }) {
                 <SearchIcon />
                 <BellIcon />
                         <Link to={`${usertype === 'company' ?'/companyProfile':'/userProfile' }`}>
-                            <img className="w-10 h-10 rounded-full border border-gray-300 shadow-sm" loading="lazy" src={usertype==='company'?CompanyProAssets.profPho:profileImage} alt="user Profile" />
+                            <img className="w-10 h-10 rounded-full border border-gray-300 shadow-sm" loading="lazy" src={Pic?Pic:setup.defImg} alt="user Profile" />
                         </Link>
             </div>
         </header>
