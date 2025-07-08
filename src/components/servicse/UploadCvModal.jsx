@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import uploadImage from '../../assets/images/home/ResumeReview2.png'
 
-export default function UploadCvModal({ onClose, setService, onDone }) {
+export default function UploadCvModal({ onClose, setService, onDone, isProcessing = false }) {
     const [progress, setProgress] = useState(0);
     const [isDone, setIsDone] = useState(false);
     const navigate = useNavigate();
@@ -59,13 +59,13 @@ export default function UploadCvModal({ onClose, setService, onDone }) {
                             </svg>
                         </div>
                         <div className="text-sm">
-                            Your CV has been uploaded successfully.
+                            {isProcessing ? 'Analyzing your CV with AI...' : 'Your CV has been uploaded successfully.'}
                         </div>
                         <div className="font-medium">My CV</div>
                         <div className='flex items-center gap-3 w-full'>
                             <div className="w-full h-4 bg-primry_purble rounded-full"></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="14" viewBox="0 0 20 14" fill="none">
-                                <path d="M1.5 6.06027L7.17 11.7203L18.5 2.28027" stroke="#54E15D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M1.5 6.06027L7.17 11.7203L18.5 2.28027" stroke="#54E15D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </div>
                         <button

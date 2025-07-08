@@ -6,7 +6,58 @@ import CvAnalysisResult from '../../components/home/CvAnalysisResult';
 function CvAnalysis({ setService }) {
     const [showModal, setShowModal] = useState(false);
     const [showResult, setShowResult] = useState(false);
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [isProcessing, setIsProcessing] = useState(false);
     const fileInputRef = useRef();
+
+    // Replace with your actual AI model endpoint
+    const AI_ENDPOINT = "https://0231b0f759fb.ngrok-free.app";
+
+    // Function to send CV to AI model
+    const sendCvToAI = async (file) => {
+        setIsProcessing(true);
+        
+        try {
+            // Create FormData to send file
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('cv', file); // Some APIs might expect different field names
+            
+            console.log('Sending CV to AI model...', {
+                fileName: file.name,
+                fileSize: file.size,
+                fileType: file.type
+            });
+
+            const response = await fetch(AI_ENDPOINT, {
+                method: 'POST',
+                body: formData,
+                // Add headers if needed
+                headers: {
+                    // 'Authorization': 'Bearer YOUR_TOKEN', // Add if authentication is needed
+                    // 'Accept': 'application/json',
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            
+            // Print result in console
+            console.log('AI Model Response:', result);
+            console.log('CV Analysis Complete!');
+            
+            return result;
+            
+        } catch (error) {
+            console.error('Error sending CV to AI model:', error);
+            return null;
+        } finally {
+            setIsProcessing(false);
+        }
+    };
 
     // If showing result, render the result component
     if (showResult) {
@@ -17,10 +68,20 @@ function CvAnalysis({ setService }) {
         fileInputRef.current?.click();
     };
 
-    const handleFileChange = (e) => {
+    const handleFileChange = async (e) => {
         const file = e.target.files[0];
         if (file) {
+            setSelectedFile(file);
             setShowModal(true);
+            
+            // Send CV to AI model in the background
+            const aiResult = await sendCvToAI(file);
+            
+            if (aiResult) {
+                console.log('CV processing completed successfully!');
+                // You can store the result in state if needed for the result page
+                // setAnalysisResult(aiResult);
+            }
         }
     };
 
@@ -81,7 +142,13 @@ function CvAnalysis({ setService }) {
                 </div>
             </div>
 
-            {showModal && <UploadCvModal onClose={() => setShowModal(false)} onDone={() => setShowResult(true)} />}
+            {showModal && (
+                <UploadCvModal 
+                    onClose={() => setShowModal(false)} 
+                    onDone={() => setShowResult(true)}
+                    isProcessing={isProcessing}
+                />
+            )}
         </div>
     );
 }
