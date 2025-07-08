@@ -8,13 +8,13 @@ export default function CvAnalysisResult({ onBack }) {
         if (onBack) {
             onBack();
         } else {
-            navigate(-1);
+            navigate('home');
         }
     };
 
     return (
-        <div className="col-span-9 space-y-6 p-8 bg-white rounded-xl shadow">
-            <h2 className="text-2xl font-semibold text-center">Resume Reviewer</h2>
+        <div className="col-span-9 space-y-6 p-8 bg-white rounded-xl shadow ">
+            <h2 className="text-2xl font-semibold text-center font-lato">Resume Reviewer</h2>
             <div className="text-center mt-4">
                 <div className="text-lg font-medium">Your Score</div>
                 <div className="relative inline-block my-4">
@@ -60,7 +60,7 @@ export default function CvAnalysisResult({ onBack }) {
                 <h3 className="font-semibold mb-2">Suggestions</h3>
                 <ul className="list-disc pl-6 space-y-1 text-sm text-gray-700">
                     <li>
-                        Highlight specific skills relevant to the job you're targeting.
+                        Highlight specific skills relevant to the job you&apos;re targeting.
                     </li>
                     <li>
                         Include both technical (e.g., tools, software) and soft skills

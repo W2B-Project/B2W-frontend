@@ -25,7 +25,7 @@ function CvAnalysis({ setService }) {
     };
 
     return (
-        <div className="col-span-9 space-y-6">
+        <div className="col-span-9 space-y-6 bg-white rounded-xl shadow pt-5">
             <div className="flex justify-between items-center">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

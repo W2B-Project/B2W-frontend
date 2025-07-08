@@ -22,12 +22,12 @@ function SignLanguageTranslator() {
 
     const startCamera = async () => {
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ 
-                video: { 
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: {
                     facingMode: 'user',
                     width: { ideal: 640 },
                     height: { ideal: 480 }
-                } 
+                }
             });
             setHasPermission(true);
             videoRef.current.srcObject = stream;
@@ -41,9 +41,13 @@ function SignLanguageTranslator() {
     const stopCamera = () => {
         if (streamRef.current) {
             streamRef.current.getTracks().forEach(track => track.stop());
+            streamRef.current = null;
+        }
+        if (videoRef.current) {
             videoRef.current.srcObject = null;
         }
     };
+
 
     useEffect(() => {
         if (!showFirst) {
@@ -59,9 +63,9 @@ function SignLanguageTranslator() {
     }
 
     return (
-        <div className='col-span-9 space-y-6'>
+        <div className='col-span-9 space-y-6 rounded-xl shadow bg-white pt-5'>
             <div className='flex justify-between items-center'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 20 36" fill="none" onClick={() => navigate(-1)} className='cursor-pointer'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 20 36" fill="none" onClick={() => navigate('home')} className='cursor-pointer'>
                     <mask id="path-1-inside-1_5476_354" fill="white">
                         <path fillRule="evenodd" clipRule="evenodd" d="M3.8885 17.7731C8.9485 12.6969 13.8941 7.744 18.7253 2.91426C18.9782 2.64843 19.1192 2.29556 19.1192 1.92866C19.1192 1.56176 18.9782 1.2089 18.7253 0.943063C18.0411 0.181863 16.9587 0.247863 16.4659 0.767063C11.4587 5.78746 6.2205 11.0345 0.751298 16.5081C0.317164 16.8645 0.100098 17.2854 0.100098 17.7709C0.100098 18.2563 0.317164 18.6905 0.751298 19.0733L17.2139 35.1465C17.5299 35.4364 17.9465 35.592 18.3752 35.58C18.804 35.5681 19.2112 35.3897 19.5107 35.0827C20.2983 34.2929 19.9947 33.5141 19.6383 33.1445C14.3801 28.0276 9.12944 22.9031 3.8863 17.7709" />
                     </mask>
@@ -121,7 +125,7 @@ function SignLanguageTranslator() {
                     )}
                 </div>
                 <textarea cols="44" placeholder='Translated Text...' rows="5" className='outline-none rounded-xl bg-gray-300/60 border-none placeholder:text-gray-500 text-gray-800'></textarea>
-                
+
                 <div className="flex gap-4 mt-4">
                     <button
                         onClick={() => setShowResult(true)}
@@ -131,8 +135,8 @@ function SignLanguageTranslator() {
                     </button>
                     <button
                         onClick={() => {
-                            setShowFirst(true);
                             stopCamera();
+                            setShowFirst(true);
                         }}
                         className="px-8 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium"
                     >
