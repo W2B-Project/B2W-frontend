@@ -48,7 +48,7 @@ export default function SignLanguageResult({ onBack }) {
                         <h4 className="text-lg font-semibold text-gray-800 mb-3">Translated Text:</h4>
                         <div className="bg-white rounded-lg p-4 shadow-sm">
                             <p className="text-gray-700 text-base leading-relaxed">
-                                "Hello, how are you today? I hope you're having a wonderful day!"
+                                &quot;Hello, how are you today? I hope you&apos;re having a wonderful day!&quot;
                             </p>
                         </div>
                     </div>
