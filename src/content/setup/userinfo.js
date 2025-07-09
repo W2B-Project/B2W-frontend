@@ -28,7 +28,7 @@ export default info = [
         title: 'Experience Level',
         value:"experienceLevel",
         question: 'What is Your Level in of Experience?',
-        answers: ["Intern", "Joiner", "Mid-level", "Senior", "Lead"],
+        answers: ["Intern", "Junior", "Mid-level", "Senior", "Lead"],
         img:setup.progress4
     },
     {

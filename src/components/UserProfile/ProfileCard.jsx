@@ -11,7 +11,7 @@ function ProfileCard() {
     return (
         <div className='bg-white w-[23%] relative -top-24 left-10 p-5 pt-0 rounded-xl h-fit'>
             <div className='flex'>
-                <img src={Pic?Pic:setup.defImg} className='relative -top-5 left-4 rounded-full w-20 m-auto' alt="" />
+                <img src={Pic?Pic:setup.defImg} className='relative -top-5 left-4 rounded-full w-20 h-20 m-auto' alt="" />
                 <Edit color='gray' className='mt-2 cursor-pointer' onClick={() => setPersonalModal(true)} />
             </div>
             <div className='text-center'>

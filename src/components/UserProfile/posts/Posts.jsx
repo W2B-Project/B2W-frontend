@@ -10,7 +10,7 @@ function Posts() {
         (post) => post?.userId === userData.applicationUserId
     );
     if (userPosts.length !== 0)
-        return <PostsList userPosts={userPosts} />
+        return <PostsList userPosts={userPosts} userProfile={true} />
     else
         return <div className="text-center text-2xl mt-20 font-semibold">No Added Posts Yet</div>
 

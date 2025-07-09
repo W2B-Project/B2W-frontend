@@ -1,16 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/global/Button'
 
-export default function CvAnalysisResult({ onBack }) {
+export default function CvAnalysisResult({ onBack, aiResult }) {
     const navigate = useNavigate();
-
-    const handleBack = () => {
-        if (onBack) {
-            onBack();
-        } else {
-            navigate('home');
-        }
-    };
+    const radius = 54;
+    const circumference = 2 * Math.PI * radius;
+    const percentage = aiResult?.resume_score ? aiResult?.resume_score : 30;
+    const offset = circumference * (1 - percentage / 100);
+    console.log(aiResult?.tips)
 
     return (
         <div className="col-span-9 space-y-6 p-8 bg-white rounded-xl shadow ">
@@ -34,32 +31,52 @@ export default function CvAnalysisResult({ onBack }) {
                             stroke="#8b5cf6"
                             strokeWidth="12"
                             fill="none"
-                            strokeDasharray={`${Math.PI * 54 * 2}`}
-                            strokeDashoffset={`${Math.PI * 54 * 2 * 0.25}`} // 75%
+                            strokeDasharray={circumference}
+                            strokeDashoffset={offset}
                             strokeLinecap="round"
                             transform="rotate(-90 60 60)"
                         />
                     </svg>
                     <div className="absolute inset-0 flex items-center justify-center text-purple-600 font-bold text-xl">
-                        75%
+                        {aiResult?.resume_score ? `${aiResult?.resume_score}%` : `20%`}
                     </div>
                 </div>
-                <div className="text-sm text-gray-600">Good Work!</div>
+                <div className="text-sm text-gray-600">
+                    {aiResult?.resume_score < 45 ?
+                        'You need to improve your resume!' :
+                        aiResult?.resume_score > 45 && aiResult?.resume_score < 70 ? 'goGood, but there is better!'
+                            : 'Good Work!'
+                    }
+
+                </div>
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
-                <div>✅ Personal Information</div>
-                <div>❌ Experience</div>
-                <div>✅ Education</div>
-                <div>❌ Certifications</div>
-                <div>✅ Key Skills</div>
-                <div>✅ Languages</div>
+                {
+                    aiResult?.name && aiResult?.email && aiResult?.mobile_number ?
+                        <div>✅ Personal Information</div>
+                        : <div>❌ Personal Information</div>
+                }
+
+                <div>
+                    {aiResult?.total_experience === 0 ? '❌ Experience' : '✅ Experience'}
+                </div>
+                <div>
+                    {aiResult?.college_name ? '✅ Education' : '❌ Education'}
+                </div>
+                <div>
+                    {aiResult?.skills?.length !== 0 ? '✅ Key Skills' : '❌ Key Skills'}
+                </div>
             </div>
 
             <div className="mt-6 text-left">
                 <h3 className="font-semibold mb-2">Suggestions</h3>
                 <ul className="list-disc pl-6 space-y-1 text-sm text-gray-700">
-                    <li>
+
+                    {aiResult?.tips?.map((tip, index) => 
+                        <li key={index}>{tip}</li>
+                )}
+                    {/* <li>
                         Highlight specific skills relevant to the job you&apos;re targeting.
                     </li>
                     <li>
@@ -73,17 +90,17 @@ export default function CvAnalysisResult({ onBack }) {
                     <li>
                         Quantify results where possible (e.g., “Increased sales by 15% within
                         6 months”).
-                    </li>
+                    </li> */}
                 </ul>
             </div>
 
             <div className="text-center mt-8">
                 <Button
                     btn_text="Back To Home"
-                    onHandleClick={handleBack}
+                    onHandleClick={navigate('/home')}
                     width="w-1/2"
                 />
             </div>
-        </div>
+        </div >
     );
 }

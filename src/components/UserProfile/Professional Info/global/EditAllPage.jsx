@@ -99,7 +99,10 @@ function EditAllPage() {
                                         <div className="rounded-full bg-veryLight_purple w-16 h-16">
                                             <img src={item.image} alt="" className='m-auto w-[55%] my-[10px]' />
                                         </div>
-                                        : <div className="rounded-xl bg-primry_purble w-16 h-16"></div>
+                                        :typeCertifecates? 
+                                        <img src={userprofileassets.course} className="rounded-xl  w-16 h-16"/>
+                                        :typeEX? <img src={userprofileassets.company} className="rounded-xl  w-16 h-16"/>
+                                        : <img src={userprofileassets.uni} className="rounded-xl  w-16 h-16"/>
                                     }
                                     <div>
                                         <p className="text-lg ">{item[fields.primary]}</p>

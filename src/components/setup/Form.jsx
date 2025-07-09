@@ -5,6 +5,7 @@ import { AddUserPic } from "../../Api_Calls/SetupServices"
 import { useAuth } from "../../context/AuthContext"
 function Form({ getnextstep, edit, editData }) {
     const { Pic, setPic } = useContext(SetupContext)
+    const [PicID, setPicID] = useState()
     const { UserInfo, setUserInfo } = useContext(SetupContext)
     const { authUser } = useAuth()
 
@@ -13,12 +14,14 @@ function Form({ getnextstep, edit, editData }) {
         if (!file) return;
         try {
             const res = await AddUserPic(authUser.userId, file);
+            setPicID(res.userId)
             setPic(`data:image/jpeg;base64,${res.image}`);
             console.log("Image uploaded successfully:", res);
         } catch (error) {
             console.error("Upload error:", error.response?.data || error.message);
         }
     };
+    const picId = Pic && PicID === authUser.userId
 
 
     const handleChange = (e) => {
@@ -31,7 +34,7 @@ function Form({ getnextstep, edit, editData }) {
             {/* image upload */}
             <input type="file" id="inputt" className="hidden w-fit" onChange={handleImageUpload} />
             <label htmlFor="inputt">
-                <img src={Pic ? Pic : setup.defImg} alt="upload image" loading="lazy" className="m-auto rounded-full h-28 w-28" />
+                <img src={picId ? Pic : setup.defImg} alt="upload image" loading="lazy" className="m-auto rounded-full h-28 w-28" />
             </label>
             {/* user info */}
             <div className="mt-5">

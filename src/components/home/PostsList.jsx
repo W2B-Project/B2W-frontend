@@ -10,9 +10,9 @@ import { SetupContext } from "../../context/SetupContext";
 import { convertBlobUrlToBase64 } from "../../Api_Calls/SetupServices";
 import { setup } from "../../assets/images/setup/setupAssets";
 
-function PostsList({ userPosts = null }) {
+function PostsList({ userPosts = null, userProfile = false }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { userData,Pic } = useContext(SetupContext)
+  const { userData, Pic } = useContext(SetupContext)
   const IntialFormdata = {
     userId: "",
     id: Date.now(),
@@ -28,14 +28,14 @@ function PostsList({ userPosts = null }) {
   const [form, setForm] = useState(IntialFormdata)
   const { posts, addPost } = useContext(postContext)
   const AllPostsORuser = userPosts ? userPosts : posts
-  const handleAddPost =async () => {
+  const handleAddPost = async () => {
     const base64Img = await convertBlobUrlToBase64(Pic);
     const PostData = {
       ...form,
       userId: userData.applicationUserId,
       name: userData.firstName + ' ' + userData.lastName,
       role: userData.desiredJobTitle,
-      avatar:Pic?base64Img:setup.defImg,
+      avatar: Pic ? base64Img : setup.defImg,
     }
     addPost(PostData)
     setIsModalOpen(false)
@@ -44,22 +44,27 @@ function PostsList({ userPosts = null }) {
 
   return (
     <>
-      <div className="flex justify-between items-center gap-4">
-        <img
-          className="w-16 h-16 rounded-full"
-          src={Pic?Pic:setup.defImg}
-          alt=""
-        />
-        <input
-          type="text"
-          placeholder="What's on your mind?"
-          className="flex-1 border rounded-3xl p-2 mb-3"
+    
+      {!userProfile && <>
+        <div className="flex justify-between items-center gap-4">
+          <img
+            className="w-16 h-16 rounded-full"
+            src={Pic ? Pic : setup.defImg}
+            alt=""
+          />
+          <input
+            type="text"
+            placeholder="What's on your mind?"
+            className="flex-1 border rounded-3xl p-2 mb-3"
 
-        />
-        <Button btn_text="Share Post" width="15%" onHandleClick={() => setIsModalOpen(true)} />
-      </div>
+          />
+          <Button btn_text="Share Post" width="15%" onHandleClick={() => setIsModalOpen(true)} />
+        </div>
+        {posts.length!==0&&<h2 className="text-xl font-semibold">Posts</h2>}
+      </>
+      }
+      {posts.length===0&& <div className="text-center text-2xl mt-20 font-semibold">No Added Posts Yet</div>}
 
-      <h2 className="text-xl font-semibold mb-4">Posts</h2>
       {AllPostsORuser.map((post, index) => (
         <PostItem post={post} key={index} />
       ))}

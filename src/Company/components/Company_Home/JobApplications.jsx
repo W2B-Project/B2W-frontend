@@ -24,6 +24,7 @@ const StatusBadge = ({ status }) => {
 
 const JobApplications = () => {
     const { jobId } = useParams();
+    console.log(jobId)
     const {
         getJobApplications,
         applications: allApplications,
@@ -36,9 +37,9 @@ const JobApplications = () => {
 
     useEffect(() => {
         const numericJobId = Number(jobId);
-        if (!numericJobId || postedJobs.length === 0 || allApplications.length === 0) return;
+        if (!numericJobId || postedJobs.length === 0 ) return;
 
-        const matchedJob = postedJobs.find((j) => Number(j.id) === numericJobId);
+        const matchedJob = postedJobs.find((j) => j.id === numericJobId);
         setJob(matchedJob);
 
         if (matchedJob) {
@@ -46,6 +47,7 @@ const JobApplications = () => {
             setFilteredApplications(filtered);
         }
     }, [jobId, allApplications, postedJobs]);
+    
 
     return (
         <div className="max-w-3xl mx-auto p-6 font-sans">
@@ -57,7 +59,7 @@ const JobApplications = () => {
                     <ArrowLeft className="mr-1 text-black" size={25} />
                 </button>
                 <div className="flex items-center gap-4">
-                    <h2 className="text-2xl font-semibold">
+                    <h2 className="text-2xl font-semibold capitalize">
                         {job?.jobData?.jobTitle ?? "Untitled Job"}
                     </h2>
                 </div>

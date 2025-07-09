@@ -2,25 +2,23 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import uploadImage from '../../assets/images/home/ResumeReview2.png'
 
-export default function UploadCvModal({ onClose, setService, onDone, isProcessing = false }) {
+export default function UploadCvModal({ onClose, setService, onDone, isProcessing = false, selectedFile }) {
     const [progress, setProgress] = useState(0);
     const [isDone, setIsDone] = useState(false);
     const navigate = useNavigate();
-    
+
     useEffect(() => {
+        if (!isProcessing) {
+            setProgress(100);
+            return;
+        }
         const interval = setInterval(() => {
-            setProgress((prev) => {
-                if (prev >= 100) {
-                    clearInterval(interval);
-                    setIsDone(true);
-                    return 100;
-                }
-                return prev + 10;
-            });
+            setProgress((prev) => (prev < 95 ? prev + 5 : prev));
         }, 300);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [isProcessing]);
+
     const handleDone = () => {
         onClose();
         if (onDone) {
@@ -34,14 +32,15 @@ export default function UploadCvModal({ onClose, setService, onDone, isProcessin
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center gap-6 z-50 !mt-0">
             <div className="bg-white rounded-2xl p-6 w-[454px] h-[372px] flex flex-col items-center gap-4 text-center">
-                {!isDone ? (
+                {isProcessing ? (
                     <>
                         <img
                             src={uploadImage}
                             alt="Uploading"
                             className="w-52 h-52"
                         />
-                        <div className="font-medium">My CV</div>
+                        <div className='text-sm'>Analyzing your CV with AI...</div>
+                        <div className="font-medium">{selectedFile.name}</div>
                         <div className="w-full h-4 bg-gray-300 rounded-full overflow-hidden">
                             <div
                                 className="h-4 bg-primry_purble transition-all"
@@ -59,9 +58,10 @@ export default function UploadCvModal({ onClose, setService, onDone, isProcessin
                             </svg>
                         </div>
                         <div className="text-sm">
-                            {isProcessing ? 'Analyzing your CV with AI...' : 'Your CV has been uploaded successfully.'}
+                            Your CV has been uploaded successfully.
+                            
                         </div>
-                        <div className="font-medium">My CV</div>
+                        <div className="font-medium">{selectedFile.name}</div>
                         <div className='flex items-center gap-3 w-full'>
                             <div className="w-full h-4 bg-primry_purble rounded-full"></div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="14" viewBox="0 0 20 14" fill="none">
