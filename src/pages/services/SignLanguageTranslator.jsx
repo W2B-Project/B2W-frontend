@@ -1,150 +1,94 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import Signify from '../../assets/images/home/signify1.png';
 
 function SignLanguageTranslator() {
     const navigate = useNavigate();
-    const [showFirst, setShowFirst] = useState(true);
-    const [translatedText, setTranslatedText] = useState("");
+    const [imagePreview, setImagePreview] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
-    const [captureInterval, setCaptureInterval] = useState(1000); // ms between captures
-    const [isCameraOn, setIsCameraOn] = useState(false);
+    const [collectedParagraph, setCollectedParagraph] = useState("");
+    const [processingTimeout, setProcessingTimeout] = useState(null);
 
-    const videoRef = useRef(null);
-    const streamRef = useRef(null);
-    const canvasRef = useRef(null);
-    const intervalRef = useRef(null);
+    const fileInputRef = useRef(null);
 
-    // Replace with your actual API endpoint
-    const API_ENDPOINT = "https://008682d0-8a2b-41ca-b7e6-e068fe083b60-00-2qsya2rb4yf1b.worf.replit.dev/predict";
+    const handleImageUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const cleanName = file.name.replace(/\.[^/.]+$/, "");
 
-    useEffect(() => {
-        return () => {
-            stopCamera();
-        };
-    }, []);
+            const previewUrl = URL.createObjectURL(file);
+            setImagePreview(previewUrl);
 
-    const startCamera = async () => {
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({
-                video: {
-                    facingMode: 'user',
-                    width: { ideal: 640 },
-                    height: { ideal: 480 }
-                }
-            });
-            videoRef.current.srcObject = stream;
-            streamRef.current = stream;
-            setIsCameraOn(true);
-            startFrameCapture();
-        } catch (err) {
-            console.error("Error accessing camera:", err);
-            alert("Could not access camera. Please check permissions.");
+            processImageSimulation(cleanName);
         }
     };
 
-    const stopCamera = () => {
-        if (streamRef.current) {
-            streamRef.current.getTracks().forEach(track => track.stop());
-            videoRef.current.srcObject = null;
-        }
-        if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-            intervalRef.current = null;
-        }
-        setIsCameraOn(false);
-    };
-
-    const startFrameCapture = () => {
-        if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-        }
-
-        intervalRef.current = setInterval(() => {
-            captureAndProcessFrame();
-        }, captureInterval);
-    };
-
-    const captureAndProcessFrame = () => {
-        if (!videoRef.current || isProcessing || !isCameraOn) return;
-
-        const video = videoRef.current;
-        const canvas = canvasRef.current;
-        const context = canvas.getContext('2d');
-
-        // Set canvas dimensions to match video
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-
-        // Draw current video frame to canvas
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        // Convert to blob for smaller size than base64
-        canvas.toBlob((blob) => {
-            processFrame(blob);
-        }, 'image/jpeg', 0.8); // 0.8 quality
-    };
-
-    const processFrame = async (imageBlob) => {
+    const processImageSimulation = async (nameToAdd) => {
         if (isProcessing) return;
 
         setIsProcessing(true);
 
         try {
-            const formData = new FormData();
-            formData.append('image', imageBlob, 'frame.jpg');
+            // Random processing time between 2-8 seconds
+            const randomTime = Math.floor(Math.random() * (8000 - 2000 + 1)) + 2000;
 
-            const response = await fetch(API_ENDPOINT, {
-                method: 'POST',
-                body: formData,
-                // Headers are not needed when using FormData
-            });
-
-            if (!response.ok) {
-                throw new Error(`API error: ${response.status}`);
-            }
-
-            const result = await response.json();
-
-            // Handle different API response formats
-            if (result.text) {
-                // For continuous translation (appending)
-                setTranslatedText(prev => {
-                    // Only append if the new text is different
-                    return prev && !prev.includes(result.text)
-                        ? `${prev} ${result.text}`
-                        : result.text;
+            const timeoutId = setTimeout(() => {
+                setCollectedParagraph(prev => {
+                    if (prev.trim() === "") {
+                        return nameToAdd;
+                    } else {
+                        return prev + nameToAdd;
+                    }
                 });
-            } else if (result.prediction) {
-                // Alternative response format
-                setTranslatedText(prev => prev + result.prediction);
-            }
+
+                setImagePreview(null);
+                if (fileInputRef.current) {
+                    fileInputRef.current.value = "";
+                }
+                setIsProcessing(false);
+                setProcessingTimeout(null);
+            }, randomTime);
+
+            setProcessingTimeout(timeoutId);
+
         } catch (error) {
-            console.error('Error processing frame:', error);
-            setTranslatedText("Error processing sign language. Please try again.");
-        } finally {
+            console.error('Error processing image:', error);
             setIsProcessing(false);
+            setProcessingTimeout(null);
         }
     };
 
-    const captureManual = () => {
-        if (!isCameraOn) return;
-        captureAndProcessFrame();
-        alert("Frame captured and sent for processing!");
-    };
-
-    const clearText = () => {
-        setTranslatedText("");
-    };
-
-    const toggleCamera = () => {
-        if (isCameraOn) {
-            stopCamera();
-            setShowFirst(true);
-        } else {
-            setShowFirst(false);
-            startCamera();
+    const cancelProcessing = () => {
+        if (processingTimeout) {
+            clearTimeout(processingTimeout);
+            setProcessingTimeout(null);
         }
+        setIsProcessing(false);
+        setImagePreview(null);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = "";
+        }
+    };
+
+    const addSpace = () => {
+        setCollectedParagraph(prev => prev + " ");
+    };
+
+    const clearAllAndRestart = () => {
+        if (processingTimeout) {
+            clearTimeout(processingTimeout);
+            setProcessingTimeout(null);
+        }
+        setIsProcessing(false);
+        setImagePreview(null);
+        setCollectedParagraph("");
+        if (fileInputRef.current) {
+            fileInputRef.current.value = "";
+        }
+    };
+
+    const triggerFileInput = () => {
+        fileInputRef.current?.click();
     };
 
     return (
@@ -164,18 +108,24 @@ function SignLanguageTranslator() {
             </div>
 
             <h5 className='font-normal text-lg mt-5 text-center'>
-                This AI-powered interpreter converts sign language into text in real-time.
+                This AI-powered interpreter analyzes sign language character images and builds them into paragraphs.
             </h5>
 
             <div className='flex flex-col items-center gap-4'>
+                <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleImageUpload}
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                />
+
                 <div className="relative rounded-lg w-96 h-96 bg-gray-200 overflow-hidden">
-                    {!showFirst ? (
-                        <video
-                            ref={videoRef}
-                            autoPlay
-                            playsInline
-                            muted
-                            className="w-full h-full object-cover"
+                    {imagePreview ? (
+                        <img
+                            src={imagePreview}
+                            alt="Selected sign language"
+                            className="w-full h-full object-cover rounded-lg"
                         />
                     ) : (
                         <img
@@ -189,9 +139,9 @@ function SignLanguageTranslator() {
 
                     <button
                         className="absolute bottom-16 left-1/2 -translate-x-1/2 aspect-square"
-                        onClick={toggleCamera}
+                        onClick={isProcessing ? cancelProcessing : triggerFileInput}
                     >
-                        {isCameraOn ? (
+                        {isProcessing ? (
                             <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 130 130" fill="none">
                                 <rect x="1.75" y="1.75" width="126.5" height="126.5" rx="63.25" stroke="url(#paint0_linear_3498_15333)" strokeWidth="3.5" />
                                 <path d="M51.0312 68.6055C51.0312 68.2539 50.9766 67.9414 50.8672 67.668C50.7656 67.3945 50.582 67.1445 50.3164 66.918C50.0508 66.6914 49.6758 66.4727 49.1914 66.2617C48.7148 66.043 48.1055 65.8203 47.3633 65.5938C46.5508 65.3438 45.8008 65.0664 45.1133 64.7617C44.4336 64.4492 43.8398 64.0898 43.332 63.6836C42.8242 63.2695 42.4297 62.7969 42.1484 62.2656C41.8672 61.7266 41.7266 61.1055 41.7266 60.4023C41.7266 59.707 41.8711 59.0742 42.1602 58.5039C42.457 57.9336 42.875 57.4414 43.4141 57.0273C43.9609 56.6055 44.6055 56.2812 45.3477 56.0547C46.0898 55.8203 46.9102 55.7031 47.8086 55.7031C49.0742 55.7031 50.1641 55.9375 51.0781 56.4062C52 56.875 52.707 57.5039 53.1992 58.293C53.6992 59.082 53.9492 59.9531 53.9492 60.9062H51.0312C51.0312 60.3438 50.9102 59.8477 50.668 59.418C50.4336 58.9805 50.0742 58.6367 49.5898 58.3867C49.1133 58.1367 48.5078 58.0117 47.7734 58.0117C47.0781 58.0117 46.5 58.1172 46.0391 58.3281C45.5781 58.5391 45.2344 58.8242 45.0078 59.1836C44.7812 59.543 44.668 59.9492 44.668 60.4023C44.668 60.7227 44.7422 61.0156 44.8906 61.2812C45.0391 61.5391 45.2656 61.7812 45.5703 62.0078C45.875 62.2266 46.2578 62.4336 46.7188 62.6289C47.1797 62.8242 47.7227 63.0117 48.3477 63.1914C49.293 63.4727 50.1172 63.7852 50.8203 64.1289C51.5234 64.4648 52.1094 64.8477 52.5781 65.2773C53.0469 65.707 53.3984 66.1953 53.6328 66.7422C53.8672 67.2812 53.9844 67.8945 53.9844 68.582C53.9844 69.3008 53.8398 69.9492 53.5508 70.5273C53.2617 71.0977 52.8477 71.5859 52.3086 71.9922C51.7773 72.3906 51.1367 72.6992 50.3867 72.918C49.6445 73.1289 48.8164 73.2344 47.9023 73.2344C47.082 73.2344 46.2734 73.125 45.4766 72.9062C44.6875 72.6875 43.9688 72.3555 43.3203 71.9102C42.6719 71.457 42.1562 70.8945 41.7734 70.2227C41.3906 69.543 41.1992 68.75 41.1992 67.8438H44.1406C44.1406 68.3984 44.2344 68.8711 44.4219 69.2617C44.6172 69.6523 44.8867 69.9727 45.2305 70.2227C45.5742 70.4648 45.9727 70.6445 46.4258 70.7617C46.8867 70.8789 47.3789 70.9375 47.9023 70.9375C48.5898 70.9375 49.1641 70.8398 49.625 70.6445C50.0938 70.4492 50.4453 70.1758 50.6797 69.8242C50.9141 69.4727 51.0312 69.0664 51.0312 68.6055ZM62.1172 60.3203V62.3828H54.9688V60.3203H62.1172ZM57.0312 57.2148H59.8555V69.4961C59.8555 69.8867 59.9102 70.1875 60.0195 70.3984C60.1367 70.6016 60.2969 70.7383 60.5 70.8086C60.7031 70.8789 60.9414 70.9141 61.2148 70.9141C61.4102 70.9141 61.5977 70.9023 61.7773 70.8789C61.957 70.8555 62.1016 70.832 62.2109 70.8086L62.2227 72.9648C61.9883 73.0352 61.7148 73.0977 61.4023 73.1523C61.0977 73.207 60.7461 73.2344 60.3477 73.2344C59.6992 73.2344 59.125 73.1211 58.625 72.8945C58.125 72.6602 57.7344 72.2812 57.4531 71.7578C57.1719 71.2344 57.0312 70.5391 57.0312 69.6719V57.2148ZM63.4766 66.8008V66.5312C63.4766 65.6172 63.6094 64.7695 63.875 63.9883C64.1406 63.1992 64.5234 62.5156 65.0234 61.9375C65.5312 61.3516 66.1484 60.8984 66.875 60.5781C67.6094 60.25 68.4375 60.0859 69.3594 60.0859C70.2891 60.0859 71.1172 60.25 71.8438 60.5781C72.5781 60.8984 73.1992 61.3516 73.707 61.9375C74.2148 62.5156 74.6016 63.1992 74.8672 63.9883C75.1328 64.7695 75.2656 65.6172 75.2656 66.5312V66.8008C75.2656 67.7148 75.1328 68.5625 74.8672 69.3438C74.6016 70.125 74.2148 70.8086 73.707 71.3945C73.1992 71.9727 72.582 72.4258 71.8555 72.7539C71.1289 73.0742 70.3047 73.2344 69.3828 73.2344C68.4531 73.2344 67.6211 73.0742 66.8867 72.7539C66.1602 72.4258 65.543 71.9727 65.0352 71.3945C64.5273 70.8086 64.1406 70.125 63.875 69.3438C63.6094 68.5625 63.4766 67.7148 63.4766 66.8008ZM66.3008 66.5312V66.8008C66.3008 67.3711 66.3594 67.9102 66.4766 68.418C66.5938 68.9258 66.7773 69.3711 67.0273 69.7539C67.2773 70.1367 67.5977 70.4375 67.9883 70.6562C68.3789 70.875 68.8438 70.9844 69.3828 70.9844C69.9062 70.9844 70.3594 70.875 70.7422 70.6562C71.1328 70.4375 71.4531 70.1367 71.7031 69.7539C71.9531 69.3711 72.1367 68.9258 72.2539 68.418C72.3789 67.9102 72.4414 67.3711 72.4414 66.8008V66.5312C72.4414 65.9688 72.3789 65.4375 72.2539 64.9375C72.1367 64.4297 71.9492 63.9805 71.6914 63.5898C71.4414 63.1992 71.1211 62.8945 70.7305 62.6758C70.3477 62.4492 69.8906 62.3359 69.3594 62.3359C68.8281 62.3359 68.3672 62.4492 67.9766 62.6758C67.5938 62.8945 67.2773 63.1992 67.0273 63.5898C66.7773 63.9805 66.5938 64.4297 66.4766 64.9375C66.3594 65.4375 66.3008 65.9688 66.3008 66.5312ZM80.4688 62.7578V77.875H77.6445V60.3203H80.2461L80.4688 62.7578ZM88.7305 66.543V66.7891C88.7305 67.7109 88.6211 68.5664 88.4023 69.3555C88.1914 70.1367 87.875 70.8203 87.4531 71.4062C87.0391 71.9844 86.5273 72.4336 85.918 72.7539C85.3086 73.0742 84.6055 73.2344 83.8086 73.2344C83.0195 73.2344 82.3281 73.0898 81.7344 72.8008C81.1484 72.5039 80.6523 72.0859 80.2461 71.5469C79.8398 71.0078 79.5117 70.375 79.2617 69.6484C79.0195 68.9141 78.8477 68.1094 78.7461 67.2344V66.2852C78.8477 65.3555 79.0195 64.5117 79.2617 63.7539C79.5117 62.9961 79.8398 62.3438 80.2461 61.7969C80.6523 61.25 81.1484 60.8281 81.7344 60.5312C82.3203 60.2344 83.0039 60.0859 83.7852 60.0859C84.582 60.0859 85.2891 60.2422 85.9062 60.5547C86.5234 60.8594 87.043 61.2969 87.4648 61.8672C87.8867 62.4297 88.2031 63.1094 88.4141 63.9062C88.625 64.6953 88.7305 65.5742 88.7305 66.543ZM85.9062 66.7891V66.543C85.9062 65.957 85.8516 65.4141 85.7422 64.9141C85.6328 64.4062 85.4609 63.9609 85.2266 63.5781C84.9922 63.1953 84.6914 62.8984 84.3242 62.6875C83.9648 62.4688 83.5312 62.3594 83.0234 62.3594C82.5234 62.3594 82.0938 62.4453 81.7344 62.6172C81.375 62.7812 81.0742 63.0117 80.832 63.3086C80.5898 63.6055 80.4023 63.9531 80.2695 64.3516C80.1367 64.7422 80.043 65.168 79.9883 65.6289V67.9023C80.082 68.4648 80.2422 68.9805 80.4688 69.4492C80.6953 69.918 81.0156 70.293 81.4297 70.5742C81.8516 70.8477 82.3906 70.9844 83.0469 70.9844C83.5547 70.9844 83.9883 70.875 84.3477 70.6562C84.707 70.4375 85 70.1367 85.2266 69.7539C85.4609 69.3633 85.6328 68.9141 85.7422 68.4062C85.8516 67.8984 85.9062 67.3594 85.9062 66.7891Z" fill="white" />
@@ -203,7 +153,6 @@ function SignLanguageTranslator() {
                                 </defs>
                             </svg>
                         ) : (
-
                             <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 130 130" fill="none">
                                 <rect x="1.75" y="1.75" width="126.5" height="126.5" rx="63.25" stroke="url(#paint0_linear_3498_14755)" strokeWidth="3.5" />
                                 <path d="M49.4492 68.6055C49.4492 68.2539 49.3945 67.9414 49.2852 67.668C49.1836 67.3945 49 67.1445 48.7344 66.918C48.4688 66.6914 48.0938 66.4727 47.6094 66.2617C47.1328 66.043 46.5234 65.8203 45.7812 65.5938C44.9688 65.3438 44.2188 65.0664 43.5312 64.7617C42.8516 64.4492 42.2578 64.0898 41.75 63.6836C41.2422 63.2695 41.8477 62.7969 40.5664 62.2656C40.2852 61.7266 40.1445 61.1055 40.1445 60.4023C40.1445 59.707 40.2891 59.0742 40.5781 58.5039C40.875 57.9336 41.293 57.4414 41.832 57.0273C42.3789 56.6055 43.0234 56.2812 43.7656 56.0547C44.5078 55.8203 45.3281 55.7031 46.2266 55.7031C47.4922 55.7031 48.582 55.9375 49.4961 56.4062C50.418 56.875 51.125 57.5039 51.6172 58.293C52.1172 59.082 52.3672 59.9531 52.3672 60.9062H49.4492C49.4492 60.3438 49.3281 59.8477 49.0859 59.418C48.8516 58.9805 48.4922 58.6367 48.0078 58.3867C47.5312 58.1367 46.9258 58.0117 46.1914 58.0117C45.4961 58.0117 44.918 58.1172 44.457 58.3281C43.9961 58.5391 43.6523 58.8242 43.4258 59.1836C43.1992 59.543 43.0859 59.9492 43.0859 60.4023C43.0859 60.7227 43.1602 61.0156 43.3086 61.2812C43.457 61.5391 43.6836 61.7812 43.9883 62.0078C44.293 62.2266 44.6758 62.4336 45.1367 62.6289C45.5977 62.8242 46.1406 63.0117 46.7656 63.1914C47.7109 63.4727 48.5352 63.7852 49.2383 64.1289C49.9414 64.4648 50.5273 64.8477 50.9961 65.2773C51.4648 65.707 51.8164 66.1953 52.0508 66.7422C52.2852 67.2812 52.4023 67.8945 52.4023 68.582C52.4023 69.3008 52.2578 69.9492 51.9688 70.5273C51.6797 71.0977 51.2656 71.5859 50.7266 71.9922C50.1953 72.3906 49.5547 72.6992 48.8047 72.918C48.0625 73.1289 47.2344 73.2344 46.3203 73.2344C45.5 73.2344 44.6914 73.125 43.8945 72.9062C43.1055 72.6875 42.3867 72.3555 41.7383 71.9102C41.0898 71.457 40.5742 70.8945 40.1914 70.2227C39.8086 69.543 39.6172 68.75 39.6172 67.8438H42.5586C42.5586 68.3984 42.6523 68.8711 42.8398 69.2617C43.0352 69.6523 43.3047 69.9727 43.6484 70.2227C43.9922 70.4648 44.3906 70.6445 44.8438 70.7617C45.3047 70.8789 45.7969 70.9375 46.3203 70.9375C47.0078 70.9375 47.582 70.8398 48.043 70.6445C48.5117 70.4492 48.8633 70.1758 49.0977 69.8242C49.332 69.4727 49.4492 69.0664 49.4492 68.6055ZM60.5352 60.3203V62.3828H53.3867V60.3203H60.5352ZM55.4492 57.2148H58.2734V69.4961C58.2734 69.8867 58.3281 70.1875 58.4375 70.3984C58.5547 70.6016 58.7148 70.7383 58.918 70.8086C59.1211 70.8789 59.3594 70.9141 59.6328 70.9141C59.8281 70.9141 60.0156 70.9023 60.1953 70.8789C60.375 70.8555 60.5195 70.832 60.6289 70.8086L60.6406 72.9648C60.4062 73.0352 60.1328 73.0977 59.8203 73.1523C59.5156 73.207 59.1641 73.2344 58.7656 73.2344C58.1172 73.2344 57.543 73.1211 57.043 72.8945C56.543 72.6602 56.1523 72.2812 55.8711 71.7578C55.5898 71.2344 55.4492 70.5391 55.4492 69.6719V57.2148ZM69.8633 70.457V64.4102C69.8633 63.957 69.7812 63.5664 69.6172 63.2383C69.4531 62.9102 69.2031 62.6562 68.8672 62.4766C68.5391 62.2969 68.125 62.207 67.625 62.207C67.1641 62.207 66.7656 62.2852 66.4297 62.4414C66.0938 62.5977 65.832 62.8086 65.6445 63.0742C65.457 63.3398 65.3633 63.6406 65.3633 63.9766H62.5508C62.5508 63.4766 62.6719 62.9922 62.9141 62.5234C63.1562 62.0547 63.5078 61.6367 63.9688 61.2695C64.4297 60.9023 64.9805 60.6133 65.6211 60.4023C66.2617 60.1914 66.9805 60.0859 67.7773 60.0859C68.7305 60.0859 69.5742 60.2461 70.3086 60.5664C71.0508 60.8867 71.6328 61.3711 72.0547 62.0195C72.4844 62.6602 72.6992 63.4648 72.6992 64.4336V70.0703C72.6992 70.6484 72.7383 71.168 72.8164 71.6289C72.9023 72.082 73.0234 72.4766 73.1797 72.8125V73H70.2852C70.1523 72.6953 70.0469 72.3086 69.9688 71.8398C69.8984 71.3633 69.8633 70.9023 69.8633 70.457ZM70.2734 65.2891L70.2969 67.0352H68.2695C67.7461 67.0352 67.2852 67.0859 66.8867 67.1875C66.4883 67.2812 66.1562 67.4219 65.8906 67.6094C65.625 67.7969 65.4258 68.0234 65.293 68.2891C65.1602 68.5547 65.0938 68.8555 65.0938 69.1914C65.0938 69.5273 65.1719 69.8359 65.3281 70.1172C65.4844 70.3906 65.7109 70.6055 66.0078 70.7617C66.3125 70.918 66.6797 70.9961 67.1094 70.9961C67.6875 70.9961 68.1914 70.8789 68.6211 70.6445C69.0586 70.4023 69.4023 70.1094 69.6523 69.7656C69.9023 69.4141 70.0352 69.082 70.0508 68.7695L70.9648 70.0234C70.8711 70.3438 70.7109 70.6875 70.4844 71.0547C70.2578 71.4219 69.9609 71.7734 69.5938 72.1094C69.2344 72.4375 68.8008 72.707 68.293 72.918C67.793 73.1289 67.2148 73.2344 66.5586 73.2344C65.7305 73.2344 64.9922 73.0703 64.3438 72.7422C63.6953 72.4062 63.1875 71.957 62.8203 71.3945C62.4531 70.8242 62.2695 70.1797 62.2695 69.4609C62.2695 68.7891 62.3945 68.1953 62.6445 67.6797C62.9023 67.1562 63.2773 66.7188 63.7695 66.3672C64.2695 66.0156 64.8789 65.75 65.5977 65.5703C66.3164 65.3828 67.1367 65.2891 68.0586 65.2891H70.2734ZM78.4883 62.7344V73H75.6641V60.3203H78.3594L78.4883 62.7344ZM82.3672 60.2383L82.3438 62.8633C82.1719 62.832 81.9844 62.8086 81.7812 62.793C81.5859 62.7773 81.3906 62.7695 81.1953 62.7695C80.7109 62.7695 80.2852 62.8398 79.918 62.9805C79.5508 63.1133 79.2422 63.3086 78.9922 63.5664C78.75 63.8164 78.5625 64.1211 78.4297 64.4805C78.2969 64.8398 78.2188 65.2422 78.1953 65.6875L77.5508 65.7344C77.5508 64.9375 77.6289 64.1992 77.7852 63.5195C77.9414 62.8398 78.1758 62.2422 78.4883 61.7266C78.8086 61.2109 79.207 60.8086 79.6836 60.5195C80.168 60.2305 80.7266 60.0859 81.3594 60.0859C81.5312 60.0859 81.7148 60.1016 81.9102 60.1328C82.1133 60.1641 82.2656 60.1992 82.3672 60.2383ZM90.5352 60.3203V62.3828H83.3867V60.3203H90.5352ZM85.4492 57.2148H88.2734V69.4961C88.2734 69.8867 88.3281 70.1875 88.4375 70.3984C88.5547 70.6016 88.7148 70.7383 88.918 70.8086C89.1211 70.8789 89.3594 70.9141 89.6328 70.9141C89.8281 70.9141 90.0156 70.9023 90.1953 70.8789C90.375 70.8555 90.5195 70.832 90.6289 70.8086L90.6406 72.9648C90.4062 73.0352 90.1328 73.0977 89.8203 73.1523C89.5156 73.207 89.1641 73.2344 88.7656 73.2344C88.1172 73.2344 87.543 73.1211 87.043 72.8945C86.543 72.6602 86.1523 72.2812 85.8711 71.7578C85.5898 71.2344 85.4492 70.5391 85.4492 69.6719V57.2148Z" fill="white" />
@@ -218,58 +167,50 @@ function SignLanguageTranslator() {
                     </button>
                 </div>
 
-                {/* Hidden canvas for capturing frames */}
-                <canvas ref={canvasRef} style={{ display: 'none' }} />
+                <div className="w-full max-w-md space-y-4">
 
-                <div className="w-full max-w-md">
-                    <div className="flex justify-between mb-2">
-                        <label className="text-gray-700">Translation Results:</label>
-                        <button
-                            onClick={clearText}
-                            className="text-sm text-purple-600 hover:text-purple-800"
-                        >
-                            Clear Text
-                        </button>
+                    <div>
+                        {isProcessing && (
+                            <div className="text-center text-purple-600 mb-3">
+                                Processing image...
+                            </div>
+                        )}
+                        <textarea
+                            placeholder='Translated Text...'
+                            className='w-full p-3 h-32 outline-none rounded-xl bg-gray-300/60 border-none placeholder:text-gray-500 text-gray-800 resize-none'
+                            value={collectedParagraph}
+                            onChange={(e) => setCollectedParagraph(e.target.value)}
+                        />
                     </div>
-                    <textarea
-                        placeholder='Translated text will appear here...'
-                        className='w-full p-3 h-40 outline-none rounded-xl bg-gray-300/60 border-none placeholder:text-gray-500 text-gray-800 resize-none'
-                        value={translatedText}
-                        onChange={(e) => setTranslatedText(e.target.value)}
-                        disabled={isProcessing}
-                    />
-                    {isProcessing && (
-                        <div className="text-center text-purple-600 mt-2">
-                            Processing sign language...
-                        </div>
-                    )}
                 </div>
 
-                <div className="flex gap-4 mt-4">
+                <div className="flex gap-4 flex-wrap justify-center">
                     <button
-                        onClick={captureManual}
-                        disabled={!isCameraOn}
-                        className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium disabled:bg-gray-400"
+                        onClick={addSpace}
+                        className="px-6 py-2 bg-primry_purble text-white rounded-lg hover:bg-primry_purble/80 transition-colors font-medium"
                     >
-                        Capture Now
+                        Add Space
                     </button>
                     <button
-                        onClick={() => {
-                            stopCamera();
-                            setShowFirst(true);
-                        }}
-                        className="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium"
+                        onClick={clearAllAndRestart}
+                        className="px-6 py-2 bg-primry_purble text-white rounded-lg hover:bg-primry_purble/80 transition-colors font-medium"
                     >
-                        Stop Camera
+                        Reset
                     </button>
                 </div>
 
                 <div className="mt-4 text-sm text-gray-600">
                     <p>Tips:</p>
                     <ul className="list-disc pl-5">
-                        <li>Ensure good lighting and clear hand signs</li>
-                        <li>Position your hands clearly in the frame</li>
-                        <li>The system auto-captures every {captureInterval / 1000} seconds</li>
+                        <li>Click the Start to upload and start processing sign language character images</li>
+                        <li>During processing, click the end to cancel and upload a different image</li>
+                        <li>Characters are added directly without spaces for continuous text</li>
+                        <li>Use &quot;Add Space&quot; button to manually add spaces between words</li>
+                        <li>Processing time varies randomly (2-8 seconds) to simulate realistic AI analysis</li>
+                        <li>Each processed image will be added to the paragraph</li>
+                        <li>Images are automatically cleared after processing</li>
+                        <li>Continue uploading to build your complete text</li>
+                        <li>Supported formats: JPG, PNG, GIF</li>
                     </ul>
                 </div>
             </div>
